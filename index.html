@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRAGMA - Desarrollo de Apps a Medida</title>
+  <meta name="description" content="PRAGMA: Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna. Apps web, móviles, automatización y sistemas internos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #06060e;
+      --bg-secondary: #0a0a18;
+      --bg-card: rgba(255,255,255,0.03);
+      --border-card: rgba(255,255,255,0.06);
+      --text-primary: #f0f0f5;
+      --text-secondary: rgba(240,240,245,0.55);
+      --accent-blue: #4d7cff;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #a855f7;
+      --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      --accent-gradient-btn: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════ NOISE OVERLAY ═══════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ═══════════════════ GLOBAL GLOW ═══════════════════ */
+    .glow-orb {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-orb--purple { background: var(--accent-purple); top: -200px; right: -100px; }
+    .glow-orb--blue { background: var(--accent-blue); bottom: 20%; left: -200px; }
+
+    /* ═══════════════════ NAV ═══════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      background: rgba(6,6,14,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    nav.scrolled { padding: 0.8rem 3rem; background: rgba(6,6,14,0.92); }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .nav-logo:hover, .nav-logo:focus { text-decoration: none; }
+
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      transition: width 0.3s var(--ease-out-expo);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 0.65rem 1.6rem;
+      background: var(--accent-gradient-btn);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out-expo);
+      text-decoration: none;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(168,85,247,0.3); }
+
+    /* Mobile nav */
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s; }
+
+    /* ═══════════════════ HERO ═══════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(99,102,241,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 30% 70%, rgba(168,85,247,0.06) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 60% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 60% 50%, black 20%, transparent 70%);
+    }
+
+    .hero-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem 0.4rem 0.6rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.2s both;
+    }
+    .hero-tag span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.35s both;
+    }
+    .hero h1 .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.5s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.65s both;
+    }
+
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: var(--accent-gradient-btn);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out-expo);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(168,85,247,0.35); }
+
+    .btn-secondary {
+      padding: 0.85rem 2rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out-expo);
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeUp 1s var(--ease-out-expo) 0.5s both;
+    }
+
+    .hero-phone {
+      width: 280px;
+      height: 560px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .phone-notch {
+      width: 120px;
+      height: 28px;
+      background: var(--bg-primary);
+      border-radius: 0 0 20px 20px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .phone-screen {
+      padding: 1.2rem;
+      height: calc(100% - 28px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .phone-bar {
+      height: 8px;
+      border-radius: 4px;
+      animation: shimmer 2s infinite;
+    }
+    .phone-bar--long { width: 80%; background: linear-gradient(90deg, rgba(99,102,241,0.3), rgba(168,85,247,0.3)); }
+    .phone-bar--med { width: 60%; background: linear-gradient(90deg, rgba(34,211,238,0.2), rgba(99,102,241,0.2)); }
+    .phone-bar--short { width: 40%; background: rgba(255,255,255,0.06); }
+
+    .phone-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .phone-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 60px;
+      margin-top: 0.8rem;
+    }
+    .phone-chart-bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      animation: grow-bar 1.5s var(--ease-out-expo) both;
+    }
+
+    @keyframes grow-bar {
+      from { height: 0; }
+    }
+
+    .hero-float-card {
+      position: absolute;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      animation: float 6s ease-in-out infinite;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .hero-float-card--1 { top: 15%; right: -30px; animation-delay: 0s; }
+    .hero-float-card--2 { bottom: 20%; left: -40px; animation-delay: -3s; }
+
+    .float-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .float-icon--green { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .float-icon--blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+
+    .float-text { font-size: 0.78rem; }
+    .float-text strong { display: block; color: var(--text-primary); font-weight: 600; }
+    .float-text span { color: var(--text-secondary); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════ SECTIONS SHARED ═══════════════════ */
+    section { padding: 7rem 3rem; position: relative; }
+
+    .section-tag {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.02em;
+      margin-bottom: 3.5rem;
+    }
+    .section-title .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s var(--ease-out-expo);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════ SERVICES ═══════════════════ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.5s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99,102,241,0.06), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover {
+      border-color: rgba(99,102,241,0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+    }
+    .service-icon--web { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(99,102,241,0.05)); color: #818cf8; }
+    .service-icon--mobile { background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(168,85,247,0.05)); color: #c084fc; }
+    .service-icon--auto { background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(34,211,238,0.05)); color: #22d3ee; }
+    .service-icon--sys { background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(59,130,246,0.05)); color: #60a5fa; }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════ BENEFITS ═══════════════════ */
+    .benefits { background: var(--bg-secondary); }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .benefit-item {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .benefit-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      position: relative;
+    }
+    .benefit-icon::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      padding: 2px;
+      background: var(--accent-gradient);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.4;
+    }
+
+    .benefit-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .benefit-item p {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════ ABOUT ═══════════════════ */
+    .about-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 20%;
+      right: 20%;
+      height: 2px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    .about-brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.2rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-card p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════ CTA ═══════════════════ */
+    .cta {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 60%);
+    }
+
+    .cta-content { position: relative; z-index: 2; }
+
+    .cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-desc {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ═══════════════════ CONTACT ═══════════════════ */
+    .contact-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 3rem;
+    }
+
+    .contact-field {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+      outline: none;
+    }
+    .contact-field:focus { border-color: rgba(99,102,241,0.4); background: rgba(255,255,255,0.05); }
+    .contact-field::placeholder { color: var(--text-secondary); }
+
+    textarea.contact-field { resize: vertical; min-height: 130px; }
+
+    .contact-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent-gradient-btn);
+      border: none;
+      border-radius: 14px;
+      color: white;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out-expo);
+      margin-top: 0.5rem;
+    }
+    .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(168,85,247,0.3); }
+
+    /* ═══════════════════ FOOTER ═══════════════════ */
+    footer {
+      padding: 2.5rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-copy {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-socials { display: flex; gap: 1rem; }
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+    .footer-socials a:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+
+    /* ═══════════════════ RESPONSIVE ═══════════════════ */
+    @media (max-width: 1024px) {
+      .services-grid, .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(6,6,14,0.96);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+      }
+
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; flex-wrap: wrap; }
+      .hero-visual { display: none; }
+      .hero-tag { margin: 0 auto 1.5rem; }
+
+      .services-grid, .benefits-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+
+      .about-card { padding: 2rem 1.5rem; }
+      .contact-wrapper { padding: 2rem 1.5rem; }
+
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-orb glow-orb--purple"></div>
+  <div class="glow-orb glow-orb--blue"></div>
+
+  <!-- ═══════════════ NAV ═══════════════ -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">PRAGMA</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#servicios">Servicios</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#contacto" class="nav-cta">Presupuesto</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-tag">
+          <span></span> Aceptando nuevos proyectos
+        </div>
+        <h1>Desarrollo de Apps a Medida <span class="gradient-text">a Bajo Costo</span></h1>
+        <p class="hero-desc">Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna. Tecnología de primer nivel, al alcance de todos.</p>
+        <div class="hero-actions">
+          <a href="#contacto" class="btn-primary">
+            Solicitar presupuesto
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#servicios" class="btn-secondary">Ver servicios</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-bar phone-bar--long"></div>
+            <div class="phone-bar phone-bar--med"></div>
+            <div class="phone-bar phone-bar--short"></div>
+            <div class="phone-card">
+              <div class="phone-bar phone-bar--med" style="margin-bottom: 0.5rem"></div>
+              <div class="phone-chart">
+                <div class="phone-chart-bar" style="height: 35%; background: linear-gradient(to top, rgba(99,102,241,0.4), rgba(99,102,241,0.8)); animation-delay: 0.1s"></div>
+                <div class="phone-chart-bar" style="height: 65%; background: linear-gradient(to top, rgba(168,85,247,0.4), rgba(168,85,247,0.8)); animation-delay: 0.2s"></div>
+                <div class="phone-chart-bar" style="height: 45%; background: linear-gradient(to top, rgba(34,211,238,0.4), rgba(34,211,238,0.8)); animation-delay: 0.3s"></div>
+                <div class="phone-chart-bar" style="height: 80%; background: linear-gradient(to top, rgba(99,102,241,0.4), rgba(99,102,241,0.8)); animation-delay: 0.4s"></div>
+                <div class="phone-chart-bar" style="height: 55%; background: linear-gradient(to top, rgba(168,85,247,0.4), rgba(168,85,247,0.8)); animation-delay: 0.5s"></div>
+                <div class="phone-chart-bar" style="height: 90%; background: linear-gradient(to top, rgba(34,211,238,0.4), rgba(34,211,238,0.8)); animation-delay: 0.6s"></div>
+              </div>
+            </div>
+            <div class="phone-card">
+              <div class="phone-bar phone-bar--short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-float-card hero-float-card--1">
+          <div class="float-icon float-icon--green">✓</div>
+          <div class="float-text">
+            <strong>Deploy exitoso</strong>
+            <span>App en producción</span>
+          </div>
+        </div>
+        <div class="hero-float-card hero-float-card--2">
+          <div class="float-icon float-icon--blue">⚡</div>
+          <div class="float-text">
+            <strong>+99.9% uptime</strong>
+            <span>Alta disponibilidad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SERVICIOS ═══════════════ -->
+  <section id="servicios">
+    <div class="container">
+      <span class="section-tag">Servicios</span>
+      <h2 class="section-title">Soluciones <span class="gradient-text">a tu medida</span></h2>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon service-icon--web">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Apps Web a Medida</h3>
+          <p>Plataformas web modernas, rápidas y adaptadas a las necesidades de tu negocio.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon service-icon--mobile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          </div>
+          <h3>Apps Móviles</h3>
+          <p>Aplicaciones nativas y multiplataforma para llegar a tus clientes en cualquier dispositivo.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon service-icon--auto">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Automatización de Procesos</h3>
+          <p>Optimizá tus flujos de trabajo con soluciones inteligentes que ahorran tiempo y recursos.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon service-icon--sys">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
+          </div>
+          <h3>Sistemas Internos</h3>
+          <p>Software interno para gestión, inventario, CRM y más, diseñado para tu empresa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ BENEFICIOS ═══════════════ -->
+  <section id="beneficios" class="benefits">
+    <div class="container">
+      <span class="section-tag">Beneficios</span>
+      <h2 class="section-title">¿Por qué elegir <span class="gradient-text">PRAGMA</span>?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-item reveal">
+          <div class="benefit-icon">🎯</div>
+          <h3>100% Personalizado</h3>
+          <p>Cada proyecto se diseña desde cero según tus necesidades.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon">⚡</div>
+          <h3>Entrega Rápida</h3>
+          <p>Procesos ágiles para que tu app esté lista en tiempo récord.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon">💰</div>
+          <h3>Precio Accesible</h3>
+          <p>Soluciones de calidad profesional sin costos excesivos.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon">🚀</div>
+          <h3>Soporte y Escalabilidad</h3>
+          <p>Acompañamiento continuo y apps que crecen con tu negocio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ NOSOTROS ═══════════════ -->
+  <section id="nosotros">
+    <div class="container">
+      <div class="about-card reveal">
+        <div class="about-brand">PRAGMA</div>
+        <span class="section-tag">Sobre Pragma</span>
+        <h2 class="section-title" style="margin-bottom: 1.5rem">Tecnología al alcance de <span class="gradient-text">todos</span></h2>
+        <p>PRAGMA es un emprendimiento enfocado en brindar soluciones tecnológicas modernas, accesibles y de alta calidad para pequeñas y medianas empresas. Creemos que cada negocio merece herramientas digitales potentes sin necesidad de grandes inversiones. Nuestro equipo combina creatividad, experiencia técnica y compromiso para transformar tus ideas en aplicaciones reales que impulsen tu crecimiento.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CTA ═══════════════ -->
+  <section class="cta">
+    <div class="cta-bg"></div>
+    <div class="cta-content reveal">
+      <h2>¿Listo para llevar tu idea a <span class="gradient-text">una app real</span>?</h2>
+      <p class="cta-desc">Contanos tu proyecto y te ayudamos a hacerlo realidad con tecnología de primer nivel.</p>
+      <a href="#contacto" class="btn-primary" style="font-size: 1.05rem; padding: 1rem 2.5rem;">
+        Contactanos ahora
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CONTACTO ═══════════════ -->
+  <section id="contacto">
+    <div class="container">
+      <span class="section-tag">Contacto</span>
+      <h2 class="section-title">Hablemos de tu <span class="gradient-text">proyecto</span></h2>
+      <div class="contact-wrapper reveal">
+        <input type="text" class="contact-field" placeholder="Tu nombre" id="contactName">
+        <input type="email" class="contact-field" placeholder="Tu email" id="contactEmail">
+        <textarea class="contact-field" placeholder="Contanos sobre tu proyecto..." id="contactMsg"></textarea>
+        <button class="contact-btn" id="contactBtn">Enviar mensaje</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer>
+    <span class="footer-brand">PRAGMA</span>
+    <span class="footer-copy">© 2026 PRAGMA. Todos los derechos reservados.</span>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/pragmasolucionesdigitales/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/pragma-sd-8253453b4/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://wa.me/5493516017576" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // ═══════════════ NAV SCROLL ═══════════════
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ═══════════════ MOBILE NAV ═══════════════
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // ═══════════════ SCROLL REVEAL ═══════════════
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ═══════════════ CONTACT FORM → EMAIL ═══════════════
+    document.getElementById('contactBtn').addEventListener('click', () => {
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const msg = document.getElementById('contactMsg').value.trim();
+
+      if (!name || !email || !msg) {
+        alert('Por favor completá todos los campos.');
+        return;
+      }
+
+      const subject = encodeURIComponent(`Consulta de ${name} desde la web`);
+      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${msg}`);
+      window.open(`mailto:pragmasolucionesdigitales@gmail.com?subject=${subject}&body=${body}`, '_self');
+
+      const btn = document.getElementById('contactBtn');
+      btn.textContent = '✓ Abriendo tu correo...';
+      btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+      setTimeout(() => {
+        btn.textContent = 'Enviar mensaje';
+        btn.style.background = '';
+      }, 3000);
+    });
+
+    // ═══════════════ SMOOTH SCROLL ═══════════════
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
