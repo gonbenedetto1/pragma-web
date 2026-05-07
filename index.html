@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pragma Studio - Desarrollo de Apps a Medida</title>
-  <meta name="description" content="PRAGMA Studio: Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna. Apps web, móviles, automatización y sistemas internos.">
-  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAAAIAArAwAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAQhpQ0NQSUNDIFByb2ZpbGUAAHicY2BgPMEABCwGDAy5eSVFQe5OChGRUQrsDxgYgRAMEpOLCxhwA6Cqb9cgai/r4lGHC3CmpBYnA+kPQKxSBLQcaKQIkC2SDmFrgNhJELYNiF1eUlACZAeA2EUhQc5AdgqQrZGOxE5CYicXFIHU9wDZNrk5pckIdzPwpOaFBgNpDiCWYShmCGJwZ3AC+R+iJH8RA4PFVwYG5gkIsaSZDAzbWxkYJG4hxFQWMDDwtzAwbDuPEEOESUFiUSJYiAWImdLSGBg+LWdg4I1kYBC+wMDAFQ0LCBxuUwC7zZ0hHwjTGXIYUoEingx5DMkMekCWEYMBgyGDGQCm1j8/R2zgUAAAAd5JREFUeJxtk09rFEEQxX+vund218NmY8CgWQXBL6A5C+JFEbz4mbx5FE+KIIJB8YsIgsJCkOghggTEiIYksjA7XR66Z2aD9qX/0O/Vq1dVGk5nDuDk5d6e+uUO0j/PAMT/AfPZ816eXQ4IyQBQYYyrYHfHPYG3YCfDMo8kMAd6ktiDEyk1WS4CzxFa5SKTexJSS2K9ghbsqcbrkxVXWoYK4rgYYmCp98A9XzzVDAdTZhfvEVyMQqAiMbTEj9N99g7noEEWV6yPfb6CZsHa9Ap3bzxjebpPlQ6ZhIbzFVxf3+Tph0fszF8RhhNScSd2jhely6YmNQt2D97y5dtrLIyYjiY8v/OYm1vb7MxfruZFRDqTrinQLE/YvvyA21fvsx5qLlQNB8dfebH7Btmwq4hUyth7nbVsnJvxbu8h7z8/IVbriMTR4hfL+g+KYxIJI+S+CJNLTlvCpqYaTLm2eYvvvz/y8+gT2LDEiAQLNJ6QCbOAy1BY23JS2wMJUgPLY7AxCqOsTbl6jkMBUzoyGuASZoYncBOqNnASeMLpPcp5G0Jdh0ZDJEAYLscR7l5cMSgzgASy3M4SagkkYSJHx/LUdfPpeIe3VsYZ22O+qPvk7t3oOkJllL1V0anLIf4C1pXvbFIRsS4AAAAASUVORK5CYII=">
-  <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAB3klEQVR4nG2TT2sUQRDFf6+6d3bXw2ZjwKBZBcEvoDkL4kURvPiZvHkUT4oggkHxiwiCwkKQ6CGCBMSIhiSyMDtdHrpnZoP2pf/Q79WrV1UaTmcO4OTl3p765Q7SP88AxP8B89nzXp5dDgjJAFBhjKtgd8c9gbdgJ8MyjyQwB3qS2IMTKTVZLgLPEVrlIpN7ElJLYr2CFuypxuuTFVdahgriuBhiYKn3wD1fPNUMB1NmF+8RXIxCoCIxtMSP0332DuegQRZXrI99voJmwdr0CndvPGN5uk+VDpmEhvMVXF/f5OmHR+zMXxGGE1JxJ3aOF6XLpiY1C3YP3vLl22ssjJiOJjy/85ibW9vszF+u5kVEOpOuKdAsT9i+/IDbV++zHmouVA0Hx195sfsG2bCriFTK2HudtWycm/Fu7yHvPz8hVuuIxNHiF8v6D4pjEgkj5L4Ik0tOW8KmphpMubZ5i++/P/Lz6BPYsMSIBAs0npAJs4DLUFjbclLbAwlSA8tjsDEKo6xNuXqOQwFTOjIa4BJmhidwE6o2cBJ4wuk9ynkbQl2HRkMkQBguxxHuXlwxKDOABLLczhJqCSRhIkfH8tR18+l4h7dWxhnbY76o++Tu3eg6QmWUvVXRqcsh/gLWle9sUhGxLgAAAABJRU5ErkJggg==">
-  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
-  <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+  <title>PRAGMA Studio - Desarrollo de Apps a Medida</title>
+  <meta name="description"
+    content="PRAGMA Studio: Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna. Apps web, móviles, automatización y sistemas internos.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     :root {
       --bg-primary: #06060e;
       --bg-secondary: #0a0a18;
-      --bg-card: rgba(255,255,255,0.03);
-      --border-card: rgba(255,255,255,0.06);
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border-card: rgba(255, 255, 255, 0.06);
       --text-primary: #f0f0f5;
-      --text-secondary: rgba(240,240,245,0.55);
+      --text-secondary: rgba(240, 240, 245, 0.55);
       --accent-blue: #4d7cff;
       --accent-cyan: #22d3ee;
       --accent-purple: #a855f7;
@@ -32,7 +38,9 @@
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: var(--font-body);
@@ -40,6 +48,45 @@
       color: var(--text-primary);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════ WHATSAPP FLOAT ═══════════════════ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.6);
+      z-index: 999;
+      transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
+      animation: waPulse 2.4s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 14px 36px rgba(37, 211, 102, 0.55);
+    }
+
+    @keyframes waPulse {
+      0%   { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.55); }
+      70%  { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.45), 0 0 0 18px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        bottom: 1.2rem;
+        right: 1.2rem;
+        width: 52px;
+        height: 52px;
+      }
     }
 
     /* ═══════════════════ NOISE OVERLAY ═══════════════════ */
@@ -63,8 +110,18 @@
       pointer-events: none;
       z-index: 0;
     }
-    .glow-orb--purple { background: var(--accent-purple); top: -200px; right: -100px; }
-    .glow-orb--blue { background: var(--accent-blue); bottom: 20%; left: -200px; }
+
+    .glow-orb--purple {
+      background: var(--accent-purple);
+      top: -200px;
+      right: -100px;
+    }
+
+    .glow-orb--blue {
+      background: var(--accent-blue);
+      bottom: 20%;
+      left: -200px;
+    }
 
     /* ═══════════════════ NAV ═══════════════════ */
     nav {
@@ -78,11 +135,15 @@
       align-items: center;
       justify-content: space-between;
       backdrop-filter: blur(20px);
-      background: rgba(6,6,14,0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      background: rgba(6, 6, 14, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       transition: all 0.4s var(--ease-out-expo);
     }
-    nav.scrolled { padding: 0.8rem 3rem; background: rgba(6,6,14,0.92); }
+
+    nav.scrolled {
+      padding: 0.8rem 3rem;
+      background: rgba(6, 6, 14, 0.92);
+    }
 
     .nav-logo {
       font-family: var(--font-display);
@@ -98,7 +159,12 @@
       flex-direction: column;
       line-height: 1;
     }
-    .nav-logo:hover, .nav-logo:focus { text-decoration: none; }
+
+    .nav-logo:hover,
+    .nav-logo:focus {
+      text-decoration: none;
+    }
+
     .nav-logo-sub {
       font-size: 0.55rem;
       font-weight: 600;
@@ -111,7 +177,12 @@
       margin-top: 0.15rem;
     }
 
-    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
@@ -120,7 +191,11 @@
       transition: color 0.3s;
       position: relative;
     }
-    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -131,7 +206,10 @@
       background: var(--accent-gradient);
       transition: width 0.3s var(--ease-out-expo);
     }
-    .nav-links a:hover::after { width: 100%; }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
 
     .nav-cta {
       padding: 0.65rem 1.6rem;
@@ -146,11 +224,30 @@
       transition: all 0.3s var(--ease-out-expo);
       text-decoration: none;
     }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(168,85,247,0.3); }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(168, 85, 247, 0.3);
+    }
 
     /* Mobile nav */
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
-    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s; }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
+    }
 
     /* ═══════════════════ HERO ═══════════════════ */
     .hero {
@@ -166,16 +263,16 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(99,102,241,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 30% 70%, rgba(168,85,247,0.06) 0%, transparent 50%);
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 30% 70%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
     }
 
     .hero-grid {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       background-size: 80px 80px;
       mask-image: radial-gradient(ellipse at 60% 50%, black 20%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse at 60% 50%, black 20%, transparent 70%);
@@ -198,14 +295,15 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.4rem 1rem 0.4rem 0.6rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 50px;
       font-size: 0.8rem;
       color: var(--text-secondary);
       margin-bottom: 1.5rem;
       animation: fadeUp 0.8s var(--ease-out-expo) 0.2s both;
     }
+
     .hero-tag span {
       width: 8px;
       height: 8px;
@@ -215,19 +313,27 @@
     }
 
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
     }
 
     .hero h1 {
       font-family: var(--font-display);
       font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.08;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
       animation: fadeUp 0.8s var(--ease-out-expo) 0.35s both;
     }
+
     .hero h1 .gradient-text {
       background: var(--accent-gradient);
       -webkit-background-clip: text;
@@ -266,12 +372,16 @@
       align-items: center;
       gap: 0.5rem;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(168,85,247,0.35); }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(168, 85, 247, 0.35);
+    }
 
     .btn-secondary {
       padding: 0.85rem 2rem;
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 50px;
       color: var(--text-primary);
       font-family: var(--font-body);
@@ -281,7 +391,11 @@
       transition: all 0.3s var(--ease-out-expo);
       text-decoration: none;
     }
-    .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
+
+    .btn-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+    }
 
     /* Hero visual */
     .hero-visual {
@@ -295,12 +409,12 @@
     .hero-phone {
       width: 280px;
       height: 560px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 40px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
     }
 
     .phone-notch {
@@ -326,13 +440,25 @@
       border-radius: 4px;
       animation: shimmer 2s infinite;
     }
-    .phone-bar--long { width: 80%; background: linear-gradient(90deg, rgba(99,102,241,0.3), rgba(168,85,247,0.3)); }
-    .phone-bar--med { width: 60%; background: linear-gradient(90deg, rgba(34,211,238,0.2), rgba(99,102,241,0.2)); }
-    .phone-bar--short { width: 40%; background: rgba(255,255,255,0.06); }
+
+    .phone-bar--long {
+      width: 80%;
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.3));
+    }
+
+    .phone-bar--med {
+      width: 60%;
+      background: linear-gradient(90deg, rgba(34, 211, 238, 0.2), rgba(99, 102, 241, 0.2));
+    }
+
+    .phone-bar--short {
+      width: 40%;
+      background: rgba(255, 255, 255, 0.06);
+    }
 
     .phone-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 12px;
       padding: 1rem;
       margin-top: 0.5rem;
@@ -345,6 +471,7 @@
       height: 60px;
       margin-top: 0.8rem;
     }
+
     .phone-chart-bar {
       flex: 1;
       border-radius: 4px 4px 0 0;
@@ -352,24 +479,36 @@
     }
 
     @keyframes grow-bar {
-      from { height: 0; }
+      from {
+        height: 0;
+      }
     }
 
     .hero-float-card {
       position: absolute;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       padding: 1rem 1.2rem;
       display: flex;
       align-items: center;
       gap: 0.7rem;
       animation: float 6s ease-in-out infinite;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
-    .hero-float-card--1 { top: 15%; right: -30px; animation-delay: 0s; }
-    .hero-float-card--2 { bottom: 20%; left: -40px; animation-delay: -3s; }
+
+    .hero-float-card--1 {
+      top: 15%;
+      right: -30px;
+      animation-delay: 0s;
+    }
+
+    .hero-float-card--2 {
+      bottom: 20%;
+      left: -40px;
+      animation-delay: -3s;
+    }
 
     .float-icon {
       width: 36px;
@@ -380,30 +519,72 @@
       justify-content: center;
       font-size: 1rem;
     }
-    .float-icon--green { background: rgba(34,197,94,0.15); color: #22c55e; }
-    .float-icon--blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
 
-    .float-text { font-size: 0.78rem; }
-    .float-text strong { display: block; color: var(--text-primary); font-weight: 600; }
-    .float-text span { color: var(--text-secondary); }
+    .float-icon--green {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+
+    .float-icon--blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+    }
+
+    .float-text {
+      font-size: 0.78rem;
+    }
+
+    .float-text strong {
+      display: block;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .float-text span {
+      color: var(--text-secondary);
+    }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
     }
 
     @keyframes shimmer {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ═══════════════════ SECTIONS SHARED ═══════════════════ */
-    section { padding: 7rem 3rem; position: relative; }
+    section {
+      padding: 7rem 3rem;
+      position: relative;
+    }
 
     .section-tag {
       font-family: var(--font-display);
@@ -428,6 +609,7 @@
       letter-spacing: -0.02em;
       margin-bottom: 3.5rem;
     }
+
     .section-title .gradient-text {
       background: var(--accent-gradient);
       -webkit-background-clip: text;
@@ -435,7 +617,10 @@
       background-clip: text;
     }
 
-    .container { max-width: 1200px; margin: 0 auto; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
     /* Reveal animation */
     .reveal {
@@ -443,6 +628,7 @@
       transform: translateY(40px);
       transition: all 0.8s var(--ease-out-expo);
     }
+
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
@@ -465,19 +651,24 @@
       overflow: hidden;
       cursor: default;
     }
+
     .service-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(99,102,241,0.06), transparent);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), transparent);
       opacity: 0;
       transition: opacity 0.5s;
     }
-    .service-card:hover::before { opacity: 1; }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
     .service-card:hover {
-      border-color: rgba(99,102,241,0.2);
+      border-color: rgba(99, 102, 241, 0.2);
       transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     }
 
     .service-icon {
@@ -491,10 +682,26 @@
       font-size: 1.3rem;
       position: relative;
     }
-    .service-icon--web { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(99,102,241,0.05)); color: #818cf8; }
-    .service-icon--mobile { background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(168,85,247,0.05)); color: #c084fc; }
-    .service-icon--auto { background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(34,211,238,0.05)); color: #22d3ee; }
-    .service-icon--sys { background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(59,130,246,0.05)); color: #60a5fa; }
+
+    .service-icon--web {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0.05));
+      color: #818cf8;
+    }
+
+    .service-icon--mobile {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.05));
+      color: #c084fc;
+    }
+
+    .service-icon--auto {
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0.05));
+      color: #22d3ee;
+    }
+
+    .service-icon--sys {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05));
+      color: #60a5fa;
+    }
 
     .service-card h3 {
       font-family: var(--font-display);
@@ -511,7 +718,9 @@
     }
 
     /* ═══════════════════ BENEFITS ═══════════════════ */
-    .benefits { background: var(--bg-secondary); }
+    .benefits {
+      background: var(--bg-secondary);
+    }
 
     .benefits-grid {
       display: grid;
@@ -535,6 +744,7 @@
       font-size: 1.4rem;
       position: relative;
     }
+
     .benefit-icon::before {
       content: '';
       position: absolute;
@@ -565,14 +775,15 @@
     .about-card {
       max-width: 800px;
       margin: 0 auto;
-      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 24px;
       padding: 3.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
+
     .about-card::before {
       content: '';
       position: absolute;
@@ -595,6 +806,7 @@
       margin-bottom: 1.5rem;
       line-height: 1;
     }
+
     .about-brand-sub {
       display: block;
       font-size: 0.7rem;
@@ -623,16 +835,19 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
     }
 
-    .cta-content { position: relative; z-index: 2; }
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
 
     .cta h2 {
       font-family: var(--font-display);
       font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       margin-bottom: 1.2rem;
     }
 
@@ -646,8 +861,8 @@
     .contact-wrapper {
       max-width: 600px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 24px;
       padding: 3rem;
     }
@@ -655,8 +870,8 @@
     .contact-field {
       width: 100%;
       padding: 1rem 1.2rem;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
       color: var(--text-primary);
       font-family: var(--font-body);
@@ -665,10 +880,20 @@
       transition: all 0.3s;
       outline: none;
     }
-    .contact-field:focus { border-color: rgba(99,102,241,0.4); background: rgba(255,255,255,0.05); }
-    .contact-field::placeholder { color: var(--text-secondary); }
 
-    textarea.contact-field { resize: vertical; min-height: 130px; }
+    .contact-field:focus {
+      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-field::placeholder {
+      color: var(--text-secondary);
+    }
+
+    textarea.contact-field {
+      resize: vertical;
+      min-height: 130px;
+    }
 
     .contact-btn {
       width: 100%;
@@ -684,12 +909,16 @@
       transition: all 0.3s var(--ease-out-expo);
       margin-top: 0.5rem;
     }
-    .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(168,85,247,0.3); }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(168, 85, 247, 0.3);
+    }
 
     /* ═══════════════════ FOOTER ═══════════════════ */
     footer {
       padding: 2.5rem 3rem;
-      border-top: 1px solid rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -704,6 +933,7 @@
       flex-direction: column;
       line-height: 1;
     }
+
     .footer-brand-sub {
       font-size: 0.45rem;
       font-weight: 600;
@@ -717,13 +947,17 @@
       color: var(--text-secondary);
     }
 
-    .footer-socials { display: flex; gap: 1rem; }
+    .footer-socials {
+      display: flex;
+      gap: 1rem;
+    }
+
     .footer-socials a {
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -732,17 +966,315 @@
       font-size: 0.85rem;
       transition: all 0.3s;
     }
-    .footer-socials a:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+
+    .footer-socials a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+    }
+
+    /* ═══════════════════ TEAM ═══════════════════ */
+    .about-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .team-section {
+      background: var(--bg-secondary);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.5s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .team-card:hover::before {
+      opacity: 1;
+    }
+
+    .team-card:hover {
+      border-color: rgba(99, 102, 241, 0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .team-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-role {
+      font-size: 0.82rem;
+      font-weight: 500;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.85rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-bio {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══════════════════ BRANDS MARQUEE ═══════════════════ */
+    .brands-marquee-wrap {
+      position: relative;
+      margin-top: 1rem;
+      mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+    }
+
+    .brands-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: brands-marquee 38s linear infinite;
+    }
+
+    .brands-marquee-wrap:hover .brands-marquee-track {
+      animation-play-state: paused;
+    }
+
+    .brands-marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+      padding: 1rem 2rem;
+    }
+
+    .brand-logo-link {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      padding: 0 0.5rem;
+      opacity: 0.55;
+      filter: grayscale(1);
+      transition: opacity 0.35s, filter 0.35s, transform 0.35s var(--ease-out-expo);
+    }
+
+    .brand-logo-link:hover {
+      opacity: 1;
+      filter: grayscale(0);
+      transform: scale(1.05);
+    }
+
+    .brand-logo-img {
+      max-height: 44px;
+      max-width: 140px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    @keyframes brands-marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ═══════════════════ PROJECTS ═══════════════════ */
+    .projects-section {
+      background: var(--bg-secondary);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: left;
+      transition: all 0.5s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.06), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      border-color: rgba(168, 85, 247, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28);
+    }
+
+    .project-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-block {
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 240, 245, 0.45);
+      margin-bottom: 0.4rem;
+    }
+
+    .project-block p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .project-meta {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      opacity: 0.85;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .brands-marquee-track {
+        animation: none;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .brands-marquee-track .brands-marquee-group:last-child {
+        display: none;
+      }
+
+      .brands-marquee-group {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .brands-marquee-wrap {
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+    }
 
     /* ═══════════════════ RESPONSIVE ═══════════════════ */
     @media (max-width: 1024px) {
-      .services-grid, .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .services-grid,
+      .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        gap: 1.25rem;
+      }
+
+      .nav-links a {
+        font-size: 0.82rem;
+      }
     }
 
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .nav-toggle { display: flex; }
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
       .nav-links.open {
         display: flex;
         flex-direction: column;
@@ -750,30 +1282,81 @@
         top: 100%;
         left: 0;
         right: 0;
-        background: rgba(6,6,14,0.96);
+        background: rgba(6, 6, 14, 0.96);
         backdrop-filter: blur(20px);
         padding: 1.5rem;
         gap: 1.2rem;
-        border-bottom: 1px solid rgba(255,255,255,0.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       }
 
-      section { padding: 4rem 1.5rem; }
-      .hero { padding: 7rem 1.5rem 3rem; }
-      .hero-content { grid-template-columns: 1fr; text-align: center; }
-      .hero-desc { margin: 0 auto 2rem; }
-      .hero-actions { justify-content: center; flex-wrap: wrap; }
-      .hero-visual { display: none; }
-      .hero-tag { margin: 0 auto 1.5rem; }
+      section {
+        padding: 4rem 1.5rem;
+      }
 
-      .services-grid, .benefits-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .hero {
+        padding: 7rem 1.5rem 3rem;
+      }
 
-      .about-card { padding: 2rem 1.5rem; }
-      .contact-wrapper { padding: 2rem 1.5rem; }
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
 
-      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .hero-desc {
+        margin: 0 auto 2rem;
+      }
+
+      .hero-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .hero-tag {
+        margin: 0 auto 1.5rem;
+      }
+
+      .services-grid,
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid,
+      .projects-grid {
+        max-width: 440px;
+        margin: 0 auto;
+      }
+
+      .brands-marquee-group {
+        gap: 2rem;
+      }
+
+      .about-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .contact-wrapper {
+        padding: 2rem 1.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div class="glow-orb glow-orb--purple"></div>
@@ -786,6 +1369,8 @@
       <a href="#servicios">Servicios</a>
       <a href="#beneficios">Beneficios</a>
       <a href="#nosotros">Nosotros</a>
+      <a href="#marcas">Marcas</a>
+      <a href="#proyectos">Proyectos</a>
       <a href="#contacto">Contacto</a>
       <a href="#contacto" class="nav-cta">Presupuesto</a>
     </div>
@@ -804,11 +1389,15 @@
           <span></span> Aceptando nuevos proyectos
         </div>
         <h1>Desarrollo de Apps a Medida <span class="gradient-text">a Bajo Costo</span></h1>
-        <p class="hero-desc">Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna. Tecnología de primer nivel, al alcance de todos.</p>
+        <p class="hero-desc">Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna.
+          Tecnología de primer nivel, al alcance de todos.</p>
         <div class="hero-actions">
           <a href="#contacto" class="btn-primary">
             Solicitar presupuesto
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </a>
           <a href="#servicios" class="btn-secondary">Ver servicios</a>
         </div>
@@ -823,12 +1412,24 @@
             <div class="phone-card">
               <div class="phone-bar phone-bar--med" style="margin-bottom: 0.5rem"></div>
               <div class="phone-chart">
-                <div class="phone-chart-bar" style="height: 35%; background: linear-gradient(to top, rgba(99,102,241,0.4), rgba(99,102,241,0.8)); animation-delay: 0.1s"></div>
-                <div class="phone-chart-bar" style="height: 65%; background: linear-gradient(to top, rgba(168,85,247,0.4), rgba(168,85,247,0.8)); animation-delay: 0.2s"></div>
-                <div class="phone-chart-bar" style="height: 45%; background: linear-gradient(to top, rgba(34,211,238,0.4), rgba(34,211,238,0.8)); animation-delay: 0.3s"></div>
-                <div class="phone-chart-bar" style="height: 80%; background: linear-gradient(to top, rgba(99,102,241,0.4), rgba(99,102,241,0.8)); animation-delay: 0.4s"></div>
-                <div class="phone-chart-bar" style="height: 55%; background: linear-gradient(to top, rgba(168,85,247,0.4), rgba(168,85,247,0.8)); animation-delay: 0.5s"></div>
-                <div class="phone-chart-bar" style="height: 90%; background: linear-gradient(to top, rgba(34,211,238,0.4), rgba(34,211,238,0.8)); animation-delay: 0.6s"></div>
+                <div class="phone-chart-bar"
+                  style="height: 35%; background: linear-gradient(to top, rgba(99,102,241,0.4), rgba(99,102,241,0.8)); animation-delay: 0.1s">
+                </div>
+                <div class="phone-chart-bar"
+                  style="height: 65%; background: linear-gradient(to top, rgba(168,85,247,0.4), rgba(168,85,247,0.8)); animation-delay: 0.2s">
+                </div>
+                <div class="phone-chart-bar"
+                  style="height: 45%; background: linear-gradient(to top, rgba(34,211,238,0.4), rgba(34,211,238,0.8)); animation-delay: 0.3s">
+                </div>
+                <div class="phone-chart-bar"
+                  style="height: 80%; background: linear-gradient(to top, rgba(99,102,241,0.4), rgba(99,102,241,0.8)); animation-delay: 0.4s">
+                </div>
+                <div class="phone-chart-bar"
+                  style="height: 55%; background: linear-gradient(to top, rgba(168,85,247,0.4), rgba(168,85,247,0.8)); animation-delay: 0.5s">
+                </div>
+                <div class="phone-chart-bar"
+                  style="height: 90%; background: linear-gradient(to top, rgba(34,211,238,0.4), rgba(34,211,238,0.8)); animation-delay: 0.6s">
+                </div>
               </div>
             </div>
             <div class="phone-card">
@@ -862,28 +1463,46 @@
       <div class="services-grid">
         <div class="service-card reveal">
           <div class="service-icon service-icon--web">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
           </div>
           <h3>Apps Web a Medida</h3>
           <p>Plataformas web modernas, rápidas y adaptadas a las necesidades de tu negocio.</p>
         </div>
         <div class="service-card reveal">
           <div class="service-icon service-icon--mobile">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2" />
+              <line x1="12" y1="18" x2="12" y2="18" />
+            </svg>
           </div>
           <h3>Apps Móviles</h3>
           <p>Aplicaciones nativas y multiplataforma para llegar a tus clientes en cualquier dispositivo.</p>
         </div>
         <div class="service-card reveal">
           <div class="service-icon service-icon--auto">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
           </div>
           <h3>Automatización de Procesos</h3>
           <p>Optimizá tus flujos de trabajo con soluciones inteligentes que ahorran tiempo y recursos.</p>
         </div>
         <div class="service-card reveal">
           <div class="service-icon service-icon--sys">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="8" rx="2" />
+              <rect x="2" y="14" width="20" height="8" rx="2" />
+              <line x1="6" y1="6" x2="6" y2="6" />
+              <line x1="6" y1="18" x2="6" y2="18" />
+            </svg>
           </div>
           <h3>Sistemas Internos</h3>
           <p>Software interno para gestión, inventario, CRM y más, diseñado para tu empresa.</p>
@@ -928,8 +1547,205 @@
       <div class="about-card reveal">
         <div class="about-brand">PRAGMA<span class="about-brand-sub">studio</span></div>
         <span class="section-tag">Sobre Pragma</span>
-        <h2 class="section-title" style="margin-bottom: 1.5rem">Tecnología al alcance de <span class="gradient-text">todos</span></h2>
-        <p>PRAGMA es un emprendimiento enfocado en brindar soluciones tecnológicas modernas, accesibles y de alta calidad para pequeñas y medianas empresas. Creemos que cada negocio merece herramientas digitales potentes sin necesidad de grandes inversiones. Nuestro equipo combina creatividad, experiencia técnica y compromiso para transformar tus ideas en aplicaciones reales que impulsen tu crecimiento.</p>
+        <h2 class="section-title" style="margin-bottom: 1.5rem">Tecnología al alcance de <span
+            class="gradient-text">todos</span></h2>
+        <p>PRAGMA es un emprendimiento enfocado en brindar soluciones tecnológicas modernas, accesibles y de alta
+          calidad para pequeñas y medianas empresas. Creemos que cada negocio merece herramientas digitales potentes sin
+          necesidad de grandes inversiones. Nuestro equipo combina creatividad, experiencia técnica y compromiso para
+          transformar tus ideas en aplicaciones reales que impulsen tu crecimiento.</p>
+        <div class="about-cta-row">
+          <a href="#equipo" class="btn-secondary">Conocé al equipo</a>
+          <a href="#proyectos" class="btn-secondary">Ver proyectos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ EQUIPO ═══════════════ -->
+  <section id="equipo" class="team-section">
+    <div class="container">
+      <span class="section-tag">Equipo</span>
+      <h2 class="section-title">Las personas detrás de <span class="gradient-text">PRAGMA</span></h2>
+      <div class="team-grid">
+        <article class="team-card reveal">
+          <img class="team-photo" src="images/gonzalo.png" width="140" height="140"
+            alt="Gonzalo Benedetto - Co-Founder & Full Stack Developer en PRAGMA Studio">
+          <h3>Gonzalo Benedetto</h3>
+          <p class="team-role">Co-Founder & Full Stack Developer</p>
+          <p class="team-bio">Especializado en arquitectura de software, desarrollo de funcionalidades complejas y
+            despliegues en producción. Lidera la definición técnica de los proyectos y asegura que cada producto
+            mantenga estándares altos de calidad, escalabilidad y rendimiento.
+            Trabaja de forma cercana con clientes y el equipo para transformar ideas en productos digitales sólidos,
+            priorizando velocidad de ejecución y claridad técnica en cada etapa del desarrollo.</p>
+        </article>
+        <article class="team-card reveal">
+          <img class="team-photo" src="images/gaspar.png" width="140" height="140"
+            alt="Gaspar Quintana Ruiz - Co-Founder & Industrial Engineer en PRAGMA Studio">
+          <h3>Gaspar Quintana Ruiz</h3>
+          <p class="team-role">Co-Founder & Industrial Engineer</p>
+          <p class="team-bio">Enfocado en el desarrollo full stack, optimización de procesos y resolución técnica de
+            proyectos. Participa activamente en la construcción de productos, code reviews, testing y mejoras continuas
+            para garantizar entregas rápidas y confiables.
+            Combina visión de negocio y ejecución técnica para convertir necesidades reales en soluciones digitales
+            funcionales, modernas y escalables.</p>
+        </article>
+        <article class="team-card reveal">
+          <img class="team-photo" src="images/facundo.png" width="140" height="140"
+            alt="Facundo Lamoratta - Co-Founder & Growth Lead en PRAGMA Studio">
+          <h3>Facundo Lamoratta</h3>
+          <p class="team-role">Co-Founder & Growth Lead</p>
+          <p class="team-bio">Responsable del área comercial, comunicación y relación con clientes. Lidera el proceso de
+            descubrimiento, seguimiento de proyectos y crecimiento de la marca, asegurando una experiencia clara y
+            cercana durante todo el proceso.
+            Además, impulsa la presencia de Pragma Studio en redes y la estrategia de contenido,
+            conectando tecnología y negocio de forma simple y efectiva.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ MARCAS ═══════════════ -->
+  <section id="marcas">
+    <div class="container">
+      <span class="section-tag">Confían en nosotros</span>
+      <h2 class="section-title">Marcas con las que <span class="gradient-text">trabajamos</span></h2>
+      <p style="text-align:center;color:var(--text-secondary);max-width:560px;margin:-2rem auto 0;font-size:0.95rem;line-height:1.6"
+        class="reveal">Trabajamos junto a marcas que buscan crecer con tecnología, diseño y ejecución rápida.</p>
+      <div class="brands-marquee-wrap reveal">
+        <div class="brands-marquee-track">
+          <div class="brands-marquee-group">
+            <a class="brand-logo-link" href="https://www.instagram.com/emat.ok/?hl=es-la" target="_blank"
+              rel="noopener noreferrer" aria-label="Cliente ejemplo 1 en Instagram">
+              <img class="brand-logo-img" src="images/brands/emat.png" alt="Logo cliente ejemplo 1">
+            </a>
+            <a class="brand-logo-link" href="https://galowines.com.ar/sucursal-barrio-jardin/" target="_blank"
+              rel="noopener noreferrer" aria-label="Cliente ejemplo 3 en Instagram">
+              <img class="brand-logo-img" src="images/brands/galowines.png" alt="Logo cliente ejemplo 3">
+            </a>
+            <a class="brand-logo-link" href="https://www.instagram.com/quintanaruizasesores/?hl=es-la" target="_blank"
+              rel="noopener noreferrer" aria-label="Cliente ejemplo 4 en Instagram">
+              <img class="brand-logo-img" src="images/brands/quintanaruizasesores.png" alt="Logo cliente ejemplo 4">
+            </a>
+            <a class="brand-logo-link" href="https://www.instagram.com/facumartinez_inmobiliaria/?hl=es-la"
+              target="_blank" rel="noopener noreferrer" aria-label="Cliente ejemplo 5 en Instagram">
+              <img class="brand-logo-img" src="images/brands/martinez_inmo.png" alt="Logo cliente ejemplo 5">
+            </a>
+            <a class="brand-logo-link" href="https://www.instagram.com/somoslamickey/" target="_blank"
+              rel="noopener noreferrer" aria-label="Cliente ejemplo 6 en Instagram">
+              <img class="brand-logo-img" src="images/brands/mickey.jpeg" alt="Logo cliente ejemplo 6">
+            </a>
+          </div>
+          <div class="brands-marquee-group" aria-hidden="true">
+            <a class="brand-logo-link" href="https://www.instagram.com/emat.ok/?hl=es-la" target="_blank"
+              rel="noopener noreferrer" tabindex="-1">
+              <img class="brand-logo-img" src="images/brands/emat.png" alt="">
+            </a>
+            <a class="brand-logo-link" href="https://galowines.com.ar/sucursal-barrio-jardin/" target="_blank"
+              rel="noopener noreferrer" tabindex="-1">
+              <img class="brand-logo-img" src="images/brands/galowines.png" alt="">
+            </a>
+            <a class="brand-logo-link" href="https://www.instagram.com/quintanaruizasesores/?hl=es-la" target="_blank"
+              rel="noopener noreferrer" tabindex="-1">
+              <img class="brand-logo-img" src="images/brands/quintanaruizasesores.png" alt="">
+            </a>
+            <a class="brand-logo-link" href="https://www.instagram.com/facumartinez_inmobiliaria/?hl=es-la"
+              target="_blank" rel="noopener noreferrer" tabindex="-1">
+              <img class="brand-logo-img" src="images/brands/martinez_inmo.png" alt="">
+            </a>
+            <a class="brand-logo-link" href="https://www.instagram.com/somoslamickey/" target="_blank"
+              rel="noopener noreferrer" tabindex="-1">
+              <img class="brand-logo-img" src="images/brands/mickey.jpeg" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PROYECTOS ═══════════════ -->
+  <section id="proyectos" class="projects-section">
+    <div class="container">
+      <span class="section-tag">Proyectos</span>
+      <h2 class="section-title">Problemas que <span class="gradient-text">resolvemos</span></h2>
+      <div class="projects-grid">
+        <article class="project-card reveal">
+          <h3>CRM - Gestión de Clientes</h3>
+          <div class="project-block">
+            <p class="project-label">El problema</p>
+            <p>El equipo comercial gestionaba clientes, seguimientos y presupuestos de forma manual utilizando hojas de
+              cálculo y múltiples canales separados. Esto generaba pérdida de oportunidades, falta de visibilidad del
+              pipeline y mucho tiempo operativo en tareas repetitivas.</p>
+          </div>
+          <div class="project-block">
+            <p class="project-label">La solución</p>
+            <p>Desarrollamos una plataforma interna para centralizar clientes, oportunidades y presupuestos en un único
+              sistema.
+              El proyecto permitió reemplazar procesos manuales y hojas de cálculo por un flujo comercial mucho más
+              ordenado, rápido y escalable, mejorando el seguimiento de leads y la gestión diaria del equipo de ventas.
+            </p>
+          </div>
+        </article>
+        <article class="project-card reveal">
+          <h3>App - Gestión de Compras</h3>
+          <div class="project-block">
+            <p class="project-label">El problema</p>
+            <p>La operación de compras y pedidos se gestionaba de forma manual entre mensajes y planillas de excel,
+              generando errores, demoras y poca visibilidad sobre el estado de cada pedido.</p>
+          </div>
+          <div class="project-block">
+            <p class="project-label">La solución</p>
+            <p>Desarrollamos una aplicación interna para optimizar la gestión de compras, pedidos y seguimiento
+              operativo.
+              La plataforma centraliza procesos que antes se realizaban manualmente, permitiendo al equipo trabajar con
+              mayor velocidad, control y organización diaria.</p>
+          </div>
+          <p class="project-meta">Resultado: Hoy el equipo
+            puede analizar el estado de pedidos, detectar cuellos de botella y tomar decisiones con datos claros,
+            reduciendo errores operativos y mejorando la eficiencia diaria.</p>
+        </article>
+        <article class="project-card reveal">
+          <h3>App de socios y beneficios</h3>
+          <div class="project-block">
+            <p class="project-label">El problema</p>
+            <p>La juguetería no contaba con un sistema centralizado para fidelizar clientes ni registrar beneficios de
+              manera organizada. El seguimiento de compras y reintegros se hacía de forma manual, dificultando el
+              control de socios, recompensas y comportamiento de los clientes.
+              Además, había poca visibilidad sobre hábitos de compra y recurrencia, lo que limitaba la posibilidad de
+              generar acciones comerciales más efectivas.
+            </p>
+          </div>
+          <div class="project-block">
+            <p class="project-label">La solución</p>
+            <p>Desarrollamos una aplicación de socios y beneficios que permite administrar clientes, registrar compras y
+              gestionar reintegros de forma automática y centralizada..</p>
+          </div>
+          <p class="project-meta">Resultado: La juguetería logró ordenar la gestión de socios, automatizar los
+            reintegros y obtener mayor visibilidad sobre el comportamiento de sus clientes.
+            Además de reducir trabajo manual, el sistema permitió fortalecer la fidelización y generar una experiencia
+            de compra más moderna y personalizada.</p>
+        </article>
+        <article class="project-card reveal">
+          <h3>Rediseño y actualización integral de sitio web</h3>
+          <div class="project-block">
+            <p class="project-label">El problema</p>
+            <p>La empresa contaba con una página web desactualizada, con problemas de navegación, contenido poco claro y
+              una experiencia que ya no representaba correctamente la marca ni sus servicios.
+              Además, el sitio tenía limitaciones técnicas y poca flexibilidad para actualizar contenido o acompañar el
+              crecimiento del negocio.</p>
+          </div>
+          <div class="project-block">
+            <p class="project-label">La solución</p>
+            <p>Realizamos una actualización integral del sitio web, modernizando tanto la experiencia visual como la
+              estructura técnica de la plataforma. Rediseñamos la interfaz, optimizamos la navegación y reorganizamos el
+              contenido para lograr una experiencia más clara, rápida y alineada con la identidad actual de la marca.
+              Además, mejoramos el rendimiento general del sitio y adaptamos la plataforma para facilitar futuras
+              actualizaciones y acompañar el crecimiento del negocio.</p>
+          </div>
+          <p class="project-meta">Resultado: La nueva plataforma permitió mejorar la presencia digital de la marca y
+            ofrecer una experiencia mucho más clara y profesional para sus clientes.
+            Además de optimizar el rendimiento del sitio, la actualización facilitó la gestión de contenido y dejó una
+            base tecnológica preparada para seguir creciendo.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -942,7 +1758,10 @@
       <p class="cta-desc">Contanos tu proyecto y te ayudamos a hacerlo realidad con tecnología de primer nivel.</p>
       <a href="#contacto" class="btn-primary" style="font-size: 1.05rem; padding: 1rem 2.5rem;">
         Contactanos ahora
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
       </a>
     </div>
   </section>
@@ -966,14 +1785,28 @@
     <span class="footer-brand">PRAGMA<span class="footer-brand-sub">studio</span></span>
     <span class="footer-copy">© 2026 PRAGMA Studio. Todos los derechos reservados.</span>
     <div class="footer-socials">
-      <a href="https://www.instagram.com/pragmasolucionesdigitales/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      <a href="https://www.instagram.com/pragmasolucionesdigitales/" target="_blank" rel="noopener"
+        aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
       </a>
       <a href="https://www.linkedin.com/in/pragma-sd-8253453b4/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+          <rect x="2" y="9" width="4" height="12" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
       </a>
       <a href="https://wa.me/5493516017576" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
       </a>
     </div>
   </footer>
@@ -1037,13 +1870,27 @@
     // ═══════════════ SMOOTH SCROLL ═══════════════
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
   </script>
+
+  <!-- ═══════════════ WHATSAPP FLOAT ═══════════════ -->
+  <a href="https://wa.me/5493516017576" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Escribinos por WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
 </body>
+
 </html>
