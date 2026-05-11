@@ -1213,6 +1213,133 @@
       z-index: 1;
     }
 
+    /* ═══════════════════ WEBS DESARROLLADAS ═══════════════════ */
+    .webs-section {
+      background: var(--bg-primary);
+    }
+
+    .webs-intro {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: -2rem auto 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .webs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .web-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.5s var(--ease-out-expo), border-color 0.5s, box-shadow 0.5s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .web-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.3);
+    }
+
+    .web-screenshot {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      background: #0a0a0a;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .web-screenshot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 14s linear;
+      transform: translateY(0);
+      will-change: transform;
+    }
+
+    .web-card:hover .web-screenshot img {
+      transform: translateY(calc(-100% + 380px));
+    }
+
+    .web-screenshot::after {
+      content: 'Pasá el mouse para recorrer';
+      position: absolute;
+      bottom: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+      transition: opacity 0.3s;
+      letter-spacing: 0.01em;
+    }
+
+    .web-card:hover .web-screenshot::after {
+      opacity: 0;
+    }
+
+    .web-info {
+      padding: 1.5rem 1.75rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .web-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .web-info p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .web-visit-btn {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+
+    .web-visit-btn:hover {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+      transform: translateX(2px);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .brands-marquee-track {
         animation: none;
@@ -1250,6 +1377,10 @@
       }
 
       .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .webs-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1331,9 +1462,14 @@
       }
 
       .team-grid,
-      .projects-grid {
+      .projects-grid,
+      .webs-grid {
         max-width: 440px;
         margin: 0 auto;
+      }
+
+      .web-screenshot {
+        height: 300px;
       }
 
       .brands-marquee-group {
@@ -1745,6 +1881,53 @@
             ofrecer una experiencia mucho más clara y profesional para sus clientes.
             Además de optimizar el rendimiento del sitio, la actualización facilitó la gestión de contenido y dejó una
             base tecnológica preparada para seguir creciendo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ WEBS DESARROLLADAS ═══════════════ -->
+  <section id="webs" class="webs-section">
+    <div class="container">
+      <span class="section-tag">Webs que desarrollamos</span>
+      <h2 class="section-title">Sitios <span class="gradient-text">en producción</span></h2>
+      <p class="webs-intro reveal">Pasá el mouse sobre cada captura para recorrer el sitio completo.</p>
+      <div class="webs-grid">
+        <article class="web-card reveal">
+          <div class="web-screenshot">
+            <img src="images/projects/emat.jpg"
+              alt="Sitio web de EMAT - Aislación térmica y acústica sustentable" loading="lazy">
+          </div>
+          <div class="web-info">
+            <h3>EMAT — Aislación térmica y acústica</h3>
+            <p>Sitio institucional con catálogo de productos, calculadora de presupuesto, mapa de cobertura y
+              testimonios.</p>
+            <a href="#" target="_blank" rel="noopener" class="web-visit-btn">
+              Visitar web
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+          </div>
+        </article>
+        <article class="web-card reveal">
+          <div class="web-screenshot">
+            <img src="images/projects/quintana.jpg"
+              alt="Sitio web de Quintana Ruiz Asesores - Seguros para personas y empresas" loading="lazy">
+          </div>
+          <div class="web-info">
+            <h3>Quintana Ruiz Asesores — Seguros</h3>
+            <p>Web corporativa con coberturas, equipo, reseñas de Google, blog y formulario de cotización integrado.
+            </p>
+            <a href="https://seguroscordoba.com.ar" target="_blank" rel="noopener" class="web-visit-btn">
+              Visitar web
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+          </div>
         </article>
       </div>
     </div>

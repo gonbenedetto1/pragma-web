@@ -1,0 +1,4 @@
+.DS_Store
+
+# PNG backups originales de las capturas (muy pesados, ya tenemos las versiones JPG optimizadas)
+images/projects/*.png
