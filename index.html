@@ -4,9 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PRAGMA Studio - Desarrollo de Apps a Medida</title>
+  <title>PRAGMA Studio — Soluciones Digitales a Medida</title>
   <meta name="description"
-    content="PRAGMA Studio: Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna. Apps web, móviles, automatización y sistemas internos.">
+    content="PRAGMA Studio: desarrollamos webs, sistemas, CRMs, apps y automatizaciones a medida para tu negocio. Cualquier solución digital, sin costos excesivos.">
+  <meta property="og:title" content="PRAGMA Studio — Soluciones Digitales a Medida">
+  <meta property="og:description"
+    content="Webs, sistemas, CRMs, apps y automatizaciones a medida. Tecnología de primer nivel, al alcance de todos.">
+  <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="shortcut icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/favicon.png">
@@ -1175,6 +1179,65 @@
       box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28);
     }
 
+    .project-card details > summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card details > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .project-card details > summary .chev {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: transform 0.35s var(--ease-out-expo), background 0.25s, color 0.25s;
+    }
+
+    .project-card details[open] > summary .chev {
+      transform: rotate(180deg);
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--text-primary);
+    }
+
+    .project-card details[open] > summary {
+      margin-bottom: 1.25rem;
+    }
+
+    .project-card details summary h3 {
+      margin-bottom: 0 !important;
+    }
+
+    .project-card details[open] > *:not(summary) {
+      animation: projectExpand 0.35s var(--ease-out-expo);
+    }
+
+    @keyframes projectExpand {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     .project-card h3 {
       font-family: var(--font-display);
       font-size: 1.2rem;
@@ -1532,9 +1595,9 @@
         <div class="hero-tag">
           <span></span> Aceptando nuevos proyectos
         </div>
-        <h1>Desarrollo de Apps a Medida <span class="gradient-text">a Bajo Costo</span></h1>
-        <p class="hero-desc">Creamos aplicaciones personalizadas para tu negocio sin que tengas que gastar una fortuna.
-          Tecnología de primer nivel, al alcance de todos.</p>
+        <h1>Soluciones Digitales a Medida <span class="gradient-text">a Bajo Costo</span></h1>
+        <p class="hero-desc">Webs, sistemas, CRMs, apps y automatizaciones diseñadas a la medida de tu negocio.
+          Tecnología de primer nivel, sin costos excesivos.</p>
         <div class="hero-actions">
           <a href="#contacto" class="btn-primary">
             Solicitar presupuesto
@@ -1669,7 +1732,7 @@
         <div class="benefit-item reveal">
           <div class="benefit-icon">⚡</div>
           <h3>Entrega Rápida</h3>
-          <p>Procesos ágiles para que tu app esté lista en tiempo récord.</p>
+          <p>Procesos ágiles para que tu proyecto esté listo en tiempo récord.</p>
         </div>
         <div class="benefit-item reveal">
           <div class="benefit-icon">💰</div>
@@ -1679,7 +1742,7 @@
         <div class="benefit-item reveal">
           <div class="benefit-icon">🚀</div>
           <h3>Soporte y Escalabilidad</h3>
-          <p>Acompañamiento continuo y apps que crecen con tu negocio.</p>
+          <p>Acompañamiento continuo y productos que crecen con tu negocio.</p>
         </div>
       </div>
     </div>
@@ -1693,10 +1756,10 @@
         <span class="section-tag">Sobre Pragma</span>
         <h2 class="section-title" style="margin-bottom: 1.5rem">Tecnología al alcance de <span
             class="gradient-text">todos</span></h2>
-        <p>PRAGMA es un emprendimiento enfocado en brindar soluciones tecnológicas modernas, accesibles y de alta
+        <p>PRAGMA es un estudio enfocado en brindar soluciones tecnológicas modernas, accesibles y de alta
           calidad para pequeñas y medianas empresas. Creemos que cada negocio merece herramientas digitales potentes sin
           necesidad de grandes inversiones. Nuestro equipo combina creatividad, experiencia técnica y compromiso para
-          transformar tus ideas en aplicaciones reales que impulsen tu crecimiento.</p>
+          transformar tus ideas en productos digitales reales que impulsen tu crecimiento.</p>
         <div class="about-cta-row">
           <a href="#equipo" class="btn-secondary">Conocé al equipo</a>
           <a href="#proyectos" class="btn-secondary">Ver proyectos</a>
@@ -1716,33 +1779,25 @@
             alt="Gonzalo Benedetto - Co-Founder & Full Stack Developer en PRAGMA Studio">
           <h3>Gonzalo Benedetto</h3>
           <p class="team-role">Co-Founder & Full Stack Developer</p>
-          <p class="team-bio">Especializado en arquitectura de software, desarrollo de funcionalidades complejas y
-            despliegues en producción. Lidera la definición técnica de los proyectos y asegura que cada producto
-            mantenga estándares altos de calidad, escalabilidad y rendimiento.
-            Trabaja de forma cercana con clientes y el equipo para transformar ideas en productos digitales sólidos,
-            priorizando velocidad de ejecución y claridad técnica en cada etapa del desarrollo.</p>
+          <p class="team-bio">Lidera la definición técnica de los proyectos: arquitectura, desarrollo de
+            funcionalidades complejas y despliegues en producción. Garantiza calidad, escalabilidad y velocidad de
+            ejecución en cada etapa.</p>
         </article>
         <article class="team-card reveal">
           <img class="team-photo" src="images/gaspar.png" width="140" height="140"
             alt="Gaspar Quintana Ruiz - Co-Founder & Industrial Engineer en PRAGMA Studio">
           <h3>Gaspar Quintana Ruiz</h3>
           <p class="team-role">Co-Founder & Industrial Engineer</p>
-          <p class="team-bio">Enfocado en el desarrollo full stack, optimización de procesos y resolución técnica de
-            proyectos. Participa activamente en la construcción de productos, code reviews, testing y mejoras continuas
-            para garantizar entregas rápidas y confiables.
-            Combina visión de negocio y ejecución técnica para convertir necesidades reales en soluciones digitales
-            funcionales, modernas y escalables.</p>
+          <p class="team-bio">Combina desarrollo full stack y optimización de procesos para convertir necesidades reales
+            en soluciones digitales escalables. Code reviews, testing y mejora continua en cada entrega.</p>
         </article>
         <article class="team-card reveal">
           <img class="team-photo" src="images/facundo.png" width="140" height="140"
             alt="Facundo Lamoratta - Co-Founder & Growth Lead en PRAGMA Studio">
           <h3>Facundo Lamoratta</h3>
           <p class="team-role">Co-Founder & Growth Lead</p>
-          <p class="team-bio">Responsable del área comercial, comunicación y relación con clientes. Lidera el proceso de
-            descubrimiento, seguimiento de proyectos y crecimiento de la marca, asegurando una experiencia clara y
-            cercana durante todo el proceso.
-            Además, impulsa la presencia de Pragma Studio en redes y la estrategia de contenido,
-            conectando tecnología y negocio de forma simple y efectiva.</p>
+          <p class="team-bio">Lidera el área comercial y la relación con clientes: descubrimiento, seguimiento y
+            crecimiento de la marca. Impulsa la presencia de PRAGMA en redes conectando tecnología y negocio.</p>
         </article>
       </div>
     </div>
@@ -1813,82 +1868,119 @@
       <h2 class="section-title">Problemas que <span class="gradient-text">resolvemos</span></h2>
       <div class="projects-grid">
         <article class="project-card reveal">
-          <h3>CRM - Gestión de Clientes</h3>
-          <div class="project-block">
-            <p class="project-label">El problema</p>
-            <p>El equipo comercial gestionaba clientes, seguimientos y presupuestos de forma manual utilizando hojas de
-              cálculo y múltiples canales separados. Esto generaba pérdida de oportunidades, falta de visibilidad del
-              pipeline y mucho tiempo operativo en tareas repetitivas.</p>
-          </div>
-          <div class="project-block">
-            <p class="project-label">La solución</p>
-            <p>Desarrollamos una plataforma interna para centralizar clientes, oportunidades y presupuestos en un único
-              sistema.
-              El proyecto permitió reemplazar procesos manuales y hojas de cálculo por un flujo comercial mucho más
-              ordenado, rápido y escalable, mejorando el seguimiento de leads y la gestión diaria del equipo de ventas.
-            </p>
-          </div>
+          <details>
+            <summary>
+              <h3>CRM - Gestión de Clientes</h3>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </summary>
+            <div class="project-block">
+              <p class="project-label">El problema</p>
+              <p>El equipo comercial gestionaba clientes, seguimientos y presupuestos de forma manual utilizando hojas
+                de cálculo y múltiples canales separados. Esto generaba pérdida de oportunidades, falta de visibilidad
+                del pipeline y mucho tiempo operativo en tareas repetitivas.</p>
+            </div>
+            <div class="project-block">
+              <p class="project-label">La solución</p>
+              <p>Desarrollamos una plataforma interna para centralizar clientes, oportunidades y presupuestos en un
+                único sistema. El proyecto permitió reemplazar procesos manuales y hojas de cálculo por un flujo
+                comercial mucho más ordenado, rápido y escalable, mejorando el seguimiento de leads y la gestión diaria
+                del equipo de ventas.</p>
+            </div>
+          </details>
         </article>
         <article class="project-card reveal">
-          <h3>App - Gestión de Compras</h3>
-          <div class="project-block">
-            <p class="project-label">El problema</p>
-            <p>La operación de compras y pedidos se gestionaba de forma manual entre mensajes y planillas de excel,
-              generando errores, demoras y poca visibilidad sobre el estado de cada pedido.</p>
-          </div>
-          <div class="project-block">
-            <p class="project-label">La solución</p>
-            <p>Desarrollamos una aplicación interna para optimizar la gestión de compras, pedidos y seguimiento
-              operativo.
-              La plataforma centraliza procesos que antes se realizaban manualmente, permitiendo al equipo trabajar con
-              mayor velocidad, control y organización diaria.</p>
-          </div>
-          <p class="project-meta">Resultado: Hoy el equipo
-            puede analizar el estado de pedidos, detectar cuellos de botella y tomar decisiones con datos claros,
-            reduciendo errores operativos y mejorando la eficiencia diaria.</p>
+          <details>
+            <summary>
+              <h3>App - Gestión de Compras</h3>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </summary>
+            <div class="project-block">
+              <p class="project-label">El problema</p>
+              <p>La operación de compras y pedidos se gestionaba de forma manual entre mensajes y planillas de excel,
+                generando errores, demoras y poca visibilidad sobre el estado de cada pedido.</p>
+            </div>
+            <div class="project-block">
+              <p class="project-label">La solución</p>
+              <p>Desarrollamos una aplicación interna para optimizar la gestión de compras, pedidos y seguimiento
+                operativo. La plataforma centraliza procesos que antes se realizaban manualmente, permitiendo al equipo
+                trabajar con mayor velocidad, control y organización diaria.</p>
+            </div>
+            <p class="project-meta">Resultado: Hoy el equipo puede analizar el estado de pedidos, detectar cuellos de
+              botella y tomar decisiones con datos claros, reduciendo errores operativos y mejorando la eficiencia
+              diaria.</p>
+          </details>
         </article>
         <article class="project-card reveal">
-          <h3>App de socios y beneficios</h3>
-          <div class="project-block">
-            <p class="project-label">El problema</p>
-            <p>La juguetería no contaba con un sistema centralizado para fidelizar clientes ni registrar beneficios de
-              manera organizada. El seguimiento de compras y reintegros se hacía de forma manual, dificultando el
-              control de socios, recompensas y comportamiento de los clientes.
-              Además, había poca visibilidad sobre hábitos de compra y recurrencia, lo que limitaba la posibilidad de
-              generar acciones comerciales más efectivas.
-            </p>
-          </div>
-          <div class="project-block">
-            <p class="project-label">La solución</p>
-            <p>Desarrollamos una aplicación de socios y beneficios que permite administrar clientes, registrar compras y
-              gestionar reintegros de forma automática y centralizada..</p>
-          </div>
-          <p class="project-meta">Resultado: La juguetería logró ordenar la gestión de socios, automatizar los
-            reintegros y obtener mayor visibilidad sobre el comportamiento de sus clientes.
-            Además de reducir trabajo manual, el sistema permitió fortalecer la fidelización y generar una experiencia
-            de compra más moderna y personalizada.</p>
+          <details>
+            <summary>
+              <h3>App de socios y beneficios</h3>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </summary>
+            <div class="project-block">
+              <p class="project-label">El problema</p>
+              <p>La juguetería no contaba con un sistema centralizado para fidelizar clientes ni registrar beneficios de
+                manera organizada. El seguimiento de compras y reintegros se hacía de forma manual, dificultando el
+                control de socios, recompensas y comportamiento de los clientes. Además, había poca visibilidad sobre
+                hábitos de compra y recurrencia, lo que limitaba la posibilidad de generar acciones comerciales más
+                efectivas.</p>
+            </div>
+            <div class="project-block">
+              <p class="project-label">La solución</p>
+              <p>Desarrollamos una aplicación de socios y beneficios que permite administrar clientes, registrar compras
+                y gestionar reintegros de forma automática y centralizada.</p>
+            </div>
+            <p class="project-meta">Resultado: La juguetería logró ordenar la gestión de socios, automatizar los
+              reintegros y obtener mayor visibilidad sobre el comportamiento de sus clientes. Además de reducir trabajo
+              manual, el sistema permitió fortalecer la fidelización y generar una experiencia de compra más moderna y
+              personalizada.</p>
+          </details>
         </article>
         <article class="project-card reveal">
-          <h3>Rediseño y actualización integral de sitio web</h3>
-          <div class="project-block">
-            <p class="project-label">El problema</p>
-            <p>La empresa contaba con una página web desactualizada, con problemas de navegación, contenido poco claro y
-              una experiencia que ya no representaba correctamente la marca ni sus servicios.
-              Además, el sitio tenía limitaciones técnicas y poca flexibilidad para actualizar contenido o acompañar el
-              crecimiento del negocio.</p>
-          </div>
-          <div class="project-block">
-            <p class="project-label">La solución</p>
-            <p>Realizamos una actualización integral del sitio web, modernizando tanto la experiencia visual como la
-              estructura técnica de la plataforma. Rediseñamos la interfaz, optimizamos la navegación y reorganizamos el
-              contenido para lograr una experiencia más clara, rápida y alineada con la identidad actual de la marca.
-              Además, mejoramos el rendimiento general del sitio y adaptamos la plataforma para facilitar futuras
-              actualizaciones y acompañar el crecimiento del negocio.</p>
-          </div>
-          <p class="project-meta">Resultado: La nueva plataforma permitió mejorar la presencia digital de la marca y
-            ofrecer una experiencia mucho más clara y profesional para sus clientes.
-            Además de optimizar el rendimiento del sitio, la actualización facilitó la gestión de contenido y dejó una
-            base tecnológica preparada para seguir creciendo.</p>
+          <details>
+            <summary>
+              <h3>Rediseño y actualización integral de sitio web</h3>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </summary>
+            <div class="project-block">
+              <p class="project-label">El problema</p>
+              <p>La empresa contaba con una página web desactualizada, con problemas de navegación, contenido poco claro
+                y una experiencia que ya no representaba correctamente la marca ni sus servicios. Además, el sitio tenía
+                limitaciones técnicas y poca flexibilidad para actualizar contenido o acompañar el crecimiento del
+                negocio.</p>
+            </div>
+            <div class="project-block">
+              <p class="project-label">La solución</p>
+              <p>Realizamos una actualización integral del sitio web, modernizando tanto la experiencia visual como la
+                estructura técnica de la plataforma. Rediseñamos la interfaz, optimizamos la navegación y reorganizamos
+                el contenido para lograr una experiencia más clara, rápida y alineada con la identidad actual de la
+                marca. Además, mejoramos el rendimiento general del sitio y adaptamos la plataforma para facilitar
+                futuras actualizaciones y acompañar el crecimiento del negocio.</p>
+            </div>
+            <p class="project-meta">Resultado: La nueva plataforma permitió mejorar la presencia digital de la marca y
+              ofrecer una experiencia mucho más clara y profesional para sus clientes. Además de optimizar el
+              rendimiento del sitio, la actualización facilitó la gestión de contenido y dejó una base tecnológica
+              preparada para seguir creciendo.</p>
+          </details>
         </article>
       </div>
     </div>
@@ -1910,7 +2002,7 @@
             <h3>EMAT — Aislación térmica y acústica</h3>
             <p>Sitio institucional con catálogo de productos, calculadora de presupuesto, mapa de cobertura y
               testimonios.</p>
-            <a href="#" target="_blank" rel="noopener" class="web-visit-btn">
+            <a href="https://emat.com.ar/" target="_blank" rel="noopener" class="web-visit-btn">
               Visitar web
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -1945,7 +2037,7 @@
   <section class="cta">
     <div class="cta-bg"></div>
     <div class="cta-content reveal">
-      <h2>¿Listo para llevar tu idea a <span class="gradient-text">una app real</span>?</h2>
+      <h2>¿Listo para llevar tu idea a <span class="gradient-text">un producto real</span>?</h2>
       <p class="cta-desc">Contanos tu proyecto y te ayudamos a hacerlo realidad con tecnología de primer nivel.</p>
       <a href="#contacto" class="btn-primary" style="font-size: 1.05rem; padding: 1rem 2.5rem;">
         Contactanos ahora
