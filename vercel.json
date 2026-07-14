@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/partners", "destination": "https://pragma-partners-eight.vercel.app/partners" },
+    { "source": "/partners/(.*)", "destination": "https://pragma-partners-eight.vercel.app/partners/$1" }
+  ]
+}
