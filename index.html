@@ -155,19 +155,28 @@
       }
     }
 
-    /* ═══════════════════ AMBIENT GRADIENT WASHES ═══════════════════ */
+    /* ═══════════════════ AMBIENT GRADIENT WASHES (animated) ═══════════════════ */
     body::before {
       content: '';
       position: fixed;
-      inset: 0;
+      inset: -20%;
       background:
-        radial-gradient(ellipse 55% 45% at 12% 20%, rgba(168, 85, 247, 0.20) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 88% 30%, rgba(236, 72, 153, 0.14) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 45% at 20% 85%, rgba(34, 211, 238, 0.10) 0%, transparent 55%),
-        radial-gradient(ellipse 45% 40% at 90% 88%, rgba(124, 58, 237, 0.16) 0%, transparent 55%);
+        radial-gradient(ellipse 45% 40% at 15% 25%, rgba(168, 85, 247, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 85% 30%, rgba(236, 72, 153, 0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 40% at 20% 85%, rgba(34, 211, 238, 0.11) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 90% 88%, rgba(124, 58, 237, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 30% 25% at 55% 55%, rgba(168, 85, 247, 0.10) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
-      opacity: 1;
+      animation: bgDrift 32s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    @keyframes bgDrift {
+      0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      25%      { transform: translate(-2%, -1%) rotate(1.5deg) scale(1.03); }
+      50%      { transform: translate(1%, -2%) rotate(-1deg) scale(1.05); }
+      75%      { transform: translate(-1%, 2%) rotate(2deg) scale(1.02); }
     }
 
     body::after {
@@ -181,6 +190,33 @@
       opacity: 0.5;
       mask-image: radial-gradient(ellipse at 50% 40%, transparent 25%, black 100%);
       -webkit-mask-image: radial-gradient(ellipse at 50% 40%, transparent 25%, black 100%);
+    }
+
+    /* Mouse-following violet blob */
+    .mouse-blob {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(236, 72, 153, 0.14) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-100%, -100%);
+      filter: blur(50px);
+      opacity: 0;
+      transition: opacity 0.4s;
+      will-change: transform;
+    }
+
+    .mouse-blob.active {
+      opacity: 1;
+    }
+
+    @media (pointer: coarse) {
+      .mouse-blob { display: none; }
+      body::before { animation: none; }
     }
 
     main, nav, section, footer, .hero-marquee {
@@ -369,25 +405,37 @@
     }
 
     .nav-cta {
-      padding: 0.6rem 1.3rem;
-      background: transparent;
-      border: 1px solid rgba(10, 10, 10, 0.3);
+      padding: 0.6rem 1.4rem;
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 55%, #ec4899 110%);
+      border: 1px solid transparent;
       border-radius: 999px;
-      color: var(--text-primary);
+      color: #ffffff !important;
       font-family: var(--font-mono);
       font-size: 0.82rem;
-      font-weight: 400;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s var(--ease-out-expo);
+      transition: transform 0.3s var(--ease-out-expo), box-shadow 0.35s, filter 0.25s;
       text-decoration: none;
       letter-spacing: -0.01em;
+      box-shadow:
+        0 6px 20px -6px rgba(124, 58, 237, 0.55),
+        0 3px 10px -4px rgba(236, 72, 153, 0.30);
     }
 
     .nav-cta:hover {
-      background: var(--text-primary);
-      color: var(--bg-primary);
-      border-color: var(--text-primary);
       transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow:
+        0 10px 28px -6px rgba(124, 58, 237, 0.70),
+        0 5px 14px -4px rgba(236, 72, 153, 0.40);
+    }
+
+    .nav-links a.nav-cta::after {
+      display: none;
+    }
+
+    .nav-links a.nav-cta:hover {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 55%, #ec4899 110%);
     }
 
     /* Mobile nav */
@@ -974,6 +1022,10 @@
       padding-right: 3rem;
     }
 
+    .hero-marquee:hover .hero-marquee-track {
+      animation-play-state: paused;
+    }
+
     .hero-marquee-item {
       display: inline-flex;
       align-items: center;
@@ -984,6 +1036,13 @@
       color: var(--text-primary);
       letter-spacing: -0.02em;
       white-space: nowrap;
+      transition: color 0.25s, transform 0.25s var(--ease-out-expo);
+      cursor: default;
+    }
+
+    .hero-marquee-item:hover {
+      color: var(--accent-violet);
+      transform: translateY(-2px);
     }
 
     .hero-marquee-item::after {
@@ -993,6 +1052,12 @@
       height: 8px;
       border-radius: 50%;
       background: var(--accent-violet);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .hero-marquee-item:hover::after {
+      transform: scale(1.5);
+      box-shadow: 0 0 12px rgba(124, 58, 237, 0.6);
     }
 
     @keyframes marquee-scroll {
@@ -1096,12 +1161,58 @@
     .reveal {
       opacity: 0;
       transform: translateY(40px);
-      transition: all 0.8s var(--ease-out-expo);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .reveal-blur {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(20px);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo), filter 0.9s ease-out;
+    }
+
+    .reveal-blur.visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
     }
 
     /* ═══════════════════ SERVICES ═══════════════════ */
@@ -1112,11 +1223,12 @@
     }
 
     .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(10, 10, 10, 0.08);
       border-radius: 20px;
       padding: 2rem;
-      transition: all 0.5s var(--ease-out-expo);
+      transition: transform 0.5s var(--ease-out-expo), border-color 0.35s, box-shadow 0.5s;
       position: relative;
       overflow: hidden;
       cursor: default;
@@ -1126,9 +1238,10 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), transparent);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.10), rgba(236, 72, 153, 0.06) 60%, transparent 80%);
       opacity: 0;
       transition: opacity 0.5s;
+      pointer-events: none;
     }
 
     .service-card:hover::before {
@@ -1136,9 +1249,10 @@
     }
 
     .service-card:hover {
-      border-color: rgba(99, 102, 241, 0.2);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      border-color: rgba(124, 58, 237, 0.35);
+      box-shadow:
+        0 20px 45px -12px rgba(124, 58, 237, 0.25),
+        0 8px 20px -8px rgba(236, 72, 153, 0.15);
     }
 
     .service-icon {
@@ -1200,7 +1314,23 @@
 
     .benefit-item {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1.25rem;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(10, 10, 10, 0.06);
+      border-radius: 20px;
+      transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s, border-color 0.4s;
+    }
+
+    .benefit-item:hover {
+      border-color: rgba(124, 58, 237, 0.3);
+      box-shadow:
+        0 16px 40px -12px rgba(124, 58, 237, 0.22),
+        0 6px 16px -6px rgba(236, 72, 153, 0.14);
+    }
+
+    .benefit-item:hover .benefit-icon {
+      transform: scale(1.08) rotate(-4deg);
     }
 
     .benefit-icon {
@@ -1213,6 +1343,7 @@
       justify-content: center;
       font-size: 1.4rem;
       position: relative;
+      transition: transform 0.4s var(--ease-out-expo);
     }
 
     .benefit-icon::before {
@@ -1305,7 +1436,15 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
+        radial-gradient(ellipse 65% 55% at 50% 50%, rgba(168, 85, 247, 0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 35% at 30% 30%, rgba(236, 72, 153, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 35% at 70% 70%, rgba(34, 211, 238, 0.14) 0%, transparent 55%);
+      animation: ctaGlow 8s ease-in-out infinite;
+    }
+
+    @keyframes ctaGlow {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
     }
 
     .cta-content {
@@ -1599,7 +1738,7 @@
 
     /* ═══════════════════ PROJECTS ═══════════════════ */
     .projects-section {
-      background: var(--bg-secondary);
+      background: transparent;
     }
 
     .projects-grid {
@@ -2226,8 +2365,8 @@
   <!-- ═══════════════ SERVICIOS ═══════════════ -->
   <section id="servicios">
     <div class="container">
-      <span class="section-tag">Servicios</span>
-      <h2 class="section-title">Soluciones <span class="gradient-text">a tu medida</span></h2>
+      <span class="section-tag reveal">Servicios</span>
+      <h2 class="section-title reveal-blur">Soluciones <span class="gradient-text">a tu medida</span></h2>
       <div class="services-grid">
         <div class="service-card reveal">
           <div class="service-icon service-icon--web">
@@ -2280,10 +2419,10 @@
   </section>
 
   <!-- ═══════════════ BENEFICIOS ═══════════════ -->
-  <section id="beneficios" class="benefits section-dark">
+  <section id="beneficios" class="benefits">
     <div class="container">
-      <span class="section-tag">Beneficios</span>
-      <h2 class="section-title">¿Por qué elegir <span class="gradient-text">PRAGMA</span>?</h2>
+      <span class="section-tag reveal">Beneficios</span>
+      <h2 class="section-title reveal-blur">¿Por qué elegir <span class="gradient-text">PRAGMA</span>?</h2>
       <div class="benefits-grid">
         <div class="benefit-item reveal">
           <div class="benefit-icon">🎯</div>
@@ -2314,8 +2453,8 @@
     <div class="container">
       <div class="about-card reveal">
         <div class="about-brand">PRAGMA<span class="about-brand-sub">studio</span></div>
-        <span class="section-tag">Sobre Pragma</span>
-        <h2 class="section-title" style="margin-bottom: 1.5rem">Tecnología al alcance de <span
+        <span class="section-tag reveal">Sobre Pragma</span>
+        <h2 class="section-title reveal-blur" style="margin-bottom: 1.5rem">Tecnología al alcance de <span
             class="gradient-text">todos</span></h2>
         <p>PRAGMA es un estudio enfocado en brindar soluciones tecnológicas modernas, accesibles y de alta
           calidad para pequeñas y medianas empresas. Creemos que cada negocio merece herramientas digitales potentes sin
@@ -2332,8 +2471,8 @@
   <!-- ═══════════════ EQUIPO ═══════════════ -->
   <section id="equipo" class="team-section">
     <div class="container">
-      <span class="section-tag">Equipo</span>
-      <h2 class="section-title">Las personas detrás de <span class="gradient-text">PRAGMA</span></h2>
+      <span class="section-tag reveal">Equipo</span>
+      <h2 class="section-title reveal-blur">Las personas detrás de <span class="gradient-text">PRAGMA</span></h2>
       <div class="team-grid">
         <article class="team-card reveal">
           <img class="team-photo" src="images/gonzalo.png" width="140" height="140"
@@ -2367,8 +2506,8 @@
   <!-- ═══════════════ MARCAS ═══════════════ -->
   <section id="marcas" class="section-dark">
     <div class="container">
-      <span class="section-tag">Confían en nosotros</span>
-      <h2 class="section-title">Marcas con las que <span class="gradient-text">trabajamos</span></h2>
+      <span class="section-tag reveal">Confían en nosotros</span>
+      <h2 class="section-title reveal-blur">Marcas con las que <span class="gradient-text">trabajamos</span></h2>
       <p style="text-align:center;color:var(--text-secondary);max-width:560px;margin:-2rem auto 0;font-size:0.95rem;line-height:1.6"
         class="reveal">Trabajamos junto a marcas que buscan crecer con tecnología, diseño y ejecución rápida.</p>
       <div class="brands-marquee-wrap reveal">
@@ -2423,10 +2562,10 @@
   </section>
 
   <!-- ═══════════════ PROYECTOS ═══════════════ -->
-  <section id="proyectos" class="projects-section section-dark">
+  <section id="proyectos" class="projects-section">
     <div class="container">
-      <span class="section-tag">Proyectos</span>
-      <h2 class="section-title">Problemas que <span class="gradient-text">resolvemos</span></h2>
+      <span class="section-tag reveal">Proyectos</span>
+      <h2 class="section-title reveal-blur">Problemas que <span class="gradient-text">resolvemos</span></h2>
       <div class="projects-grid">
         <article class="project-card reveal">
           <details>
@@ -2550,8 +2689,8 @@
   <!-- ═══════════════ WEBS DESARROLLADAS ═══════════════ -->
   <section id="webs" class="webs-section">
     <div class="container">
-      <span class="section-tag">Webs que desarrollamos</span>
-      <h2 class="section-title">Sitios <span class="gradient-text">en producción</span></h2>
+      <span class="section-tag reveal">Webs que desarrollamos</span>
+      <h2 class="section-title reveal-blur">Sitios <span class="gradient-text">en producción</span></h2>
       <p class="webs-intro reveal">Pasá el mouse sobre cada captura para recorrer el sitio completo.</p>
       <div class="webs-grid">
         <article class="web-card reveal">
@@ -2595,7 +2734,7 @@
   </section>
 
   <!-- ═══════════════ CTA ═══════════════ -->
-  <section class="cta section-dark">
+  <section class="cta">
     <div class="cta-bg"></div>
     <div class="cta-content reveal">
       <h2>¿Listo para llevar tu idea a <span class="gradient-text">un producto real</span>?</h2>
@@ -2613,8 +2752,8 @@
   <!-- ═══════════════ CONTACTO ═══════════════ -->
   <section id="contacto">
     <div class="container">
-      <span class="section-tag">Contacto</span>
-      <h2 class="section-title">Hablemos de tu <span class="gradient-text">proyecto</span></h2>
+      <span class="section-tag reveal">Contacto</span>
+      <h2 class="section-title reveal-blur">Hablemos de tu <span class="gradient-text">proyecto</span></h2>
       <div class="contact-wrapper reveal">
         <input type="text" class="contact-field" placeholder="Tu nombre" id="contactName">
         <input type="email" class="contact-field" placeholder="Tu email" id="contactEmail">
@@ -2672,14 +2811,14 @@
       a.addEventListener('click', () => links.classList.remove('open'));
     });
 
-    // ═══════════════ SCROLL REVEAL ═══════════════
-    const reveals = document.querySelectorAll('.reveal');
+    // ═══════════════ SCROLL REVEAL (multi-variant) ═══════════════
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
             entry.target.classList.add('visible');
-          }, i * 60);
+          }, i * 55);
           observer.unobserve(entry.target);
         }
       });
@@ -2727,8 +2866,30 @@
 
     // ═══════════════ REVEAL FALLBACK (siempre visible después de 2s) ═══════════════
     setTimeout(() => {
-      document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+      document.querySelectorAll('.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible), .reveal-scale:not(.visible), .reveal-blur:not(.visible)').forEach(el => el.classList.add('visible'));
     }, 2500);
+
+    // ═══════════════ MOUSE-FOLLOWING BLOB ═══════════════
+    (function mouseBlob() {
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+      const blob = document.createElement('div');
+      blob.className = 'mouse-blob';
+      document.body.appendChild(blob);
+      let tx = -300, ty = -300, cx = -300, cy = -300;
+      let active = false;
+      document.addEventListener('mousemove', (e) => {
+        tx = e.clientX; ty = e.clientY;
+        if (!active) { blob.classList.add('active'); active = true; }
+      });
+      document.addEventListener('mouseleave', () => { blob.classList.remove('active'); active = false; });
+      function loop() {
+        cx += (tx - cx) * 0.08;
+        cy += (ty - cy) * 0.08;
+        blob.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
 
     // ═══════════════ HERO PARALLAX (scroll-driven) ═══════════════
     (function heroParallax() {
