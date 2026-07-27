@@ -744,6 +744,172 @@
       height: 15px;
     }
 
+    /* ═══════════════════ INDUSTRIAS ═══════════════════ */
+    .industrias {
+      padding: 6rem 2rem 5rem;
+    }
+
+    .industrias-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .industrias-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .industrias-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      user-select: none;
+      color: var(--text-primary);
+    }
+
+    .industrias-heading em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent-bordo);
+    }
+
+    .industrias-lead {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      max-width: 460px;
+    }
+
+    .industrias-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      background: #ffffff;
+      border: 1px solid rgba(10, 10, 10, 0.10);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent-bordo);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      align-self: flex-start;
+    }
+
+    .industrias-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .industria-item {
+      padding: 2.25rem 2rem;
+      border-top: 1px solid rgba(10, 10, 10, 0.12);
+      border-left: 1px solid rgba(10, 10, 10, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: transparent;
+      transition: background 0.35s;
+      position: relative;
+    }
+
+    .industria-item:nth-child(2n+1) { border-left: none; }
+    .industria-item:nth-child(1), .industria-item:nth-child(2) { border-top: none; }
+
+    .industria-item:hover {
+      background: rgba(10, 10, 10, 0.02);
+    }
+
+    .industria-num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-bordo);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .industria-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      user-select: none;
+    }
+
+    .industria-desc {
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .industria-cover {
+      margin-top: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(10, 10, 10, 0.14);
+    }
+
+    .industria-cover-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--accent-bordo);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.65rem;
+    }
+
+    .industria-cover-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .industria-cover-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.32rem 0.7rem;
+      background: rgba(10, 10, 10, 0.04);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .industrias-intro {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        align-items: start;
+      }
+
+      .industrias-list {
+        grid-template-columns: 1fr;
+      }
+
+      .industria-item {
+        border-left: none !important;
+        border-top: 1px solid rgba(10, 10, 10, 0.12);
+        padding: 2rem 0;
+      }
+
+      .industria-item:first-child { border-top: none; }
+    }
+
     /* ═══════════════════ CAPACIDADES (numbered 01/02/03) ═══════════════════ */
     .capacidades {
       padding: 6rem 2rem 5rem;
@@ -2632,6 +2798,127 @@
     </div>
   </section>
 
+  <!-- ═══════════════ INDUSTRIAS ═══════════════ -->
+  <section id="industrias" class="industrias">
+    <div class="industrias-inner">
+      <div class="industrias-intro reveal">
+        <div>
+          <span class="industrias-count" data-i18n-en="06 · Industries">06 · Industrias</span>
+          <h2 class="industrias-heading">Lo construimos <em>para tu industria</em>.</h2>
+        </div>
+        <p class="industrias-lead" data-i18n-en="Every sector runs differently. Find yours and see what software and website would make sense for your operation.">
+          Cada sector opera distinto. Encontrá el tuyo y mirá qué software y qué sitio web tendrían sentido para
+          tu operación.</p>
+      </div>
+
+      <div class="industrias-list">
+        <article class="industria-item reveal">
+          <span class="industria-num">01 · Industria</span>
+          <h3 class="industria-title">Industria y construcción</h3>
+          <p class="industria-desc">Sistemas y sitios para empresas que producen, transforman o instalan; donde el
+            día a día depende de planificación, costos, obra y logística de despacho.</p>
+          <div class="industria-cover">
+            <span class="industria-cover-label" data-i18n-en="Covers">Cubre</span>
+            <div class="industria-cover-tags">
+              <span class="industria-cover-tag">Metalúrgicas</span>
+              <span class="industria-cover-tag">Manufactureras</span>
+              <span class="industria-cover-tag">Construcción</span>
+              <span class="industria-cover-tag">Aislación</span>
+              <span class="industria-cover-tag">Materiales</span>
+              <span class="industria-cover-tag">Distribuidoras</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="industria-item reveal">
+          <span class="industria-num">02 · Industria</span>
+          <h3 class="industria-title">Retail y gastronomía</h3>
+          <p class="industria-desc">Tiendas online, sistemas de socios y sitios para negocios que necesitan gestionar
+            stock, ventas y una experiencia de cliente consistente entre el local y lo digital.</p>
+          <div class="industria-cover">
+            <span class="industria-cover-label">Cubre</span>
+            <div class="industria-cover-tags">
+              <span class="industria-cover-tag">Vinerías</span>
+              <span class="industria-cover-tag">Jugueterías</span>
+              <span class="industria-cover-tag">Bebidas</span>
+              <span class="industria-cover-tag">Restaurantes</span>
+              <span class="industria-cover-tag">Delivery</span>
+              <span class="industria-cover-tag">Retail</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="industria-item reveal">
+          <span class="industria-num">03 · Industria</span>
+          <h3 class="industria-title">Servicios profesionales</h3>
+          <p class="industria-desc">CRMs, sitios y sistemas para estudios y firmas donde el activo son las personas,
+            las horas y la relación con clientes; donde la calidad depende de qué tan claro está cada expediente.</p>
+          <div class="industria-cover">
+            <span class="industria-cover-label">Cubre</span>
+            <div class="industria-cover-tags">
+              <span class="industria-cover-tag">Seguros</span>
+              <span class="industria-cover-tag">Contables</span>
+              <span class="industria-cover-tag">Abogados</span>
+              <span class="industria-cover-tag">Consultoras</span>
+              <span class="industria-cover-tag">Estudios técnicos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="industria-item reveal">
+          <span class="industria-num">04 · Industria</span>
+          <h3 class="industria-title">Real estate</h3>
+          <p class="industria-desc">Sitios y sistemas para inmobiliarias y desarrolladoras que gestionan
+            propiedades, clientes y operaciones comerciales en un mercado donde la velocidad de contacto define
+            la venta.</p>
+          <div class="industria-cover">
+            <span class="industria-cover-label">Cubre</span>
+            <div class="industria-cover-tags">
+              <span class="industria-cover-tag">Inmobiliarias</span>
+              <span class="industria-cover-tag">Desarrolladoras</span>
+              <span class="industria-cover-tag">Alquileres</span>
+              <span class="industria-cover-tag">Loteos</span>
+              <span class="industria-cover-tag">Emprendimientos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="industria-item reveal">
+          <span class="industria-num">05 · Industria</span>
+          <h3 class="industria-title">Salud y bienestar</h3>
+          <p class="industria-desc">Sistemas para centros y consultorios donde la operación gira alrededor del
+            paciente, la agenda de turnos, los profesionales y la calidad del seguimiento clínico.</p>
+          <div class="industria-cover">
+            <span class="industria-cover-label">Cubre</span>
+            <div class="industria-cover-tags">
+              <span class="industria-cover-tag">Clínicas</span>
+              <span class="industria-cover-tag">Consultorios</span>
+              <span class="industria-cover-tag">Kinesiología</span>
+              <span class="industria-cover-tag">Estética</span>
+              <span class="industria-cover-tag">Veterinarias</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="industria-item reveal">
+          <span class="industria-num">06 · Industria</span>
+          <h3 class="industria-title">Educación y formación</h3>
+          <p class="industria-desc">Plataformas para instituciones donde la operación gira alrededor de cohortes,
+            profesores, asistencia y la experiencia académica de los alumnos.</p>
+          <div class="industria-cover">
+            <span class="industria-cover-label">Cubre</span>
+            <div class="industria-cover-tags">
+              <span class="industria-cover-tag">Institutos</span>
+              <span class="industria-cover-tag">Academias</span>
+              <span class="industria-cover-tag">Escuelas técnicas</span>
+              <span class="industria-cover-tag">Formación corporativa</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ BENEFICIOS ═══════════════ -->
   <section id="beneficios" class="benefits">
     <div class="container">
@@ -3020,13 +3307,32 @@
       if (!layers.length) return;
       let ticking = false;
       function update() {
-        const y = window.scrollY;
         layers.forEach(el => {
           const speed = parseFloat(el.dataset.parallax) || 0.15;
           const rect = el.getBoundingClientRect();
           const center = rect.top + rect.height / 2 - window.innerHeight / 2;
           el.style.setProperty('--parallax-y', (-center * speed) + 'px');
         });
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    // ═══════════════ HERO SCROLL FADE + PARALLAX ═══════════════
+    (function heroScroll() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const copy = document.querySelector('.hero-copy');
+      if (!copy) return;
+      let ticking = false;
+      function update() {
+        const y = window.scrollY;
+        const vh = window.innerHeight;
+        const p = Math.min(y / (vh * 0.7), 1);
+        copy.style.transform = `translate3d(0, ${y * 0.25}px, 0)`;
+        copy.style.opacity = String(1 - p);
         ticking = false;
       }
       window.addEventListener('scroll', () => {
