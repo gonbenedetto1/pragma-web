@@ -744,14 +744,15 @@
       height: 15px;
     }
 
-    /* ═══════════════════ INDUSTRIAS ═══════════════════ */
+    /* ═══════════════════ INDUSTRIAS (scroll horizontal) ═══════════════════ */
     .industrias {
-      padding: 6rem 2rem 5rem;
+      padding: 6rem 0 0;
     }
 
     .industrias-inner {
       max-width: 1300px;
       margin: 0 auto;
+      padding: 0 2rem;
     }
 
     .industrias-intro {
@@ -759,7 +760,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: end;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
 
     .industrias-heading {
@@ -804,29 +805,93 @@
       align-self: flex-start;
     }
 
-    .industrias-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0;
+    /* Horizontal scroll wrapper */
+    .industrias-scroll {
+      position: relative;
+      height: 420vh;
+    }
+
+    .industrias-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .industrias-track {
+      display: flex;
+      gap: 1.75rem;
+      padding: 0 3rem;
+      will-change: transform;
     }
 
     .industria-item {
+      flex-shrink: 0;
+      width: 440px;
+      height: 560px;
       padding: 2.25rem 2rem;
-      border-top: 1px solid rgba(10, 10, 10, 0.12);
-      border-left: 1px solid rgba(10, 10, 10, 0.12);
+      background: #ffffff;
+      border: 1px solid rgba(10, 10, 10, 0.10);
+      border-radius: 24px;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      background: transparent;
-      transition: background 0.35s;
+      transition: transform 0.4s var(--ease-out-expo), border-color 0.35s, box-shadow 0.4s;
       position: relative;
+      overflow: hidden;
     }
 
-    .industria-item:nth-child(2n+1) { border-left: none; }
-    .industria-item:nth-child(1), .industria-item:nth-child(2) { border-top: none; }
-
     .industria-item:hover {
-      background: rgba(10, 10, 10, 0.02);
+      border-color: rgba(107, 28, 28, 0.35);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px -20px rgba(107, 28, 28, 0.20);
+    }
+
+    .industria-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(107, 28, 28, 0.05), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .industria-item:hover::before { opacity: 1; }
+
+    /* Progress hint below sticky */
+    .industrias-progress {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .industrias-progress-track {
+      width: 140px;
+      height: 2px;
+      background: rgba(10, 10, 10, 0.10);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .industrias-progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--accent-bordo);
+      transition: width 0.05s linear;
     }
 
     .industria-num {
@@ -897,17 +962,40 @@
         align-items: start;
       }
 
-      .industrias-list {
-        grid-template-columns: 1fr;
+      /* Disable sticky/horizontal scroll on mobile — fall back to horizontal drag */
+      .industrias-scroll {
+        height: auto;
+      }
+
+      .industrias-sticky {
+        position: static;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 1rem;
+      }
+
+      .industrias-track {
+        transform: none !important;
+        padding: 0 1.5rem;
       }
 
       .industria-item {
-        border-left: none !important;
-        border-top: 1px solid rgba(10, 10, 10, 0.12);
-        padding: 2rem 0;
+        width: 80vw;
+        max-width: 340px;
+        height: 480px;
+        scroll-snap-align: start;
       }
 
-      .industria-item:first-child { border-top: none; }
+      .industrias-progress {
+        position: static;
+        transform: none;
+        margin: 1rem auto 0;
+        justify-content: center;
+        max-width: max-content;
+      }
     }
 
     /* ═══════════════════ CAPACIDADES (numbered 01/02/03) ═══════════════════ */
@@ -2087,34 +2175,49 @@
 
     .webs-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
+      grid-template-columns: 1fr;
+      gap: 3rem;
       margin-top: 3rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .web-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 20px;
+      background: #ffffff;
+      border: 1px solid rgba(10, 10, 10, 0.10);
+      border-radius: 24px;
       overflow: hidden;
       transition: transform 0.5s var(--ease-out-expo), border-color 0.5s, box-shadow 0.5s;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      align-items: stretch;
     }
 
     .web-card:hover {
       border-color: rgba(107, 28, 28, 0.3);
       transform: translateY(-4px);
-      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 24px 60px -20px rgba(10, 10, 10, 0.18);
     }
 
     .web-screenshot {
       position: relative;
       width: 100%;
-      height: 380px;
+      height: 520px;
       overflow: hidden;
       background: #0a0a0a;
-      border-bottom: 1px solid var(--border-card);
+      border-right: 1px solid rgba(10, 10, 10, 0.06);
+    }
+
+    @media (max-width: 900px) {
+      .web-card {
+        grid-template-columns: 1fr;
+      }
+      .web-screenshot {
+        height: 380px;
+        border-right: none;
+        border-bottom: 1px solid rgba(10, 10, 10, 0.06);
+      }
     }
 
     .web-screenshot img {
@@ -2127,7 +2230,13 @@
     }
 
     .web-card:hover .web-screenshot img {
-      transform: translateY(calc(-100% + 380px));
+      transform: translateY(calc(-100% + 520px));
+    }
+
+    @media (max-width: 900px) {
+      .web-card:hover .web-screenshot img {
+        transform: translateY(calc(-100% + 380px));
+      }
     }
 
     .web-screenshot::after {
@@ -2227,10 +2336,6 @@
 
       .services-grid,
       .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .team-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -2811,10 +2916,14 @@
           tu operación.</p>
       </div>
 
-      <div class="industrias-list">
-        <article class="industria-item reveal">
-          <span class="industria-num">01 · Industria</span>
-          <h3 class="industria-title">Industria y construcción</h3>
+    </div>
+
+    <div class="industrias-scroll">
+      <div class="industrias-sticky">
+        <div class="industrias-track" id="industriasTrack">
+          <article class="industria-item">
+            <span class="industria-num">01 · Industria</span>
+            <h3 class="industria-title">Industria y construcción</h3>
           <p class="industria-desc">Sistemas y sitios para empresas que producen, transforman o instalan; donde el
             día a día depende de planificación, costos, obra y logística de despacho.</p>
           <div class="industria-cover">
@@ -2830,7 +2939,7 @@
           </div>
         </article>
 
-        <article class="industria-item reveal">
+        <article class="industria-item">
           <span class="industria-num">02 · Industria</span>
           <h3 class="industria-title">Retail y gastronomía</h3>
           <p class="industria-desc">Tiendas online, sistemas de socios y sitios para negocios que necesitan gestionar
@@ -2848,7 +2957,7 @@
           </div>
         </article>
 
-        <article class="industria-item reveal">
+        <article class="industria-item">
           <span class="industria-num">03 · Industria</span>
           <h3 class="industria-title">Servicios profesionales</h3>
           <p class="industria-desc">CRMs, sitios y sistemas para estudios y firmas donde el activo son las personas,
@@ -2865,7 +2974,7 @@
           </div>
         </article>
 
-        <article class="industria-item reveal">
+        <article class="industria-item">
           <span class="industria-num">04 · Industria</span>
           <h3 class="industria-title">Real estate</h3>
           <p class="industria-desc">Sitios y sistemas para inmobiliarias y desarrolladoras que gestionan
@@ -2883,7 +2992,7 @@
           </div>
         </article>
 
-        <article class="industria-item reveal">
+        <article class="industria-item">
           <span class="industria-num">05 · Industria</span>
           <h3 class="industria-title">Salud y bienestar</h3>
           <p class="industria-desc">Sistemas para centros y consultorios donde la operación gira alrededor del
@@ -2900,7 +3009,7 @@
           </div>
         </article>
 
-        <article class="industria-item reveal">
+        <article class="industria-item">
           <span class="industria-num">06 · Industria</span>
           <h3 class="industria-title">Educación y formación</h3>
           <p class="industria-desc">Plataformas para instituciones donde la operación gira alrededor de cohortes,
@@ -2915,62 +3024,16 @@
             </div>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
+        </div><!-- /industrias-track -->
+      </div><!-- /industrias-sticky -->
 
-  <!-- ═══════════════ BENEFICIOS ═══════════════ -->
-  <section id="beneficios" class="benefits">
-    <div class="container">
-      <span class="section-tag reveal">Beneficios</span>
-      <h2 class="section-title reveal-blur">¿Por qué elegir <span class="gradient-text">PRAGMA</span>?</h2>
-      <div class="benefits-grid">
-        <div class="benefit-item reveal">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="12" cy="12" r="6" />
-              <circle cx="12" cy="12" r="2" fill="currentColor" />
-            </svg>
-          </div>
-          <h3>100% Personalizado</h3>
-          <p>Cada proyecto se diseña desde cero según tus necesidades.</p>
-        </div>
-        <div class="benefit-item reveal">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-          </div>
-          <h3>Entrega Rápida</h3>
-          <p>Procesos ágiles para que tu proyecto esté listo en tiempo récord.</p>
-        </div>
-        <div class="benefit-item reveal">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-              <line x1="7" y1="7" x2="7.01" y2="7" />
-            </svg>
-          </div>
-          <h3>Precio Accesible</h3>
-          <p>Soluciones de calidad profesional sin costos excesivos.</p>
-        </div>
-        <div class="benefit-item reveal">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-              <polyline points="17 6 23 6 23 12" />
-            </svg>
-          </div>
-          <h3>Soporte y Escalabilidad</h3>
-          <p>Acompañamiento continuo y productos que crecen con tu negocio.</p>
+      <div class="industrias-progress">
+        <span>Deslizá</span>
+        <div class="industrias-progress-track">
+          <div class="industrias-progress-fill" id="industriasProgressFill"></div>
         </div>
       </div>
-    </div>
+    </div><!-- /industrias-scroll -->
   </section>
 
   <!-- ═══════════════ NOSOTROS ═══════════════ -->
@@ -3318,6 +3381,36 @@
       window.addEventListener('scroll', () => {
         if (!ticking) { requestAnimationFrame(update); ticking = true; }
       }, { passive: true });
+      update();
+    })();
+
+    // ═══════════════ INDUSTRIAS HORIZONTAL SCROLL ═══════════════
+    (function industriasHScroll() {
+      if (window.matchMedia('(max-width: 900px)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const wrapper = document.querySelector('.industrias-scroll');
+      const track = document.getElementById('industriasTrack');
+      const fill = document.getElementById('industriasProgressFill');
+      if (!wrapper || !track) return;
+      let ticking = false;
+      function update() {
+        const rect = wrapper.getBoundingClientRect();
+        const wrapperH = wrapper.offsetHeight;
+        const winH = window.innerHeight;
+        const scrolled = Math.max(0, -rect.top);
+        const total = wrapperH - winH;
+        const p = total > 0 ? Math.max(0, Math.min(scrolled / total, 1)) : 0;
+        const trackW = track.scrollWidth;
+        const winW = window.innerWidth;
+        const distance = Math.max(0, trackW - winW + 96);
+        track.style.transform = `translate3d(${-p * distance}px, 0, 0)`;
+        if (fill) fill.style.width = (p * 100) + '%';
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      window.addEventListener('resize', update);
       update();
     })();
 
