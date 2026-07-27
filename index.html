@@ -65,6 +65,38 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Scroll progress bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--accent-bordo);
+      z-index: 1001;
+      width: 0;
+      transition: width 0.05s linear;
+      pointer-events: none;
+    }
+
+    /* Word split reveal */
+    .split-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(60%);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+
+    .split-word.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .split-word-wrap {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: baseline;
+    }
+
     /* Títulos no seleccionables (evita copiar el texto grande) */
     .hero h1,
     .section-title,
@@ -343,6 +375,41 @@
       gap: 0.5rem;
     }
 
+    /* ES/EN toggle */
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(247, 246, 242, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      border-radius: 999px;
+      padding: 0.25rem;
+    }
+
+    .lang-toggle button {
+      padding: 0.45rem 0.85rem;
+      background: transparent;
+      border: none;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    .lang-toggle button.active {
+      background: var(--text-primary);
+      color: #ffffff;
+    }
+
+    .lang-toggle button:not(.active):hover {
+      color: var(--text-primary);
+    }
+
     .nav-wa {
       width: 44px;
       height: 44px;
@@ -470,15 +537,18 @@
       margin-bottom: 2.5rem;
       animation: fadeUp 0.8s var(--ease-out-expo) 0.2s both;
       letter-spacing: -0.01em;
+      white-space: nowrap;
+      width: fit-content;
     }
 
-    .hero-tag span {
+    .hero-tag > span:first-child {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: var(--accent-green);
       animation: pulse-dot 2s infinite;
       box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+      flex-shrink: 0;
     }
 
     @keyframes pulse-dot {
@@ -953,18 +1023,23 @@
 
     .section-title {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2rem, 4vw, 3.5rem);
       font-weight: 700;
       text-align: center;
-      letter-spacing: -0.035em;
+      letter-spacing: -0.045em;
+      line-height: 1;
       margin-bottom: 3.5rem;
       color: var(--text-primary);
     }
 
-    .section-title .gradient-text {
+    .section-title .gradient-text,
+    .section-title em,
+    .servicios-heading em,
+    .capacidades-heading em {
       font-family: var(--font-serif);
       color: var(--accent-bordo);
       font-style: italic;
+      font-weight: 400;
     }
 
     .container {
@@ -1431,21 +1506,29 @@
     }
 
     .footer-brand {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--text-secondary);
-      display: flex;
-      flex-direction: column;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.65rem;
+      color: var(--accent-bordo);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.35rem;
       line-height: 1;
+      text-transform: lowercase;
+      user-select: none;
     }
 
     .footer-brand-sub {
-      font-size: 0.45rem;
-      font-weight: 600;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      opacity: 0.7;
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      color: var(--text-secondary);
     }
 
     .footer-copy {
@@ -2065,20 +2148,24 @@
   <nav id="navbar">
     <a href="#" class="nav-logo">PRAGMA<span class="nav-logo-sub">studio</span></a>
     <div class="nav-links" id="navLinks">
-      <a href="#servicios">Servicios</a>
-      <a href="#capacidades">Capacidades</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#servicios" data-i18n-en="Services">Servicios</a>
+      <a href="#capacidades" data-i18n-en="Capabilities">Capacidades</a>
+      <a href="#webs" data-i18n-en="Work">Proyectos</a>
+      <a href="#nosotros" data-i18n-en="Studio">Nosotros</a>
+      <a href="#contacto" data-i18n-en="Contact">Contacto</a>
     </div>
     <div class="nav-actions">
+      <div class="lang-toggle" role="group" aria-label="Idioma">
+        <button type="button" class="active" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
       <a href="https://wa.me/5493512145673" target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413" />
         </svg>
       </a>
       <a href="#contacto" class="nav-cta">
-        Hablemos
+        <span data-i18n-en="Let's talk">Hablemos</span>
         <span class="nav-cta-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
             stroke-linejoin="round">
@@ -2097,17 +2184,17 @@
     <div class="hero-content">
       <div class="hero-copy">
         <div class="hero-tag">
-          <span></span> Aceptando nuevos proyectos
+          <span></span> <span data-i18n-en="Accepting new projects">Aceptando nuevos proyectos</span>
         </div>
         <h1>
-          <span class="line"><span class="line-inner">Soluciones digitales</span></span>
-          <span class="line"><span class="line-inner">hechas en serio.</span></span>
+          <span class="line"><span class="line-inner" data-i18n-en="Ideas turned">Ideas convertidas</span></span>
+          <span class="line"><span class="line-inner"><span data-i18n-en="into">en</span> <em class="italic-bordo" data-i18n-en="product">producto</em>.</span></span>
         </h1>
-        <p class="hero-desc">Sin plantillas, sin atajos, sin constructores genéricos. Cada proyecto — web, sistema,
+        <p class="hero-desc" data-i18n-en="No templates, no shortcuts, no generic builders. Every project — website, system, CRM or app — is built truly custom.">Sin plantillas, sin atajos, sin constructores genéricos. Cada proyecto — web, sistema,
           CRM o app — se construye a medida de verdad.</p>
         <div class="hero-actions">
           <a href="#contacto" class="btn-primary">
-            Agendar reunión
+            <span data-i18n-en="Book a meeting">Agendar reunión</span>
             <span class="btn-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -2116,7 +2203,7 @@
             </span>
           </a>
           <a href="https://wa.me/5493512145673" target="_blank" rel="noopener" class="btn-secondary">
-            Mandar mensaje
+            <span data-i18n-en="Send a message">Mandar mensaje</span>
             <span class="btn-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -2132,7 +2219,7 @@
   <!-- ═══════════════ LO QUE NO OFRECEMOS ═══════════════ -->
   <div class="no-list-wrap reveal">
     <div class="no-list">
-      <div class="no-list-label">Lo que NO hacemos:</div>
+      <div class="no-list-label" data-i18n-en="What we DON'T use:">Lo que NO hacemos:</div>
       <div class="no-list-items">
         <span class="no-pill">
           <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -2197,7 +2284,8 @@
   <!-- ═══════════════ CAPACIDADES 01/02/03 ═══════════════ -->
   <section id="capacidades" class="capacidades">
     <div class="capacidades-inner">
-      <h2 class="capacidades-heading reveal-blur">Lo que hay detrás<br>de cada proyecto.</h2>
+      <h2 class="capacidades-heading reveal-blur" data-i18n-en="What's behind every project.">Lo que hay detrás
+        de cada proyecto.</h2>
 
       <div class="capacidades-list">
         <div class="cap-item reveal">
@@ -2267,7 +2355,7 @@
   <!-- ═══════════════ SERVICIOS ═══════════════ -->
   <section id="servicios">
     <div class="servicios-inner">
-      <h2 class="servicios-heading reveal-blur">Qué construimos <em>a medida</em>.</h2>
+      <h2 class="servicios-heading reveal-blur"><span data-i18n-en="What we build">Qué construimos</span> <em data-i18n-en="custom">a medida</em>.</h2>
 
       <article class="servicio-row reveal">
         <div class="servicio-head">
@@ -2549,131 +2637,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════ PROYECTOS ═══════════════ -->
-  <section id="proyectos" class="projects-section">
-    <div class="container">
-      <span class="section-tag reveal">Proyectos</span>
-      <h2 class="section-title reveal-blur">Problemas que <span class="gradient-text">resolvemos</span></h2>
-      <div class="projects-grid">
-        <article class="project-card reveal">
-          <details>
-            <summary>
-              <h3>CRM - Gestión de Clientes</h3>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
-            </summary>
-            <div class="project-block">
-              <p class="project-label">El problema</p>
-              <p>El equipo comercial gestionaba clientes, seguimientos y presupuestos de forma manual utilizando hojas
-                de cálculo y múltiples canales separados. Esto generaba pérdida de oportunidades, falta de visibilidad
-                del pipeline y mucho tiempo operativo en tareas repetitivas.</p>
-            </div>
-            <div class="project-block">
-              <p class="project-label">La solución</p>
-              <p>Desarrollamos una plataforma interna para centralizar clientes, oportunidades y presupuestos en un
-                único sistema. El proyecto permitió reemplazar procesos manuales y hojas de cálculo por un flujo
-                comercial mucho más ordenado, rápido y escalable, mejorando el seguimiento de leads y la gestión diaria
-                del equipo de ventas.</p>
-            </div>
-          </details>
-        </article>
-        <article class="project-card reveal">
-          <details>
-            <summary>
-              <h3>App - Gestión de Compras</h3>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
-            </summary>
-            <div class="project-block">
-              <p class="project-label">El problema</p>
-              <p>La operación de compras y pedidos se gestionaba de forma manual entre mensajes y planillas de excel,
-                generando errores, demoras y poca visibilidad sobre el estado de cada pedido.</p>
-            </div>
-            <div class="project-block">
-              <p class="project-label">La solución</p>
-              <p>Desarrollamos una aplicación interna para optimizar la gestión de compras, pedidos y seguimiento
-                operativo. La plataforma centraliza procesos que antes se realizaban manualmente, permitiendo al equipo
-                trabajar con mayor velocidad, control y organización diaria.</p>
-            </div>
-            <p class="project-meta">Resultado: Hoy el equipo puede analizar el estado de pedidos, detectar cuellos de
-              botella y tomar decisiones con datos claros, reduciendo errores operativos y mejorando la eficiencia
-              diaria.</p>
-          </details>
-        </article>
-        <article class="project-card reveal">
-          <details>
-            <summary>
-              <h3>App de socios y beneficios</h3>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
-            </summary>
-            <div class="project-block">
-              <p class="project-label">El problema</p>
-              <p>La juguetería no contaba con un sistema centralizado para fidelizar clientes ni registrar beneficios de
-                manera organizada. El seguimiento de compras y reintegros se hacía de forma manual, dificultando el
-                control de socios, recompensas y comportamiento de los clientes. Además, había poca visibilidad sobre
-                hábitos de compra y recurrencia, lo que limitaba la posibilidad de generar acciones comerciales más
-                efectivas.</p>
-            </div>
-            <div class="project-block">
-              <p class="project-label">La solución</p>
-              <p>Desarrollamos una aplicación de socios y beneficios que permite administrar clientes, registrar compras
-                y gestionar reintegros de forma automática y centralizada.</p>
-            </div>
-            <p class="project-meta">Resultado: La juguetería logró ordenar la gestión de socios, automatizar los
-              reintegros y obtener mayor visibilidad sobre el comportamiento de sus clientes. Además de reducir trabajo
-              manual, el sistema permitió fortalecer la fidelización y generar una experiencia de compra más moderna y
-              personalizada.</p>
-          </details>
-        </article>
-        <article class="project-card reveal">
-          <details>
-            <summary>
-              <h3>Rediseño y actualización integral de sitio web</h3>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
-            </summary>
-            <div class="project-block">
-              <p class="project-label">El problema</p>
-              <p>La empresa contaba con una página web desactualizada, con problemas de navegación, contenido poco claro
-                y una experiencia que ya no representaba correctamente la marca ni sus servicios. Además, el sitio tenía
-                limitaciones técnicas y poca flexibilidad para actualizar contenido o acompañar el crecimiento del
-                negocio.</p>
-            </div>
-            <div class="project-block">
-              <p class="project-label">La solución</p>
-              <p>Realizamos una actualización integral del sitio web, modernizando tanto la experiencia visual como la
-                estructura técnica de la plataforma. Rediseñamos la interfaz, optimizamos la navegación y reorganizamos
-                el contenido para lograr una experiencia más clara, rápida y alineada con la identidad actual de la
-                marca. Además, mejoramos el rendimiento general del sitio y adaptamos la plataforma para facilitar
-                futuras actualizaciones y acompañar el crecimiento del negocio.</p>
-            </div>
-            <p class="project-meta">Resultado: La nueva plataforma permitió mejorar la presencia digital de la marca y
-              ofrecer una experiencia mucho más clara y profesional para sus clientes. Además de optimizar el
-              rendimiento del sitio, la actualización facilitó la gestión de contenido y dejó una base tecnológica
-              preparada para seguir creciendo.</p>
-          </details>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <!-- ═══════════════ WEBS DESARROLLADAS ═══════════════ -->
   <section id="webs" class="webs-section">
     <div class="container">
@@ -2724,10 +2687,10 @@
   <!-- ═══════════════ CTA ═══════════════ -->
   <section class="cta">
     <div class="cta-content reveal">
-      <h2>¿Empezamos <em class="italic-bordo">tu proyecto</em>?</h2>
-      <p class="cta-desc">Contanos tu idea y te acompañamos desde el primer sketch hasta el deploy en producción.</p>
+      <h2><span data-i18n-en="Shall we start">¿Empezamos</span> <em class="italic-bordo" data-i18n-en="your project">tu proyecto</em>?</h2>
+      <p class="cta-desc" data-i18n-en="Tell us about your idea. We'll walk with you from the first sketch to production deploy.">Contanos tu idea y te acompañamos desde el primer sketch hasta el deploy en producción.</p>
       <a href="#contacto" class="btn-primary">
-        Agendar reunión
+        <span data-i18n-en="Book a meeting">Agendar reunión</span>
         <span class="btn-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
             stroke-linejoin="round">
@@ -2754,8 +2717,8 @@
 
   <!-- ═══════════════ FOOTER ═══════════════ -->
   <footer>
-    <span class="footer-brand">PRAGMA<span class="footer-brand-sub">studio</span></span>
-    <span class="footer-copy">© 2026 PRAGMA Studio. Todos los derechos reservados.</span>
+    <span class="footer-brand">pragma<span class="footer-brand-sub">studio</span></span>
+    <span class="footer-copy" data-i18n-en="© 2026 Pragma Studio. All rights reserved.">© 2026 Pragma Studio. Todos los derechos reservados.</span>
     <div class="footer-socials">
       <a href="https://www.instagram.com/pragmasolucionesdigitales/" target="_blank" rel="noopener"
         aria-label="Instagram">
@@ -2864,6 +2827,106 @@
         btn.style.background = '';
       }, 3000);
     });
+
+    // ═══════════════ SCROLL PROGRESS BAR ═══════════════
+    (function scrollProgress() {
+      const bar = document.createElement('div');
+      bar.className = 'scroll-progress';
+      document.body.appendChild(bar);
+      let ticking = false;
+      function update() {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop;
+        const total = h.scrollHeight - h.clientHeight;
+        const pct = total > 0 ? (scrolled / total) * 100 : 0;
+        bar.style.width = pct + '%';
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+
+    // ═══════════════ MARQUEE DIRECTION FLIP ON SCROLL ═══════════════
+    (function marqueeDirection() {
+      const track = document.querySelector('.hero-marquee-track');
+      if (!track) return;
+      let lastY = window.scrollY;
+      let dir = 'normal';
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        const newDir = y > lastY ? 'normal' : 'reverse';
+        if (newDir !== dir) {
+          dir = newDir;
+          track.style.animationDirection = dir;
+        }
+        lastY = y;
+      }, { passive: true });
+    })();
+
+    // ═══════════════ WORD-BY-WORD REVEAL ═══════════════
+    (function wordReveal() {
+      const targets = document.querySelectorAll('[data-word-reveal]');
+      targets.forEach(el => {
+        const html = el.innerHTML;
+        // Split by spaces, preserve inline HTML tags roughly by using text nodes only
+        const words = el.textContent.trim().split(/\s+/);
+        el.innerHTML = words
+          .map(w => `<span class="split-word-wrap"><span class="split-word">${w}</span></span>`)
+          .join(' ');
+      });
+
+      const spans = document.querySelectorAll('.split-word');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const wrap = entry.target.parentElement.parentElement;
+            const siblings = wrap.querySelectorAll('.split-word');
+            siblings.forEach((s, i) => {
+              setTimeout(() => s.classList.add('visible'), i * 45);
+            });
+            siblings.forEach(s => obs.unobserve(s));
+          }
+        });
+      }, { threshold: 0.3 });
+      spans.forEach(s => obs.observe(s));
+
+      // Fallback
+      setTimeout(() => document.querySelectorAll('.split-word:not(.visible)').forEach(s => s.classList.add('visible')), 3000);
+    })();
+
+    // ═══════════════ ES/EN LANG TOGGLE ═══════════════
+    (function langToggle() {
+      const btns = document.querySelectorAll('.lang-toggle button');
+      if (!btns.length) return;
+
+      // Snapshot original ES text on load
+      document.querySelectorAll('[data-i18n-en]').forEach(el => {
+        el.dataset.i18nEs = el.textContent;
+      });
+
+      function setLang(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n-en]').forEach(el => {
+          const en = el.getAttribute('data-i18n-en');
+          const es = el.dataset.i18nEs;
+          el.textContent = lang === 'en' ? en : es;
+        });
+        btns.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+        try { localStorage.setItem('pragma_lang', lang); } catch {}
+      }
+
+      btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+      try {
+        const saved = localStorage.getItem('pragma_lang');
+        if (saved === 'en') setLang('en');
+      } catch {}
+    })();
 
     // ═══════════════ SMOOTH SCROLL ═══════════════
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
