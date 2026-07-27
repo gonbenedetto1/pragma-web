@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PRAGMA Studio — Soluciones Digitales a Medida</title>
   <meta name="description"
-    content="PRAGMA Studio: desarrollamos webs, sistemas, CRMs, apps y automatizaciones a medida para tu negocio. Cualquier solución digital, sin costos excesivos.">
+    content="PRAGMA Studio: desarrollamos webs, sitios corporativos, e-commerce, apps y sistemas internos a medida para tu negocio. Cualquier solución digital, sin costos excesivos.">
   <meta property="og:title" content="PRAGMA Studio — Soluciones Digitales a Medida">
   <meta property="og:description"
-    content="Webs, sistemas, CRMs, apps y automatizaciones a medida. Tecnología de primer nivel, al alcance de todos.">
+    content="Webs, sitios corporativos, e-commerce, apps y sistemas internos a medida. Tecnología de primer nivel, al alcance de todos.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="shortcut icon" type="image/png" href="images/favicon.png">
@@ -1044,90 +1044,152 @@
       transform: translateY(0);
     }
 
-    /* ═══════════════════ SERVICES ═══════════════════ */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
+    /* ═══════════════════ SERVICES (nolo-style detailed rows) ═══════════════════ */
+    #servicios {
+      padding: 6rem 2rem 6rem;
     }
 
-    .service-card {
-      background: rgba(255, 255, 255, 0.55);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(10, 10, 10, 0.08);
-      border-radius: 20px;
-      padding: 2rem;
-      transition: transform 0.5s var(--ease-out-expo), border-color 0.35s, box-shadow 0.5s;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
+    .servicios-inner {
+      max-width: 1300px;
+      margin: 0 auto;
     }
 
-    .service-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(107, 28, 28, 0.10), rgba(107, 28, 28, 0.06) 60%, transparent 80%);
-      opacity: 0;
-      transition: opacity 0.5s;
-      pointer-events: none;
-    }
-
-    .service-card:hover::before {
-      opacity: 1;
-    }
-
-    .service-card:hover {
-      border-color: rgba(107, 28, 28, 0.35);
-      box-shadow:
-        0 20px 45px -12px rgba(107, 28, 28, 0.25),
-        0 8px 20px -8px rgba(107, 28, 28, 0.15);
-    }
-
-    .service-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.3rem;
-      position: relative;
-    }
-
-    .service-icon--web {
-      background: linear-gradient(135deg, rgba(107, 28, 28, 0.2), rgba(107, 28, 28, 0.05));
-      color: #818cf8;
-    }
-
-    .service-icon--mobile {
-      background: linear-gradient(135deg, rgba(107, 28, 28, 0.2), rgba(107, 28, 28, 0.05));
-      color: #c084fc;
-    }
-
-    .service-icon--auto {
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0.05));
-      color: #22d3ee;
-    }
-
-    .service-icon--sys {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05));
-      color: #60a5fa;
-    }
-
-    .service-card h3 {
+    .servicios-heading {
       font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-      letter-spacing: -0.01em;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      margin-bottom: 4rem;
+      max-width: 700px;
+      user-select: none;
     }
 
-    .service-card p {
+    .servicios-heading em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent-bordo);
+    }
+
+    .servicio-row {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+      border-top: 1px solid rgba(10, 10, 10, 0.12);
+    }
+
+    .servicio-row:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .servicio-head {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: sticky;
+      top: 6rem;
+      align-self: start;
+    }
+
+    .servicio-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--text-primary);
+      user-select: none;
+    }
+
+    .servicio-num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-bordo);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .servicio-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 720px;
+    }
+
+    .servicio-desc {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
       color: var(--text-secondary);
-      font-size: 0.9rem;
       line-height: 1.6;
+    }
+
+    .servicio-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+    }
+
+    .servicio-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .servicio-feature::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-bordo);
+      margin-top: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .servicio-audience {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed rgba(10, 10, 10, 0.12);
+    }
+
+    .servicio-audience-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--accent-bordo);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .servicio-audience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .servicio-audience-item {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    @media (max-width: 900px) {
+      .servicio-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .servicio-head {
+        position: static;
+      }
     }
 
     /* ═══════════════════ BENEFITS ═══════════════════ */
@@ -1263,22 +1325,11 @@
     .cta {
       text-align: center;
       position: relative;
-      overflow: hidden;
+      padding: 6rem 2rem;
     }
 
     .cta-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 65% 55% at 50% 50%, rgba(107, 28, 28, 0.28) 0%, transparent 55%),
-        radial-gradient(ellipse 45% 35% at 30% 30%, rgba(107, 28, 28, 0.18) 0%, transparent 55%),
-        radial-gradient(ellipse 45% 35% at 70% 70%, rgba(34, 211, 238, 0.14) 0%, transparent 55%);
-      animation: ctaGlow 8s ease-in-out infinite;
-    }
-
-    @keyframes ctaGlow {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.05); opacity: 1; }
+      display: none;
     }
 
     .cta-content {
@@ -1288,16 +1339,28 @@
 
     .cta h2 {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.2rem;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      user-select: none;
+    }
+
+    .italic-bordo {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent-bordo);
     }
 
     .cta-desc {
       color: var(--text-secondary);
       font-size: 1.1rem;
       margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* ═══════════════════ CONTACT ═══════════════════ */
@@ -2041,7 +2104,7 @@
           <span class="line"><span class="line-inner">hechas en serio.</span></span>
         </h1>
         <p class="hero-desc">Sin plantillas, sin atajos, sin constructores genéricos. Cada proyecto — web, sistema,
-          CRM, app o automatización — se construye a medida de verdad.</p>
+          CRM o app — se construye a medida de verdad.</p>
         <div class="hero-actions">
           <a href="#contacto" class="btn-primary">
             Agendar reunión
@@ -2115,19 +2178,19 @@
   <div class="hero-marquee" aria-hidden="true">
     <div class="hero-marquee-track">
       <div class="hero-marquee-item">webs a medida</div>
-      <div class="hero-marquee-item">sistemas internos</div>
-      <div class="hero-marquee-item">CRMs</div>
-      <div class="hero-marquee-item">apps móviles</div>
-      <div class="hero-marquee-item">automatizaciones</div>
+      <div class="hero-marquee-item">sitios corporativos</div>
       <div class="hero-marquee-item">landing pages</div>
       <div class="hero-marquee-item">e-commerce</div>
+      <div class="hero-marquee-item">apps móviles</div>
+      <div class="hero-marquee-item">sistemas internos</div>
+      <div class="hero-marquee-item">CRMs</div>
       <div class="hero-marquee-item">webs a medida</div>
-      <div class="hero-marquee-item">sistemas internos</div>
-      <div class="hero-marquee-item">CRMs</div>
-      <div class="hero-marquee-item">apps móviles</div>
-      <div class="hero-marquee-item">automatizaciones</div>
+      <div class="hero-marquee-item">sitios corporativos</div>
       <div class="hero-marquee-item">landing pages</div>
       <div class="hero-marquee-item">e-commerce</div>
+      <div class="hero-marquee-item">apps móviles</div>
+      <div class="hero-marquee-item">sistemas internos</div>
+      <div class="hero-marquee-item">CRMs</div>
     </div>
   </div>
 
@@ -2203,57 +2266,119 @@
 
   <!-- ═══════════════ SERVICIOS ═══════════════ -->
   <section id="servicios">
-    <div class="container">
-      <span class="section-tag reveal">Servicios</span>
-      <h2 class="section-title reveal-blur">Soluciones <span class="gradient-text">a tu medida</span></h2>
-      <div class="services-grid">
-        <div class="service-card reveal">
-          <div class="service-icon service-icon--web">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2" />
-              <line x1="8" y1="21" x2="16" y2="21" />
-              <line x1="12" y1="17" x2="12" y2="21" />
-            </svg>
-          </div>
-          <h3>Apps Web a Medida</h3>
-          <p>Plataformas web modernas, rápidas y adaptadas a las necesidades de tu negocio.</p>
+    <div class="servicios-inner">
+      <h2 class="servicios-heading reveal-blur">Qué construimos <em>a medida</em>.</h2>
+
+      <article class="servicio-row reveal">
+        <div class="servicio-head">
+          <span class="servicio-num">01 · Servicio</span>
+          <h3 class="servicio-title">Landing page</h3>
         </div>
-        <div class="service-card reveal">
-          <div class="service-icon service-icon--mobile">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="5" y="2" width="14" height="20" rx="2" />
-              <line x1="12" y1="18" x2="12" y2="18" />
-            </svg>
+        <div class="servicio-body">
+          <p class="servicio-desc">Una sola página construida para convertir. Ideal para campañas puntuales,
+            lanzamientos, eventos, productos específicos o profesionales que necesitan un punto de contacto digital
+            directo. Toda la atención del visitante en un único mensaje y una sola acción.</p>
+          <div class="servicio-features">
+            <div class="servicio-feature">Foco en una sola acción del visitante</div>
+            <div class="servicio-feature">Carga liviana y rápida en móvil</div>
+            <div class="servicio-feature">Formulario integrado a tu CRM o correo</div>
+            <div class="servicio-feature">Configuración lista para campañas de Ads</div>
           </div>
-          <h3>Apps Móviles</h3>
-          <p>Aplicaciones nativas y multiplataforma para llegar a tus clientes en cualquier dispositivo.</p>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-icon service-icon--auto">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-            </svg>
+          <div class="servicio-audience">
+            <span class="servicio-audience-label">Para quién es</span>
+            <div class="servicio-audience-list">
+              <div class="servicio-audience-item">Empresas que necesitan capturar leads de una campaña antes de tener
+                un sitio completo.</div>
+              <div class="servicio-audience-item">Profesionales independientes que quieren un punto de contacto
+                digital sin mantener un sitio extenso.</div>
+            </div>
           </div>
-          <h3>Automatización de Procesos</h3>
-          <p>Optimizá tus flujos de trabajo con soluciones inteligentes que ahorran tiempo y recursos.</p>
         </div>
-        <div class="service-card reveal">
-          <div class="service-icon service-icon--sys">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="8" rx="2" />
-              <rect x="2" y="14" width="20" height="8" rx="2" />
-              <line x1="6" y1="6" x2="6" y2="6" />
-              <line x1="6" y1="18" x2="6" y2="18" />
-            </svg>
+      </article>
+
+      <article class="servicio-row reveal">
+        <div class="servicio-head">
+          <span class="servicio-num">02 · Servicio</span>
+          <h3 class="servicio-title">Sitio corporativo</h3>
+        </div>
+        <div class="servicio-body">
+          <p class="servicio-desc">Sitio con varias secciones pensado para empresas consolidadas que necesitan mostrar
+            la operación completa: servicios, casos, equipo, novedades y canales de contacto. Estructura clara para
+            representar la empresa con seriedad y darle al lead toda la información que necesita antes de tomar
+            contacto.</p>
+          <div class="servicio-features">
+            <div class="servicio-feature">Gestión de contenido propio para que tu equipo actualice sin depender del
+              desarrollador</div>
+            <div class="servicio-feature">Sección de novedades o blog integrada</div>
+            <div class="servicio-feature">Conexión con redes sociales y herramientas de marketing</div>
+            <div class="servicio-feature">Métricas integradas para entender qué funciona y qué no</div>
           </div>
-          <h3>Sistemas Internos</h3>
-          <p>Software interno para gestión, inventario, CRM y más, diseñado para tu empresa.</p>
+          <div class="servicio-audience">
+            <span class="servicio-audience-label">Para quién es</span>
+            <div class="servicio-audience-list">
+              <div class="servicio-audience-item">Empresas industriales o de servicios que necesitan mostrar capacidad
+                operativa, cartera y casos.</div>
+              <div class="servicio-audience-item">Empresas en expansión que necesitan un sitio profesional para
+                apuntar a nuevos mercados.</div>
+            </div>
+          </div>
         </div>
-      </div>
+      </article>
+
+      <article class="servicio-row reveal">
+        <div class="servicio-head">
+          <span class="servicio-num">03 · Servicio</span>
+          <h3 class="servicio-title">E-commerce</h3>
+        </div>
+        <div class="servicio-body">
+          <p class="servicio-desc">Tienda en línea desarrollada a medida, con catálogo, carrito, pagos integrados y
+            panel propio para gestionar productos, stock y ventas. Construida para escalar con el negocio y adaptarse
+            a las reglas comerciales reales, sin las limitaciones de una plataforma enlatada.</p>
+          <div class="servicio-features">
+            <div class="servicio-feature">Panel de administración para catálogo, stock y pedidos</div>
+            <div class="servicio-feature">Pasarelas de pago locales (Mercado Pago, transferencias, etc.)</div>
+            <div class="servicio-feature">Integración con logística y cálculo de envíos</div>
+            <div class="servicio-feature">Reportes de ventas, clientes recurrentes y productos más vendidos</div>
+          </div>
+          <div class="servicio-audience">
+            <span class="servicio-audience-label">Para quién es</span>
+            <div class="servicio-audience-list">
+              <div class="servicio-audience-item">Comercios que necesitan vender en línea con reglas propias (envíos,
+                combos, descuentos por volumen) que las plataformas genéricas no permiten.</div>
+              <div class="servicio-audience-item">Marcas que quieren un canal directo con sus clientes sin comisiones
+                de marketplaces.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="servicio-row reveal">
+        <div class="servicio-head">
+          <span class="servicio-num">04 · Servicio</span>
+          <h3 class="servicio-title">Apps y sistemas internos</h3>
+        </div>
+        <div class="servicio-body">
+          <p class="servicio-desc">Software interno hecho a la medida de la operación: CRMs, sistemas de gestión,
+            paneles de administración, apps móviles y web para uso interno. Reemplaza las planillas de Excel, las
+            hojas dispersas y los procesos manuales por una plataforma única, ordenada y escalable.</p>
+          <div class="servicio-features">
+            <div class="servicio-feature">Módulos a medida según la operación (clientes, ventas, stock, logística)
+            </div>
+            <div class="servicio-feature">Roles y permisos por rol o equipo</div>
+            <div class="servicio-feature">Integración con las herramientas que ya usás</div>
+            <div class="servicio-feature">Reportes y métricas en tiempo real</div>
+          </div>
+          <div class="servicio-audience">
+            <span class="servicio-audience-label">Para quién es</span>
+            <div class="servicio-audience-list">
+              <div class="servicio-audience-item">Empresas medianas que ya no dan abasto con hojas de cálculo y
+                mensajes de WhatsApp para gestionar la operación diaria.</div>
+              <div class="servicio-audience-item">Equipos comerciales que necesitan un CRM propio, sin pagar
+                licencias mensuales que crecen con cada usuario.</div>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -2367,7 +2492,7 @@
   </section>
 
   <!-- ═══════════════ MARCAS ═══════════════ -->
-  <section id="marcas" class="section-dark">
+  <section id="marcas">
     <div class="container">
       <span class="section-tag reveal">Confían en nosotros</span>
       <h2 class="section-title reveal-blur">Marcas con las que <span class="gradient-text">trabajamos</span></h2>
@@ -2598,16 +2723,17 @@
 
   <!-- ═══════════════ CTA ═══════════════ -->
   <section class="cta">
-    <div class="cta-bg"></div>
     <div class="cta-content reveal">
-      <h2>¿Listo para llevar tu idea a <span class="gradient-text">un producto real</span>?</h2>
-      <p class="cta-desc">Contanos tu proyecto y te ayudamos a hacerlo realidad con tecnología de primer nivel.</p>
-      <a href="#contacto" class="btn-primary" style="font-size: 1.05rem; padding: 1rem 2.5rem;">
-        Contactanos ahora
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
+      <h2>¿Empezamos <em class="italic-bordo">tu proyecto</em>?</h2>
+      <p class="cta-desc">Contanos tu idea y te acompañamos desde el primer sketch hasta el deploy en producción.</p>
+      <a href="#contacto" class="btn-primary">
+        Agendar reunión
+        <span class="btn-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </span>
       </a>
     </div>
   </section>
