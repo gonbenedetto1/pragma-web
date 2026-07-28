@@ -2507,26 +2507,29 @@
       }
 
       .nav-logo {
-        font-size: 1.4rem;
-        padding: 0.5rem 0.9rem;
+        font-size: 1.35rem;
+        padding: 0.5rem 0.85rem;
+        gap: 0.3rem;
       }
-      .nav-logo-sub { display: none; }
+      /* Mostrar "studio" también en mobile, más chico */
+      .nav-logo-sub {
+        font-size: 0.55rem;
+      }
 
       .lang-toggle { display: none; }
 
+      /* WhatsApp fuera del navbar en mobile — queda solo el flotante */
+      .nav-wa { display: none; }
+
       .nav-cta {
-        padding: 0.55rem 0.45rem 0.55rem 0.9rem;
-        font-size: 0.75rem;
+        padding: 0.5rem 0.4rem 0.5rem 0.85rem;
+        font-size: 0.72rem;
       }
       .nav-cta-arrow {
-        width: 28px;
-        height: 28px;
+        width: 26px;
+        height: 26px;
       }
-      .nav-wa {
-        width: 40px;
-        height: 40px;
-      }
-      .nav-wa svg { width: 18px; height: 18px; }
+      .nav-cta-arrow svg { width: 12px; height: 12px; }
 
       section {
         padding: 4rem 1.5rem;
@@ -2633,11 +2636,58 @@
       .footer-copy { font-size: 0.75rem; }
 
       .scroll-progress { height: 2px; }
+
+      /* Sobre Pragma — menos margen lateral */
+      #nosotros { padding: 3rem 1rem; }
+      .about-card {
+        padding: 2.25rem 1.25rem;
+        max-width: 100%;
+      }
+      .about-card p {
+        font-size: 1rem;
+        line-height: 1.55;
+      }
+
+      /* Equipo mobile — apilado, solo foto+nombre+cargo */
+      #equipo { padding: 3rem 1rem; }
+      .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+        margin: 0 auto;
+        gap: 1rem;
+      }
+      .team-card {
+        padding: 1.5rem 1.25rem;
+      }
+      .team-photo {
+        width: 96px;
+        height: 96px;
+        margin-bottom: 0.85rem;
+      }
+      .team-card h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
+      .team-role { font-size: 0.7rem; margin-bottom: 0; }
+      .team-bio { display: none; }
+
+      /* Webs desarrolladas — ocultar en mobile */
+      #webs { display: none; }
+      .nav-links a[href="#webs"] { display: none; }
+
+      /* Contact form — menos margen lateral */
+      #contacto { padding: 3rem 1rem; }
+      .contact-wrapper {
+        padding: 1.75rem 1.25rem;
+        max-width: 100%;
+      }
+
+      /* Industrias — desactivar parallax visualmente (JS lo bloquea también) */
+      .industria-icon.parallax {
+        transform: none !important;
+        --parallax-y: 0 !important;
+      }
     }
 
     /* Very small screens */
     @media (max-width: 400px) {
-      .nav-cta { display: none; }
       .hero h1 { font-size: clamp(2.4rem, 13vw, 3.5rem); }
     }
 
@@ -3499,10 +3549,17 @@
     // ═══════════════ PARALLAX LAYERS ═══════════════
     (function parallax() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      // Desactivar parallax en mobile — los icons de industrias se mueven feo
+      const mobileMQ = window.matchMedia('(max-width: 768px)');
       const layers = document.querySelectorAll('[data-parallax]');
       if (!layers.length) return;
       let ticking = false;
       function update() {
+        if (mobileMQ.matches) {
+          layers.forEach(el => el.style.setProperty('--parallax-y', '0px'));
+          ticking = false;
+          return;
+        }
         layers.forEach(el => {
           const speed = parseFloat(el.dataset.parallax) || 0.15;
           const rect = el.getBoundingClientRect();
@@ -3514,6 +3571,7 @@
       window.addEventListener('scroll', () => {
         if (!ticking) { requestAnimationFrame(update); ticking = true; }
       }, { passive: true });
+      mobileMQ.addEventListener('change', update);
       update();
     })();
 
