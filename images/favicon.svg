@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <polygon points="21,13 43,13 54,32 43,51 21,51 10,32"
+  <!-- Hexágono rounded, bordo -->
+  <polygon points="21,12 43,12 54,32 43,52 21,52 10,32"
            fill="#6b1c1c"
            stroke="#6b1c1c"
            stroke-width="10"
            stroke-linejoin="round"
            stroke-linecap="round"/>
-  <text x="34" y="46"
-        text-anchor="middle"
-        font-family="'DM Serif Display', 'Playfair Display', Georgia, serif"
-        font-style="italic"
-        font-weight="400"
-        font-size="44"
-        fill="#f7f6f2">p</text>
+  <!-- Estem del "p" -->
+  <rect x="23" y="20" width="6" height="26" rx="3" fill="#f7f6f2"/>
+  <!-- Bowl del "p" (loop superior derecha) -->
+  <circle cx="35" cy="27" r="8" fill="#f7f6f2"/>
+  <!-- Eye interior (bordo cutout) -->
+  <circle cx="35" cy="27" r="3" fill="#6b1c1c"/>
 </svg>
