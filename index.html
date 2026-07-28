@@ -1847,6 +1847,20 @@
       min-height: 130px;
     }
 
+    select.contact-field {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b1c1c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.1rem center;
+      padding-right: 3rem;
+      cursor: pointer;
+    }
+
+    select.contact-field:invalid {
+      color: var(--text-secondary);
+    }
+
     .contact-btn {
       width: 100%;
       padding: 1rem;
@@ -3324,6 +3338,16 @@
       <div class="contact-wrapper reveal">
         <input type="text" class="contact-field" placeholder="Tu nombre" id="contactName">
         <input type="email" class="contact-field" placeholder="Tu email" id="contactEmail">
+        <select class="contact-field" id="contactType" required>
+          <option value="" disabled selected>¿Qué tipo de proyecto necesitás?</option>
+          <option value="Landing page">Landing page</option>
+          <option value="Sitio corporativo">Sitio corporativo / web institucional</option>
+          <option value="E-commerce">E-commerce / tienda online</option>
+          <option value="Sistema interno / CRM">Sistema interno / CRM</option>
+          <option value="App móvil">App móvil</option>
+          <option value="Rediseño de web existente">Rediseño de web existente</option>
+          <option value="Otro / no estoy seguro">Otro / todavía no estoy seguro</option>
+        </select>
         <textarea class="contact-field" placeholder="Contanos sobre tu proyecto..." id="contactMsg"></textarea>
         <button class="contact-btn" id="contactBtn">Enviar mensaje</button>
       </div>
@@ -3423,15 +3447,21 @@
     document.getElementById('contactBtn').addEventListener('click', () => {
       const name = document.getElementById('contactName').value.trim();
       const email = document.getElementById('contactEmail').value.trim();
+      const type = document.getElementById('contactType').value;
       const msg = document.getElementById('contactMsg').value.trim();
 
-      if (!name || !email || !msg) {
-        alert('Por favor completá todos los campos.');
+      if (!name || !email || !type || !msg) {
+        alert('Por favor completá todos los campos, incluyendo el tipo de proyecto.');
         return;
       }
 
-      const subject = encodeURIComponent(`Consulta de ${name} desde la web`);
-      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${msg}`);
+      const subject = encodeURIComponent(`[${type}] Consulta de ${name}`);
+      const body = encodeURIComponent(
+        `Nombre: ${name}\n` +
+        `Email: ${email}\n` +
+        `Tipo de proyecto: ${type}\n\n` +
+        `Mensaje:\n${msg}`
+      );
       window.open(`mailto:pragmasolucionesdigitales@gmail.com?subject=${subject}&body=${body}`, '_self');
 
       const btn = document.getElementById('contactBtn');
