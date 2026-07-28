@@ -1,9 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" ry="14" fill="#6b1c1c"/>
-  <text x="18" y="52"
+  <polygon points="21,13 43,13 54,32 43,51 21,51 10,32"
+           fill="#6b1c1c"
+           stroke="#6b1c1c"
+           stroke-width="10"
+           stroke-linejoin="round"
+           stroke-linecap="round"/>
+  <text x="34" y="46"
+        text-anchor="middle"
         font-family="'DM Serif Display', 'Playfair Display', Georgia, serif"
         font-style="italic"
         font-weight="400"
-        font-size="56"
+        font-size="44"
         fill="#f7f6f2">p</text>
 </svg>
