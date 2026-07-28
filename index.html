@@ -829,8 +829,27 @@
 
     .industria-item:hover {
       border-color: rgba(107, 28, 28, 0.30);
-      transform: translateY(-3px);
-      box-shadow: 0 20px 50px -20px rgba(107, 28, 28, 0.18);
+      transform: translateY(-6px) scale(1.005);
+      box-shadow: 0 30px 60px -25px rgba(107, 28, 28, 0.25);
+    }
+
+    .industria-item:hover .industria-icon {
+      background: rgba(107, 28, 28, 0.14);
+      transform: scale(1.08) rotate(-4deg);
+      border-color: rgba(107, 28, 28, 0.32);
+    }
+
+    .industria-item .industria-icon {
+      transition: transform 0.5s var(--ease-out-expo), background 0.4s, border-color 0.4s;
+    }
+
+    .industria-item:hover .industria-num {
+      color: var(--accent-bordo-hover);
+      letter-spacing: 0.12em;
+    }
+
+    .industria-item .industria-num {
+      transition: color 0.35s, letter-spacing 0.5s var(--ease-out-expo);
     }
 
     .industria-item::before {
@@ -2223,7 +2242,7 @@
       text-align: center;
       color: var(--text-secondary);
       max-width: 560px;
-      margin: -2rem auto 0;
+      margin: 1rem auto 0;
       font-size: 0.95rem;
       line-height: 1.6;
     }
@@ -2930,7 +2949,7 @@
 
       <div class="industrias-list">
         <article class="industria-item reveal-left">
-          <span class="industria-icon">
+          <span class="industria-icon parallax" data-parallax="0.06">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M2 20h20M4 20V8l6 4V8l6 4V6h4v14" />
@@ -2954,7 +2973,7 @@
         </article>
 
         <article class="industria-item reveal-right">
-          <span class="industria-icon">
+          <span class="industria-icon parallax" data-parallax="-0.05">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M2 3h20v4H2zM4 7v14h16V7M9 13h6" />
@@ -2978,7 +2997,7 @@
         </article>
 
         <article class="industria-item reveal-left">
-          <span class="industria-icon">
+          <span class="industria-icon parallax" data-parallax="0.04">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M20 7h-4V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
@@ -3001,7 +3020,7 @@
         </article>
 
         <article class="industria-item reveal-right">
-          <span class="industria-icon">
+          <span class="industria-icon parallax" data-parallax="-0.06">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M3 21h18M5 21V7l7-4 7 4v14M9 9v.01M9 12v.01M9 15v.01M15 9v.01M15 12v.01M15 15v.01" />
@@ -3025,7 +3044,7 @@
         </article>
 
         <article class="industria-item reveal-left">
-          <span class="industria-icon">
+          <span class="industria-icon parallax" data-parallax="0.05">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -3048,7 +3067,7 @@
         </article>
 
         <article class="industria-item reveal-right">
-          <span class="industria-icon">
+          <span class="industria-icon parallax" data-parallax="-0.04">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
@@ -3143,7 +3162,8 @@
     </div>
   </section>
 
-  <!-- ═══════════════ MARCAS ═══════════════ -->
+  <!-- ═══════════════ MARCAS (comentado — no se muestra) ═══════════════ -->
+  <!--
   <section id="marcas">
     <div class="container">
       <span class="section-tag reveal">Confían en nosotros</span>
@@ -3200,6 +3220,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- ═══════════════ WEBS DESARROLLADAS ═══════════════ -->
   <section id="webs" class="webs-section">
