@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <text x="4" y="26" font-family="Georgia, 'DM Serif Display', serif" font-weight="400" font-style="italic" font-size="26" fill="#0a0a0a">p</text>
-  <circle cx="24" cy="24" r="2.5" fill="#6b1c1c"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" ry="14" fill="#6b1c1c"/>
+  <text x="18" y="52"
+        font-family="'DM Serif Display', 'Playfair Display', Georgia, serif"
+        font-style="italic"
+        font-weight="400"
+        font-size="56"
+        fill="#f7f6f2">p</text>
 </svg>
