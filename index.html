@@ -1041,29 +1041,39 @@
 
       .industria-item {
         grid-template-columns: 44px 1fr;
-        gap: 0.75rem 1rem;
+        grid-template-rows: auto auto auto auto;
+        gap: 1.25rem 1rem;
         padding: 1.75rem 1.5rem;
       }
 
       .industria-icon {
         width: 40px;
         height: 40px;
+        grid-row: 1;
+        grid-column: 1;
+        align-self: start;
+      }
+
+      .industria-title {
+        grid-row: 1;
+        grid-column: 2;
+        font-size: 1.35rem;
+        align-self: center;
+      }
+
+      .industria-desc {
+        grid-row: 2;
+        grid-column: 1 / -1;
       }
 
       .industria-num {
         grid-row: 3;
-        grid-column: 2;
+        grid-column: 1 / -1;
         justify-self: start;
-        margin-bottom: 0.25rem;
       }
 
-      .industria-title {
-        grid-column: 2;
-        font-size: 1.35rem;
-      }
-
-      .industria-desc,
       .industria-cover {
+        grid-row: 4;
         grid-column: 1 / -1;
       }
 
