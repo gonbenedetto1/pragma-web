@@ -2524,6 +2524,72 @@
       margin-top: 3rem;
     }
 
+    /* Projects invite (compact CTA replacing the webs grid) */
+    .projects-invite {
+      padding: 6rem 3rem;
+    }
+    .projects-invite-card {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 28px;
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .projects-invite-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(107, 28, 28, 0.18) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse at 50% -20%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% -20%, black 20%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .projects-invite-card > * { position: relative; z-index: 1; }
+    .projects-invite-card .section-tag {
+      color: var(--accent-bordo);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .projects-invite-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      max-width: 18ch;
+    }
+    .projects-invite-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .projects-invite-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.55;
+      max-width: 46ch;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 900px) {
+      .projects-invite { padding: 3rem 1.25rem; }
+      .projects-invite-card { padding: 2.75rem 1.5rem; border-radius: 22px; }
+      .projects-invite-desc { font-size: 0.98rem; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .brands-marquee-track {
         animation: none;
@@ -2793,9 +2859,6 @@
       .team-role { font-size: 0.7rem; margin-bottom: 0; }
       .team-bio { display: none; }
 
-      /* Webs desarrolladas — ocultar en mobile */
-      #webs { display: none; }
-      .nav-links a[href="#webs"] { display: none; }
 
       /* Contact form — menos margen lateral */
       #contacto { padding: 3rem 1rem; }
@@ -3440,76 +3503,18 @@
   </section>
   -->
 
-  <!-- ═══════════════ WEBS DESARROLLADAS ═══════════════ -->
-  <section id="webs" class="webs-section">
+  <!-- ═══════════════ INVITE PROYECTOS ═══════════════ -->
+  <section id="webs" class="projects-invite">
     <div class="container">
-      <div class="webs-intro-wrap">
-        <span class="section-tag reveal" data-i18n-en="04 · Portfolio">04 · Proyectos</span>
-        <h2 class="webs-heading reveal-blur">
-          <span data-i18n-en="Sites we've">Webs</span>
-          <em data-i18n-en="shipped">que desarrollamos</em>.
+      <div class="projects-invite-card reveal">
+        <span class="section-tag" data-i18n-en="04 · Projects">04 · Proyectos</span>
+        <h2 class="projects-invite-title">
+          <span data-i18n-en="Some of">Algunos de</span>
+          <em class="italic-bordo" data-i18n-en="our work">nuestros proyectos</em>.
         </h2>
-        <p class="webs-intro reveal" data-i18n-en="Hover each screenshot to scroll through the full site.">Pasá el
-          mouse sobre cada captura para recorrer el sitio completo.</p>
-      </div>
-      <div class="webs-grid">
-        <article class="web-card reveal">
-          <div class="web-screenshot">
-            <img src="images/projects/emat.jpg"
-              alt="Sitio web de EMAT - Aislación térmica y acústica sustentable" loading="lazy">
-          </div>
-          <div class="web-info">
-            <h3 data-i18n-en="EMAT — Thermal and acoustic insulation">EMAT — Aislación térmica y acústica</h3>
-            <p data-i18n-en="Institutional site with product catalog, quote calculator, coverage map and testimonials.">Sitio institucional con catálogo de productos, calculadora de presupuesto, mapa de cobertura y
-              testimonios.</p>
-            <a href="https://emat.com.ar/" target="_blank" rel="noopener" class="web-visit-btn">
-              <span data-i18n-en="Visit site">Visitar web</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </a>
-          </div>
-        </article>
-        <article class="web-card reveal">
-          <div class="web-screenshot">
-            <img src="images/projects/quintana.jpg"
-              alt="Sitio web de Quintana Ruiz Asesores - Seguros para personas y empresas" loading="lazy">
-          </div>
-          <div class="web-info">
-            <h3 data-i18n-en="Quintana Ruiz Asesores — Insurance">Quintana Ruiz Asesores — Seguros</h3>
-            <p data-i18n-en="Corporate site with coverages, team, Google reviews, blog and an integrated quote form.">Web corporativa con coberturas, equipo, reseñas de Google, blog y formulario de cotización integrado.
-            </p>
-            <a href="https://seguroscordoba.com.ar" target="_blank" rel="noopener" class="web-visit-btn">
-              <span data-i18n-en="Visit site">Visitar web</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </a>
-          </div>
-        </article>
-        <article class="web-card reveal">
-          <div class="web-screenshot">
-            <img src="images/projects/greenova.jpg"
-              alt="Sitio web de Greenova - Soluciones ambientales y sustentables" loading="lazy">
-          </div>
-          <div class="web-info">
-            <h3 data-i18n-en="Greenova — Environmental solutions">Greenova — Soluciones ambientales</h3>
-            <p data-i18n-en="Institutional site featuring services, portfolio and contact channels, with a clean and sustainable design language.">Sitio institucional con servicios, portfolio y canales de contacto, con lenguaje visual limpio y sustentable.</p>
-            <a href="https://greenova.ar" target="_blank" rel="noopener" class="web-visit-btn">
-              <span data-i18n-en="Visit site">Visitar web</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </a>
-          </div>
-        </article>
-      </div>
-      <div class="webs-cta reveal">
+        <p class="projects-invite-desc" data-i18n-en="Websites and custom systems live in production. Take a closer look at each one.">Sitios y sistemas a medida ya en producción. Miralos uno por uno.</p>
         <a href="proyectos.html" class="btn-primary">
-          <span data-i18n-en="View all projects">Ver todos los proyectos</span>
+          <span data-i18n-en="View projects">Ver proyectos</span>
           <span class="btn-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
               stroke-linejoin="round">

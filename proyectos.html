@@ -230,6 +230,10 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 2.5rem;
     }
+    .cards-grid.cards-3 {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
     .project-card {
       background: var(--bg-card);
       border: 1px solid var(--border-card);
@@ -245,19 +249,25 @@
     }
     .card-screenshot {
       position: relative;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 4 / 3;
       overflow: hidden;
       background: var(--bg-secondary);
     }
+    .cards-grid:not(.cards-3) .card-screenshot { aspect-ratio: 16 / 10; }
     .card-screenshot img {
+      display: block;
       width: 100%;
-      height: 100%;
+      height: auto;
+      min-height: 100%;
       object-fit: cover;
       object-position: top center;
-      transition: object-position 8s linear, transform 0.5s ease;
+      transition: transform 6s linear;
+      transform: translateY(0);
+      will-change: transform;
     }
     .project-card:hover .card-screenshot img {
-      object-position: bottom center;
+      transform: translateY(calc(-100% + var(--card-h, 300px)));
+      transition: transform 8s linear;
     }
     .card-badge {
       position: absolute;
@@ -529,7 +539,8 @@
       .hero { padding: 7rem 1.25rem 3rem; }
       .projects-section { padding: 3.5rem 1.25rem; }
       .section-heading { padding-bottom: 1.25rem; margin-bottom: 2.5rem; }
-      .cards-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+      .cards-grid, .cards-grid.cards-3 { grid-template-columns: 1fr; gap: 1.75rem; }
+      .cards-grid.cards-3 .card-screenshot { aspect-ratio: 16 / 10; }
       .final-cta { padding: 4rem 1.25rem; }
       footer { padding: 2.5rem 1.5rem 1.75rem; gap: 1.75rem; }
       .footer-top { grid-template-columns: 1fr; gap: 1.75rem; }
@@ -570,23 +581,76 @@
     <div class="container">
       <span class="section-tag" data-i18n-en="Projects">Proyectos</span>
       <h1 class="hero-title">
-        <span data-i18n-en="Everything we've">Todo lo que</span>
-        <em data-i18n-en="shipped">construimos</em>.
+        <span data-i18n-en="Some of our">Algunos</span>
+        <em data-i18n-en="projects">proyectos</em>.
       </h1>
-      <p class="hero-desc" data-i18n-en="From institutional sites to full-blown internal systems. Every project below is real, live and built end-to-end at pragma.">Desde sitios institucionales hasta sistemas internos completos. Todos los proyectos que ves acá son reales, están online y los desarrollamos de principio a fin en pragma.</p>
+      <p class="hero-desc" data-i18n-en="Real systems and websites built end-to-end at pragma. Each one live and in production.">Sistemas y sitios a medida que construimos de principio a fin en pragma. Cada uno vivo y en producción.</p>
+    </div>
+  </section>
+
+  <!-- ══════ SISTEMAS ══════ -->
+  <section class="projects-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2 class="section-title">
+          <span data-i18n-en="Systems">Sistemas</span>
+        </h2>
+        <p class="section-caption" data-i18n-en="Custom software products built for real businesses. Sold as a service or built specifically for one client.">Productos de software a medida para negocios reales. Como servicio o desarrollados a pedido para un cliente puntual.</p>
+      </div>
+      <div class="cards-grid">
+        <article class="project-card reveal">
+          <div class="card-screenshot">
+            <span class="card-badge" data-i18n-en="Shops">Comercios</span>
+            <img src="images/projects/tilin.jpg" alt="Tilin" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Tilin — <em style="font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-bordo);" data-i18n-en="Digital storefront">tienda digital</em></h3>
+            <div class="card-tags">
+              <span data-i18n-en="E-commerce">E-commerce</span>
+              <span data-i18n-en="WhatsApp orders">Pedidos WhatsApp</span>
+              <span data-i18n-en="Multi-shop">Multi-comercio</span>
+            </div>
+            <p class="card-desc" data-i18n-en="System designed for shops. Product catalog with categories, cart, WhatsApp order flow and white-label branding per shop.">Sistema pensado para comercios. Catálogo con categorías, carrito, flujo de pedido por WhatsApp y branding white-label por comercio.</p>
+            <a href="https://www.tilin.com.ar/" target="_blank" rel="noopener" class="card-visit">
+              <span data-i18n-en="Visit site">Visitar web</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="card-screenshot">
+            <span class="card-badge" data-i18n-en="Professionals">Profesionales</span>
+            <img src="images/projects/alma.jpg" alt="Alma" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Alma — <em style="font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-bordo);" data-i18n-en="Bookings SaaS">gestión de turnos</em></h3>
+            <div class="card-tags">
+              <span data-i18n-en="Appointments">Turnos</span>
+              <span data-i18n-en="Deposits">Señas</span>
+              <span data-i18n-en="Reminders">Recordatorios</span>
+            </div>
+            <p class="card-desc" data-i18n-en="System built for professionals — hair salons, nutritionists, aesthetic clinics. Appointment management, deposits, automated reminders and per-client history.">Sistema para profesionales — peluquerías, nutricionistas, estética. Gestión de turnos, señas, recordatorios automáticos e historial por cliente.</p>
+            <a href="https://alma-saas.vercel.app" target="_blank" rel="noopener" class="card-visit">
+              <span data-i18n-en="Visit site">Visitar web</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
   <!-- ══════ WEBS ══════ -->
-  <section class="projects-section">
+  <section class="projects-section" style="background: var(--bg-secondary);">
     <div class="container">
       <div class="section-heading reveal">
         <h2 class="section-title">
           <span data-i18n-en="Websites">Webs</span>
         </h2>
-        <p class="section-caption" data-i18n-en="Institutional sites, corporate pages and landing experiences.">Sitios institucionales, páginas corporativas y experiencias tipo landing.</p>
+        <p class="section-caption" data-i18n-en="Institutional sites, corporate pages and landing experiences. Hover each card to scroll through the full site.">Sitios institucionales, páginas corporativas y experiencias tipo landing. Pasá el mouse por cada card para recorrer el sitio completo.</p>
       </div>
-      <div class="cards-grid">
+      <div class="cards-grid cards-3">
         <article class="project-card reveal">
           <div class="card-screenshot">
             <span class="card-badge">Web</span>
@@ -641,59 +705,6 @@
             </div>
             <p class="card-desc" data-i18n-en="Institutional site featuring services, portfolio and contact channels, with a clean, sustainable design language.">Sitio institucional con servicios, portfolio y canales de contacto, con lenguaje visual limpio y sustentable.</p>
             <a href="https://greenova.ar" target="_blank" rel="noopener" class="card-visit">
-              <span data-i18n-en="Visit site">Visitar web</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-            </a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════ SISTEMAS ══════ -->
-  <section class="projects-section" style="background: var(--bg-secondary);">
-    <div class="container">
-      <div class="section-heading reveal">
-        <h2 class="section-title">
-          <span data-i18n-en="Systems">Sistemas</span>
-        </h2>
-        <p class="section-caption" data-i18n-en="Custom software products built for real businesses. Sold as a service or built specifically for one client.">Productos de software a medida para negocios reales. Como servicio o desarrollados a pedido para un cliente puntual.</p>
-      </div>
-      <div class="cards-grid">
-        <article class="project-card reveal">
-          <div class="card-screenshot">
-            <span class="card-badge" data-i18n-en="Shops">Comercios</span>
-            <img src="images/projects/tilin.jpg" alt="Tilin" loading="lazy">
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Tilin — <em style="font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-bordo);" data-i18n-en="Digital storefront">tienda digital</em></h3>
-            <div class="card-tags">
-              <span data-i18n-en="E-commerce">E-commerce</span>
-              <span data-i18n-en="WhatsApp orders">Pedidos WhatsApp</span>
-              <span data-i18n-en="Multi-shop">Multi-comercio</span>
-            </div>
-            <p class="card-desc" data-i18n-en="System designed for shops. Product catalog with categories, cart, WhatsApp order flow and white-label branding per shop.">Sistema pensado para comercios. Catálogo con categorías, carrito, flujo de pedido por WhatsApp y branding white-label por comercio.</p>
-            <a href="https://www.tilin.com.ar/" target="_blank" rel="noopener" class="card-visit">
-              <span data-i18n-en="Visit site">Visitar web</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <article class="project-card reveal">
-          <div class="card-screenshot">
-            <span class="card-badge" data-i18n-en="Professionals">Profesionales</span>
-            <img src="images/projects/alma.jpg" alt="Alma" loading="lazy">
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Alma — <em style="font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-bordo);" data-i18n-en="Bookings SaaS">gestión de turnos</em></h3>
-            <div class="card-tags">
-              <span data-i18n-en="Appointments">Turnos</span>
-              <span data-i18n-en="Deposits">Señas</span>
-              <span data-i18n-en="Reminders">Recordatorios</span>
-            </div>
-            <p class="card-desc" data-i18n-en="System built for professionals — hair salons, nutritionists, aesthetic clinics. Appointment management, deposits, automated reminders and per-client history.">Sistema para profesionales — peluquerías, nutricionistas, estética. Gestión de turnos, señas, recordatorios automáticos e historial por cliente.</p>
-            <a href="https://alma-saas.vercel.app" target="_blank" rel="noopener" class="card-visit">
               <span data-i18n-en="Visit site">Visitar web</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
             </a>
