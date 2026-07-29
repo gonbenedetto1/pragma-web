@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>proyectos — pragma studio</title>
+  <meta name="description" content="Proyectos de pragma studio: webs y sistemas a medida.">
+  <meta property="og:title" content="proyectos — pragma studio">
+  <meta property="og:description" content="Webs y sistemas a medida: EMAT, Quintana Ruiz, Greenova, Tilin, Alma.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <meta name="theme-color" content="#f7f6f2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-primary: #f7f6f2;
+      --bg-secondary: #eeece5;
+      --bg-card: #ffffff;
+      --border-card: rgba(10, 10, 10, 0.10);
+      --text-primary: #0a0a0a;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+      --accent-bordo: #6b1c1c;
+      --accent-bordo-hover: #8a2626;
+      --accent-green: #22c55e;
+      --font-display: 'Syne', sans-serif;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══════ GRID LENS ══════ */
+    .grid-lens {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(107, 28, 28, 0.32) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(107, 28, 28, 0.32) 1px, transparent 1px);
+      background-size: 60px 60px;
+      background-position: var(--gx, 0px) var(--gy, 0px);
+      mask-image: radial-gradient(circle 260px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.25) 70%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle 260px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.25) 70%, transparent 100%);
+      opacity: 0; transition: opacity 0.5s ease;
+    }
+    .grid-lens.active { opacity: 1; }
+    .grid-lens-core {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(rgba(107, 28, 28, 0.55) 1.5px, transparent 1.5px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(circle 110px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.9) 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle 110px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.9) 0%, transparent 80%);
+      opacity: 0; transition: opacity 0.5s ease;
+    }
+    .grid-lens-core.active { opacity: 1; }
+
+    /* ══════ NAVBAR ══════ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 3rem;
+      background: rgba(247, 246, 242, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar.scrolled { border-bottom-color: rgba(10,10,10,0.06); }
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--accent-bordo);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 0.35rem;
+      line-height: 1;
+    }
+    .nav-brand-sub {
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-size: 0.62rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex; gap: 2rem; align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-bordo); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.55rem 1.05rem;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+    .nav-cta:hover { background: var(--accent-bordo); }
+    .lang-toggle {
+      display: inline-flex; gap: 0;
+      border: 1px solid rgba(10,10,10,0.12);
+      border-radius: 999px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+    }
+    .lang-toggle button {
+      background: transparent;
+      border: none;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      font-family: inherit;
+      font-size: inherit;
+    }
+    .lang-toggle button.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+    }
+    .nav-toggle { display: none; }
+
+    /* ══════ HERO ══════ */
+    .hero {
+      padding: 10rem 3rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-bordo);
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2.75rem, 7vw, 5.25rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      max-width: 18ch;
+    }
+    .hero-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent-bordo);
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 60ch;
+      margin-top: 1.75rem;
+    }
+
+    /* ══════ SECTION ══════ */
+    .projects-section {
+      padding: 5rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid rgba(10,10,10,0.10);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      letter-spacing: -0.035em;
+      line-height: 1;
+    }
+    .section-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent-bordo);
+    }
+    .section-caption {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      max-width: 40ch;
+      line-height: 1.55;
+    }
+
+    /* ══════ CARDS ══════ */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s var(--ease-out-expo), box-shadow 0.4s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 45px -20px rgba(10,10,10,0.15);
+    }
+    .card-screenshot {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+    .card-screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: object-position 8s linear, transform 0.5s ease;
+    }
+    .project-card:hover .card-screenshot img {
+      object-position: bottom center;
+    }
+    .card-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(247, 246, 242, 0.94);
+      backdrop-filter: blur(10px);
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-bordo);
+      border: 1px solid rgba(107, 28, 28, 0.15);
+      z-index: 2;
+    }
+    .card-info {
+      padding: 1.75rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex-grow: 1;
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.15rem;
+    }
+    .card-tags span {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-top: 0.35rem;
+    }
+    .card-visit {
+      align-self: flex-start;
+      margin-top: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      background: rgba(10, 10, 10, 0.04);
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      color: var(--text-primary);
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+    .card-visit:hover {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+      transform: translateX(3px);
+    }
+
+    /* ══════ FINAL CTA ══════ */
+    .final-cta {
+      padding: 6rem 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      max-width: 22ch;
+      margin: 0 auto 1.25rem;
+    }
+    .final-cta h2 em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent-bordo);
+    }
+    .final-cta p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 55ch;
+      margin: 0 auto 2rem;
+      line-height: 1.55;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.75rem;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-bordo);
+      transform: translateY(-2px);
+    }
+    .btn-arrow svg { width: 18px; height: 18px; }
+
+    /* ══════ FOOTER (same as index) ══════ */
+    footer {
+      padding: 3rem 3rem 2rem;
+      border-top: 1px solid rgba(10, 10, 10, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+      background: var(--bg-primary);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.92rem;
+      color: var(--text-primary);
+      line-height: 1.55;
+      display: block;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent-bordo); }
+    .footer-col-brand p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      max-width: 26ch;
+      margin-top: 0.75rem;
+      line-height: 1.55;
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(10, 10, 10, 0.06);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--accent-bordo);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      line-height: 1;
+      text-decoration: none;
+    }
+    .footer-brand-sub {
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-size: 0.62rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+    .footer-copy { font-size: 0.82rem; color: var(--text-secondary); }
+    .footer-socials { display: flex; gap: 1rem; }
+    .footer-socials a {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(10, 10, 10, 0.04);
+      border: 1px solid rgba(10, 10, 10, 0.06);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .footer-socials a:hover {
+      background: rgba(10, 10, 10, 0.08);
+      color: var(--text-primary);
+    }
+
+    /* ══════ WhatsApp floating ══════ */
+    .wa-float {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+      transition: transform 0.25s;
+      z-index: 90;
+      color: white;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+
+    /* ══════ REVEAL ══════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════ RESPONSIVE ══════ */
+    @media (max-width: 900px) {
+      .navbar { padding: 1rem 1.25rem; }
+      .nav-links {
+        position: fixed;
+        top: 65px;
+        left: 0; right: 0;
+        background: rgba(247, 246, 242, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 0;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid rgba(10,10,10,0.06);
+        transform: translateY(-120%);
+        transition: transform 0.4s ease;
+      }
+      .nav-links.open { transform: translateY(0); }
+      .nav-links a { padding: 0.85rem 1.5rem; width: 100%; }
+      .nav-cta { display: none; }
+      .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--text-primary);
+      }
+      .hero { padding: 7rem 1.25rem 3rem; }
+      .projects-section { padding: 3.5rem 1.25rem; }
+      .section-heading { padding-bottom: 1.25rem; margin-bottom: 2.5rem; }
+      .cards-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+      .final-cta { padding: 4rem 1.25rem; }
+      footer { padding: 2.5rem 1.5rem 1.75rem; gap: 1.75rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 1.75rem; }
+      .footer-col-brand p { max-width: 100%; }
+      .footer-bottom { flex-direction: column; gap: 0.85rem; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-lens" id="gridLens"></div>
+  <div class="grid-lens-core" id="gridLensCore"></div>
+
+  <!-- ══════ NAV ══════ -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">pragma<span class="nav-brand-sub">studio</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#servicios" data-i18n-en="Services">Servicios</a>
+      <a href="index.html#capacidades" data-i18n-en="Capabilities">Capacidades</a>
+      <a href="proyectos.html" data-i18n-en="Projects">Proyectos</a>
+      <a href="index.html#nosotros" data-i18n-en="Studio">Nosotros</a>
+      <a href="index.html#contacto" data-i18n-en="Contact">Contacto</a>
+    </div>
+    <div style="display:flex; gap:0.75rem; align-items:center;">
+      <div class="lang-toggle">
+        <button data-lang="es" class="active">ES</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a href="https://wa.me/5493512145673?text=Hola!%20Me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20para%20contarles%20sobre%20mi%20proyecto." target="_blank" rel="noopener" class="nav-cta" data-i18n-en="Let's talk" data-i18n-en-href="https://wa.me/5493512145673?text=Hi!%20I%27d%20like%20to%20book%20a%20call%20to%20discuss%20my%20project.">Hablemos</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══════ HERO ══════ -->
+  <section class="hero">
+    <div class="container">
+      <span class="section-tag" data-i18n-en="Projects">Proyectos</span>
+      <h1 class="hero-title">
+        <span data-i18n-en="Everything we've">Todo lo que</span>
+        <em data-i18n-en="shipped">construimos</em>.
+      </h1>
+      <p class="hero-desc" data-i18n-en="From institutional sites to full-blown internal systems. Every project below is real, live and built end-to-end at pragma.">Desde sitios institucionales hasta sistemas internos completos. Todos los proyectos que ves acá son reales, están online y los desarrollamos de principio a fin en pragma.</p>
+    </div>
+  </section>
+
+  <!-- ══════ WEBS ══════ -->
+  <section class="projects-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2 class="section-title">
+          <span data-i18n-en="Websites">Webs</span>
+        </h2>
+        <p class="section-caption" data-i18n-en="Institutional sites, corporate pages and landing experiences.">Sitios institucionales, páginas corporativas y experiencias tipo landing.</p>
+      </div>
+      <div class="cards-grid">
+        <article class="project-card reveal">
+          <div class="card-screenshot">
+            <span class="card-badge">Web</span>
+            <img src="images/projects/emat.jpg" alt="EMAT" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title" data-i18n-en="EMAT — Thermal & acoustic insulation">EMAT — Aislación térmica y acústica</h3>
+            <div class="card-tags">
+              <span data-i18n-en="Institutional">Institucional</span>
+              <span data-i18n-en="Catalog">Catálogo</span>
+              <span data-i18n-en="Calculator">Calculadora</span>
+            </div>
+            <p class="card-desc" data-i18n-en="Institutional site featuring product catalog, budget calculator, coverage map and customer testimonials.">Sitio institucional con catálogo de productos, calculadora de presupuesto, mapa de cobertura y testimonios.</p>
+            <a href="https://emat.com.ar/" target="_blank" rel="noopener" class="card-visit">
+              <span data-i18n-en="Visit site">Visitar web</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="card-screenshot">
+            <span class="card-badge">Web</span>
+            <img src="images/projects/quintana.jpg" alt="Quintana Ruiz Asesores" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title" data-i18n-en="Quintana Ruiz Advisors — Insurance">Quintana Ruiz Asesores — Seguros</h3>
+            <div class="card-tags">
+              <span data-i18n-en="Corporate">Corporativo</span>
+              <span data-i18n-en="Blog">Blog</span>
+              <span data-i18n-en="Contact form">Formulario</span>
+            </div>
+            <p class="card-desc" data-i18n-en="Corporate website featuring insurance coverage, team, Google reviews, blog and an integrated quotation form.">Web corporativa con coberturas, equipo, reseñas de Google, blog y formulario de cotización integrado.</p>
+            <a href="https://seguroscordoba.com.ar" target="_blank" rel="noopener" class="card-visit">
+              <span data-i18n-en="Visit site">Visitar web</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="card-screenshot">
+            <span class="card-badge">Web</span>
+            <img src="images/projects/greenova.jpg" alt="Greenova" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title" data-i18n-en="Greenova — Environmental solutions">Greenova — Soluciones ambientales</h3>
+            <div class="card-tags">
+              <span data-i18n-en="Institutional">Institucional</span>
+              <span data-i18n-en="Portfolio">Portfolio</span>
+              <span data-i18n-en="Sustainability">Sustentable</span>
+            </div>
+            <p class="card-desc" data-i18n-en="Institutional site featuring services, portfolio and contact channels, with a clean, sustainable design language.">Sitio institucional con servicios, portfolio y canales de contacto, con lenguaje visual limpio y sustentable.</p>
+            <a href="https://greenova.ar" target="_blank" rel="noopener" class="card-visit">
+              <span data-i18n-en="Visit site">Visitar web</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SISTEMAS ══════ -->
+  <section class="projects-section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2 class="section-title">
+          <span data-i18n-en="Systems">Sistemas</span>
+        </h2>
+        <p class="section-caption" data-i18n-en="Custom software products built for real businesses. Sold as a service or built specifically for one client.">Productos de software a medida para negocios reales. Como servicio o desarrollados a pedido para un cliente puntual.</p>
+      </div>
+      <div class="cards-grid">
+        <article class="project-card reveal">
+          <div class="card-screenshot">
+            <span class="card-badge" data-i18n-en="Shops">Comercios</span>
+            <img src="images/projects/tilin.jpg" alt="Tilin" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Tilin — <em style="font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-bordo);" data-i18n-en="Digital storefront">tienda digital</em></h3>
+            <div class="card-tags">
+              <span data-i18n-en="E-commerce">E-commerce</span>
+              <span data-i18n-en="WhatsApp orders">Pedidos WhatsApp</span>
+              <span data-i18n-en="Multi-shop">Multi-comercio</span>
+            </div>
+            <p class="card-desc" data-i18n-en="System designed for shops. Product catalog with categories, cart, WhatsApp order flow and white-label branding per shop.">Sistema pensado para comercios. Catálogo con categorías, carrito, flujo de pedido por WhatsApp y branding white-label por comercio.</p>
+            <a href="https://www.tilin.com.ar/" target="_blank" rel="noopener" class="card-visit">
+              <span data-i18n-en="Visit site">Visitar web</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="card-screenshot">
+            <span class="card-badge" data-i18n-en="Professionals">Profesionales</span>
+            <img src="images/projects/alma.jpg" alt="Alma" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Alma — <em style="font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-bordo);" data-i18n-en="Bookings SaaS">gestión de turnos</em></h3>
+            <div class="card-tags">
+              <span data-i18n-en="Appointments">Turnos</span>
+              <span data-i18n-en="Deposits">Señas</span>
+              <span data-i18n-en="Reminders">Recordatorios</span>
+            </div>
+            <p class="card-desc" data-i18n-en="System built for professionals — hair salons, nutritionists, aesthetic clinics. Appointment management, deposits, automated reminders and per-client history.">Sistema para profesionales — peluquerías, nutricionistas, estética. Gestión de turnos, señas, recordatorios automáticos e historial por cliente.</p>
+            <a href="https://alma-saas.vercel.app" target="_blank" rel="noopener" class="card-visit">
+              <span data-i18n-en="Visit site">Visitar web</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ CTA ══════ -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>
+        <span data-i18n-en="Have a project">¿Tenés un proyecto</span>
+        <em data-i18n-en="in mind?">en mente?</em>
+      </h2>
+      <p data-i18n-en="Whether it's a landing page, a website or a full internal system — tell us your idea and we'll take it from there.">Ya sea una landing, un sitio web o un sistema interno completo — contanos tu idea y la llevamos adelante.</p>
+      <a href="https://wa.me/5493512145673?text=Hola!%20Me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20para%20contarles%20sobre%20mi%20proyecto." target="_blank" rel="noopener" class="btn-primary" data-i18n-en-href="https://wa.me/5493512145673?text=Hi!%20I%27d%20like%20to%20book%20a%20call%20to%20discuss%20my%20project.">
+        <span data-i18n-en="Book a meeting">Agendar reunión</span>
+        <span class="btn-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════ FOOTER ══════ -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col footer-col-brand">
+        <a href="index.html" class="footer-brand">pragma<span class="footer-brand-sub">studio</span></a>
+        <p data-i18n-en="Custom digital solutions. Websites, systems, CRMs and apps built for real businesses.">Soluciones digitales a medida. Webs, sistemas, CRMs y apps para negocios reales.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title" data-i18n-en="Contact">Contacto</span>
+        <a href="mailto:hola@pragmastudio.com">hola@pragmastudio.com</a>
+        <a href="https://wa.me/5493512145673" target="_blank" rel="noopener">+54 9 3512 14-5673</a>
+        <p data-i18n-en="Córdoba, Argentina">Córdoba, Argentina</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title" data-i18n-en="Explore">Explorar</span>
+        <a href="index.html#servicios" data-i18n-en="Services">Servicios</a>
+        <a href="proyectos.html" data-i18n-en="Projects">Proyectos</a>
+        <a href="index.html#nosotros" data-i18n-en="Studio">Nosotros</a>
+        <a href="index.html#contacto" data-i18n-en="Contact">Contacto</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="index.html" class="footer-brand">pragma<span class="footer-brand-sub">studio</span></a>
+      <span class="footer-copy" data-i18n-en="© 2026 Pragma Studio. All rights reserved.">© 2026 Pragma Studio. Todos los derechos reservados.</span>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/pragmasolucionesdigitales/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/pragma-sd-8253453b4/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://wa.me/5493512145673" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a href="https://wa.me/5493512145673" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // Navbar scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile nav
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    // Reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Grid Lens
+    (function gridLens() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.matchMedia('(max-width: 900px)').matches) return;
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+      const lens = document.getElementById('gridLens');
+      const core = document.getElementById('gridLensCore');
+      let tx = window.innerWidth/2, ty = window.innerHeight/2;
+      let cx = tx, cy = ty;
+      const root = document.documentElement.style;
+      let idleTimer;
+      document.addEventListener('mousemove', (e) => {
+        tx = e.clientX; ty = e.clientY;
+        lens.classList.add('active'); core.classList.add('active');
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => { lens.classList.remove('active'); core.classList.remove('active'); }, 3000);
+      });
+      function loop() {
+        cx += (tx - cx) * 0.14;
+        cy += (ty - cy) * 0.14;
+        root.setProperty('--mx', cx + 'px');
+        root.setProperty('--my', cy + 'px');
+        root.setProperty('--gx', ((cx / window.innerWidth - 0.5) * -18) + 'px');
+        root.setProperty('--gy', ((cy / window.innerHeight - 0.5) * -18) + 'px');
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    // Language toggle
+    (function langToggle() {
+      document.querySelectorAll('[data-i18n-en]').forEach(el => { el.dataset.i18nEs = el.textContent; });
+      document.querySelectorAll('[data-i18n-en-href]').forEach(el => { el.dataset.i18nEsHref = el.getAttribute('href') || ''; });
+      document.querySelectorAll('[data-i18n-en-placeholder]').forEach(el => { el.dataset.i18nEsPlaceholder = el.getAttribute('placeholder') || ''; });
+      document.querySelectorAll('[data-i18n-en-aria-label]').forEach(el => { el.dataset.i18nEsAriaLabel = el.getAttribute('aria-label') || ''; });
+
+      function setLang(lang) {
+        document.documentElement.setAttribute('lang', lang);
+        document.querySelectorAll('[data-i18n-en]').forEach(el => {
+          const en = el.getAttribute('data-i18n-en');
+          const es = el.dataset.i18nEs;
+          el.textContent = (lang === 'en') ? en : es;
+        });
+        document.querySelectorAll('[data-i18n-en-href]').forEach(el => {
+          const en = el.getAttribute('data-i18n-en-href');
+          const es = el.dataset.i18nEsHref;
+          el.setAttribute('href', (lang === 'en') ? en : es);
+        });
+        document.querySelectorAll('[data-i18n-en-placeholder]').forEach(el => {
+          const en = el.getAttribute('data-i18n-en-placeholder');
+          const es = el.dataset.i18nEsPlaceholder;
+          el.setAttribute('placeholder', (lang === 'en') ? en : es);
+        });
+        document.querySelectorAll('[data-i18n-en-aria-label]').forEach(el => {
+          const en = el.getAttribute('data-i18n-en-aria-label');
+          const es = el.dataset.i18nEsAriaLabel;
+          el.setAttribute('aria-label', (lang === 'en') ? en : es);
+        });
+        document.querySelectorAll('.lang-toggle button').forEach(b => {
+          b.classList.toggle('active', b.dataset.lang === lang);
+        });
+        try { localStorage.setItem('pragma-lang', lang); } catch (e) {}
+      }
+
+      const btns = document.querySelectorAll('.lang-toggle button');
+      btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+      try {
+        const saved = localStorage.getItem('pragma-lang');
+        if (saved === 'en') setLang('en');
+      } catch (e) {}
+    })();
+  </script>
+</body>
+
+</html>
