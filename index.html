@@ -198,81 +198,46 @@
       -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 90%);
     }
 
-    /* ═══════════════════ AMBIENT GLOW BLOBS ═══════════════════
-       Movimiento sutil de fondo para darle vida premium a la web.
-       Dos blobs radiales que derivan lentamente + uno que sigue el mouse. */
-    .bg-glow {
+    /* ═══════════════════ GRID LENS ═══════════════════
+       Al mover el cursor, aparece una "lente" con la grilla en bordo
+       aumentada — como si el cursor deformara/activara la grilla local. */
+    .grid-lens {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(107, 28, 28, 0.32) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(107, 28, 28, 0.32) 1px, transparent 1px);
+      background-size: 60px 60px;
+      background-position: var(--gx, 0px) var(--gy, 0px);
+      mask-image: radial-gradient(circle 260px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.25) 70%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle 260px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.25) 70%, transparent 100%);
+      transition: opacity 0.5s ease;
+      opacity: 0;
+      will-change: mask-image, -webkit-mask-image;
     }
-    .bg-glow::before,
-    .bg-glow::after {
-      content: '';
-      position: absolute;
-      width: 60vw;
-      height: 60vw;
-      max-width: 1000px;
-      max-height: 1000px;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.9;
-      will-change: transform;
-    }
-    .bg-glow::before {
-      background: radial-gradient(circle, rgba(107, 28, 28, 0.28) 0%, rgba(107, 28, 28, 0.10) 40%, transparent 65%);
-      top: -25%;
-      left: -18%;
-      animation: bgDrift1 26s ease-in-out infinite alternate;
-    }
-    .bg-glow::after {
-      background: radial-gradient(circle, rgba(181, 122, 63, 0.22) 0%, rgba(181, 122, 63, 0.08) 45%, transparent 65%);
-      bottom: -28%;
-      right: -22%;
-      animation: bgDrift2 32s ease-in-out infinite alternate;
-    }
+    .grid-lens.active { opacity: 1; }
 
-    @keyframes bgDrift1 {
-      0%   { transform: translate(0, 0) scale(1); }
-      50%  { transform: translate(15vw, 8vh) scale(1.08); }
-      100% { transform: translate(-5vw, 20vh) scale(0.95); }
-    }
-    @keyframes bgDrift2 {
-      0%   { transform: translate(0, 0) scale(1); }
-      50%  { transform: translate(-12vw, -6vh) scale(1.05); }
-      100% { transform: translate(8vw, -18vh) scale(0.92); }
-    }
-
-    /* Blob que sigue el mouse — solo desktop */
-    .bg-cursor-glow {
+    /* Segunda capa: dots bordo que aparecen en el centro exacto del cursor,
+       creando la sensación de "warp" — como si la grilla se estirara ahí */
+    .grid-lens-core {
       position: fixed;
-      top: 0; left: 0;
-      width: 560px;
-      height: 560px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(107, 28, 28, 0.18) 0%, rgba(107, 28, 28, 0.06) 40%, transparent 65%);
-      filter: blur(50px);
-      transform: translate(-50%, -50%);
+      inset: 0;
       pointer-events: none;
       z-index: 0;
+      background-image: radial-gradient(rgba(107, 28, 28, 0.55) 1.5px, transparent 1.5px);
+      background-size: 30px 30px;
+      background-position: var(--gx, 0px) var(--gy, 0px);
+      mask-image: radial-gradient(circle 110px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.9) 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle 110px at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.9) 0%, transparent 80%);
+      transition: opacity 0.5s ease;
       opacity: 0;
-      transition: opacity 0.6s ease;
-      will-change: transform, opacity;
     }
-    .bg-cursor-glow.active { opacity: 1; }
+    .grid-lens-core.active { opacity: 1; }
 
-    @media (max-width: 900px) {
-      .bg-glow::before,
-      .bg-glow::after { opacity: 0.35; filter: blur(70px); }
-      .bg-cursor-glow { display: none; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .bg-glow::before,
-      .bg-glow::after { animation: none; }
-      .bg-cursor-glow { display: none; }
+    @media (max-width: 900px), (prefers-reduced-motion: reduce), (pointer: coarse) {
+      .grid-lens, .grid-lens-core { display: none; }
     }
 
     main, nav, section, footer, .hero-marquee {
@@ -2788,9 +2753,9 @@
 
 <body>
 
-  <!-- Ambient dynamic background layers -->
-  <div class="bg-glow" aria-hidden="true"></div>
-  <div class="bg-cursor-glow" id="bgCursorGlow" aria-hidden="true"></div>
+  <!-- Grid lens — la grilla se activa/amplifica donde está el cursor -->
+  <div class="grid-lens" id="gridLens" aria-hidden="true"></div>
+  <div class="grid-lens-core" id="gridLensCore" aria-hidden="true"></div>
 
   <!-- ═══════════════ NAV ═══════════════ -->
   <nav id="navbar">
@@ -3620,28 +3585,44 @@
       }, 3000);
     });
 
-    // ═══════════════ AMBIENT MOUSE-FOLLOW GLOW ═══════════════
-    (function ambientCursorGlow() {
+    // ═══════════════ GRID LENS (mouse-follow) ═══════════════
+    (function gridLens() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (window.matchMedia('(max-width: 900px)').matches) return;
-      const glow = document.getElementById('bgCursorGlow');
-      if (!glow) return;
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+      const lens = document.getElementById('gridLens');
+      const core = document.getElementById('gridLensCore');
+      if (!lens || !core) return;
 
       let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
       let cx = tx, cy = ty;
       let active = false;
-      let ticking = false;
+      const root = document.documentElement.style;
 
       document.addEventListener('mousemove', (e) => {
         tx = e.clientX; ty = e.clientY;
-        if (!active) { glow.classList.add('active'); active = true; }
+        if (!active) {
+          lens.classList.add('active');
+          core.classList.add('active');
+          active = true;
+        }
       });
-      document.addEventListener('mouseleave', () => { glow.classList.remove('active'); active = false; });
+      document.addEventListener('mouseleave', () => {
+        lens.classList.remove('active');
+        core.classList.remove('active');
+        active = false;
+      });
 
       function loop() {
-        cx += (tx - cx) * 0.06;
-        cy += (ty - cy) * 0.06;
-        glow.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+        // Lerp muy suave para que la lente "arrastre" con delay orgánico
+        cx += (tx - cx) * 0.14;
+        cy += (ty - cy) * 0.14;
+        root.setProperty('--mx', cx + 'px');
+        root.setProperty('--my', cy + 'px');
+        // Deforma la grilla desplazando el background-position según el mouse
+        // — crea el efecto de que la grilla "acompaña" al cursor
+        root.setProperty('--gx', ((cx / window.innerWidth - 0.5) * -18) + 'px');
+        root.setProperty('--gy', ((cy / window.innerHeight - 0.5) * -18) + 'px');
         requestAnimationFrame(loop);
       }
       loop();
