@@ -72,29 +72,47 @@
     .grid-lens-core.active { opacity: 1; }
 
     /* ══════ NAVBAR ══════ */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.25rem 3rem;
-      background: rgba(247, 246, 242, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid transparent;
-      transition: all 0.3s ease;
-      display: flex; align-items: center; justify-content: space-between;
+    /* ══════ NAV (nolo-style floating pill, mismo tratamiento que index) ══════ */
+    nav {
+      position: fixed;
+      top: 1.2rem;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: top 0.4s var(--ease-out-expo);
     }
-    .navbar.scrolled { border-bottom-color: rgba(10,10,10,0.06); }
-    .nav-brand {
+    nav.scrolled { top: 0.6rem; }
+
+    .nav-logo {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1.6rem;
+      font-weight: 400;
+      font-size: 1.65rem;
       color: var(--accent-bordo);
       letter-spacing: -0.02em;
       text-decoration: none;
-      display: inline-flex; align-items: baseline; gap: 0.35rem;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.4rem;
       line-height: 1;
+      padding: 0.55rem 1.15rem 0.6rem;
+      background: rgba(247, 246, 242, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      border-radius: 999px;
+      transition: background 0.3s, border-color 0.3s;
+      text-transform: lowercase;
     }
-    .nav-brand-sub {
+    .nav-logo:hover {
+      background: rgba(247, 246, 242, 1);
+      border-color: rgba(10, 10, 10, 0.14);
+    }
+    .nav-logo-sub {
       font-family: var(--font-display);
       font-style: normal;
       font-size: 0.88rem;
@@ -103,51 +121,159 @@
       letter-spacing: -0.01em;
       text-transform: lowercase;
     }
+
     .nav-links {
-      display: flex; gap: 2rem; align-items: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      background: rgba(247, 246, 242, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      border-radius: 999px;
+      padding: 0.35rem;
     }
     .nav-links a {
-      font-size: 0.9rem;
       color: var(--text-primary);
       text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent-bordo); }
-    .nav-cta {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.55rem 1.05rem;
-      background: var(--text-primary);
-      color: var(--bg-primary);
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: all 0.25s;
-    }
-    .nav-cta:hover { background: var(--accent-bordo); }
-    .lang-toggle {
-      display: inline-flex; gap: 0;
-      border: 1px solid rgba(10,10,10,0.12);
-      border-radius: 999px;
-      overflow: hidden;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.78rem;
+      font-weight: 400;
+      transition: color 0.25s, background 0.25s;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      letter-spacing: -0.01em;
+    }
+    .nav-links a:not(.nav-cta):hover {
+      background: rgba(10, 10, 10, 0.06);
+    }
+    .nav-links a + a::before {
+      content: '';
+      position: absolute;
+      left: -3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(10, 10, 10, 0.20);
+    }
+    .nav-links a:hover + a::before,
+    .nav-links a + a:hover::before { opacity: 0; }
+
+    .nav-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(247, 246, 242, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      border-radius: 999px;
+      padding: 0.25rem;
     }
     .lang-toggle button {
+      padding: 0.45rem 0.85rem;
       background: transparent;
       border: none;
-      padding: 0.35rem 0.75rem;
-      cursor: pointer;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 400;
       color: var(--text-secondary);
-      transition: all 0.2s;
-      font-family: inherit;
-      font-size: inherit;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
     }
     .lang-toggle button.active {
       background: var(--text-primary);
-      color: var(--bg-primary);
+      color: #ffffff;
     }
-    .nav-toggle { display: none; }
+    .lang-toggle button:not(.active):hover { color: var(--text-primary); }
+
+    .nav-wa {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: var(--accent-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: transform 0.3s var(--ease-out-expo), background 0.25s;
+      text-decoration: none;
+      box-shadow: 0 6px 20px -6px rgba(34, 197, 94, 0.55);
+    }
+    .nav-wa:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: #16a34a;
+    }
+    .nav-wa svg { width: 22px; height: 22px; }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.55rem 0.55rem 1.15rem;
+      background: var(--text-primary);
+      border: none;
+      border-radius: 999px;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-out-expo), background 0.25s;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: #2a1e5c;
+    }
+    .nav-cta-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--text-primary);
+      transition: transform 0.25s var(--ease-out-expo);
+    }
+    .nav-cta:hover .nav-cta-arrow { transform: translateX(3px); }
+    .nav-cta-arrow svg { width: 14px; height: 14px; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      background: rgba(247, 246, 242, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      border-radius: 999px;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      transition: background 0.25s;
+    }
+    .nav-toggle:hover { background: rgba(247, 246, 242, 1); }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
+    }
 
     /* ══════ HERO ══════ */
     .hero {
@@ -508,38 +634,8 @@
 
     /* ══════ RESPONSIVE ══════ */
     @media (max-width: 900px) {
-      .navbar { padding: 1rem 1.25rem; }
-      .nav-links {
-        position: fixed;
-        top: 65px;
-        left: 0; right: 0;
-        background: rgba(247, 246, 242, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        gap: 0;
-        padding: 1.5rem 0;
-        border-bottom: 1px solid rgba(10,10,10,0.06);
-        transform: translateY(-120%);
-        transition: transform 0.4s ease;
-      }
-      .nav-links.open { transform: translateY(0); }
-      .nav-links a { padding: 0.85rem 1.5rem; width: 100%; }
-      .nav-cta { display: none; }
-      .nav-toggle {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.5rem;
-      }
-      .nav-toggle span {
-        display: block;
-        width: 22px;
-        height: 2px;
-        background: var(--text-primary);
-      }
+      .nav-links { gap: 1.25rem; }
+      .nav-links a { font-size: 0.82rem; }
       .hero { padding: 7rem 1.25rem 3rem; }
       .projects-section { padding: 3.5rem 1.25rem; }
       .section-heading { padding-bottom: 1.25rem; margin-bottom: 2.5rem; }
@@ -550,6 +646,41 @@
       .footer-top { grid-template-columns: 1fr; gap: 1.75rem; }
       .footer-col-brand p { max-width: 100%; }
       .footer-bottom { flex-direction: column; gap: 0.85rem; text-align: center; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 0.75rem; gap: 0.5rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0.75rem;
+        right: 0.75rem;
+        background: rgba(247, 246, 242, 0.96);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem;
+        gap: 0.5rem;
+        border: 1px solid rgba(10, 10, 10, 0.10);
+        border-radius: 20px;
+        margin-top: 0.5rem;
+      }
+      .nav-logo {
+        font-size: 1.35rem;
+        padding: 0.5rem 0.85rem;
+        gap: 0.3rem;
+      }
+      .nav-logo-sub { font-size: 0.75rem; }
+      .lang-toggle { display: none; }
+      .nav-wa { display: none; }
+      .nav-cta {
+        padding: 0.5rem 0.4rem 0.5rem 0.85rem;
+        font-size: 0.72rem;
+      }
+      .nav-cta-arrow { width: 26px; height: 26px; }
+      .nav-cta-arrow svg { width: 12px; height: 12px; }
     }
 
     /* ══════ PAGE LOADER — hex cae como un dado ══════ */
@@ -641,23 +772,35 @@
   <div class="grid-lens-core" id="gridLensCore"></div>
 
   <!-- ══════ NAV ══════ -->
-  <nav class="navbar" id="navbar">
-    <a href="index.html" class="nav-brand">pragma<span class="nav-brand-sub">studio</span></a>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">pragma<span class="nav-logo-sub">studio</span></a>
     <div class="nav-links" id="navLinks">
       <a href="index.html#servicios" data-i18n-en="Services">Servicios</a>
       <a href="index.html#capacidades" data-i18n-en="Capabilities">Capacidades</a>
-      <a href="proyectos.html" data-i18n-en="Projects">Proyectos</a>
+      <a href="proyectos.html" data-i18n-en="Work">Proyectos</a>
       <a href="index.html#nosotros" data-i18n-en="Studio">Nosotros</a>
       <a href="index.html#contacto" data-i18n-en="Contact">Contacto</a>
     </div>
-    <div style="display:flex; gap:0.75rem; align-items:center;">
-      <div class="lang-toggle">
-        <button data-lang="es" class="active">ES</button>
-        <button data-lang="en">EN</button>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group" aria-label="Idioma" data-i18n-en-aria-label="Language">
+        <button type="button" class="active" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
       </div>
-      <a href="https://wa.me/5493512145673?text=Hola!%20Me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20para%20contarles%20sobre%20mi%20proyecto." target="_blank" rel="noopener" class="nav-cta" data-i18n-en="Let's talk" data-i18n-en-href="https://wa.me/5493512145673?text=Hi!%20I%27d%20like%20to%20book%20a%20call%20to%20discuss%20my%20project.">Hablemos</a>
+      <a href="https://wa.me/5493512145673" target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp" data-i18n-en-aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413" />
+        </svg>
+      </a>
+      <a href="https://wa.me/5493512145673?text=Hola!%20Me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20para%20contarles%20sobre%20mi%20proyecto." data-i18n-en-href="https://wa.me/5493512145673?text=Hi!%20I%27d%20like%20to%20book%20a%20call%20to%20discuss%20my%20project." target="_blank" rel="noopener" class="nav-cta">
+        <span data-i18n-en="Let's talk">Hablemos</span>
+        <span class="nav-cta-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </span>
+      </a>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <button class="nav-toggle" id="navToggle" aria-label="Menú" data-i18n-en-aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
