@@ -602,15 +602,7 @@
       <div class="q-label">¿Cuál es el mayor dolor que tiene la empresa hoy con la forma en que trabajan?</div>
       <textarea id="q6_3" placeholder="Lo que más tiempo les hace perder, lo que más errores genera..."></textarea>
     </div>
-    <div class="question">
-      <div class="q-label">¿Tienen alguna expectativa de presupuesto? <span class="q-optional">(opcional)</span></div>
-      <div class="options">
-        <label class="option-item"><input type="radio" name="presupuesto" value="menos5k"> <label>Menos de USD 5.000</label></label>
-        <label class="option-item"><input type="radio" name="presupuesto" value="5k10k"> <label>Entre USD 5.000 y USD 10.000</label></label>
-        <label class="option-item"><input type="radio" name="presupuesto" value="mas10k"> <label>Más de USD 10.000</label></label>
-        <label class="option-item"><input type="radio" name="presupuesto" value="nosaben"> <label>No tenemos idea, queremos ver opciones</label></label>
-      </div>
-    </div>
+
     <div class="question">
       <div class="q-label">¿Algo más que quieran agregar o aclarar? <span class="q-optional">(opcional)</span></div>
       <textarea id="q6_5" placeholder="Cualquier cosa que no haya quedado clara..."></textarea>
@@ -759,7 +751,7 @@
           { q: 'Prioridad número 1', a: getRadio('prioridad1') },
           { q: 'Qué mantener del Excel', a: getVal('q6_2') },
           { q: 'Mayor dolor actual', a: getVal('q6_3') },
-          { q: 'Expectativa de presupuesto', a: getRadio('presupuesto') },
+
           { q: 'Comentarios adicionales', a: getVal('q6_5') },
         ]
       }
@@ -828,7 +820,7 @@
         ['Prioridad 1', getRadio('prioridad1')],
         ['Mantener del Excel', getVal('q6_2')],
         ['Mayor dolor', getVal('q6_3')],
-        ['Presupuesto', getRadio('presupuesto')],
+
         ['Comentarios', getVal('q6_5')],
       ]},
     ];
