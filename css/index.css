@@ -758,6 +758,17 @@
       height: 15px;
     }
 
+    .btn-ic {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: -0.15rem;
+    }
+    .btn-ic svg {
+      width: 17px;
+      height: 17px;
+    }
+
     /* ═══════════════════ NO-LIST (Lo que NO ofrecemos) ═══════════════════ */
     .no-list-wrap {
       padding: 3rem 2rem 4rem;
